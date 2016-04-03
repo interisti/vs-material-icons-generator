@@ -4,17 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
+using System;
+using System.Runtime.InteropServices;
 
 namespace VSMaterialIcons
 {
@@ -36,21 +28,15 @@ namespace VSMaterialIcons
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
+    [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(AddIconCommandPackage.PackageGuidString)]
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    public sealed class AddIconCommandPackage : Package
+    [Guid(PackageGuids.guidAddIconCommandPackageString)]
+    public sealed class VSPackage : Package
     {
-        /// <summary>
-        /// AddIconCommandPackage GUID string.
-        /// </summary>
-        public const string PackageGuidString = "bffb634b-07ee-4c44-9e81-7565ef240ecf";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AddIconCommand"/> class.
         /// </summary>
-        public AddIconCommandPackage()
+        public VSPackage()
         {
             // Inside this method you can place any initialization code that does not require
             // any Visual Studio service because at this point the package object is created but
