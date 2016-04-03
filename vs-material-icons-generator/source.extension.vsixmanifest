@@ -4,10 +4,12 @@
     <Identity Id="e1bf5443-bf81-49e6-bc33-004e1f1f7b02" Version="1.0" Language="en-US" Publisher="Nika Nikabadze" />
     <DisplayName>Material icons generator</DisplayName>
     <Description xml:space="preserve">This plugin help you to set material design icons to your Android project</Description>
+    <MoreInfo>https://github.com/interisti/vs-material-icons-generator</MoreInfo>
     <License>Resources\LICENSE</License>
+    <ReleaseNotes>https://github.com/interisti/vs-material-icons-generator/blob/master/CHANGELOG.md</ReleaseNotes>
     <Icon>Resources\AddIconCommandPackage.ico</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
-    <Tags>xamarin, android, material, icons</Tags>
+    <Tags>xamarin, android, material design, icons    </Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />

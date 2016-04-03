@@ -2,8 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/1wnpgw53w67bs6f2?svg=true)](https://ci.appveyor.com/project/interisti/vs-material-icons-generator)
 
-<!-- Update the VS Gallery link after you upload the VSIX-->
-Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/[GuidFromGallery])
+Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/3741d776-755b-4002-a6be-e86fa605a315)
 or get the [CI build](http://vsixgallery.com/extension/e1bf5443-bf81-49e6-bc33-004e1f1f7b02/).
 
 ---------------------------------------
