@@ -8,6 +8,6 @@ namespace VSMaterialIcons
         public const string Language = "en-US";
         public const string Version = "1.0";
         public const string Author = "Nika Nikabadze";
-        public const string Tags = "xamarin, android, material design, icons";
+        public const string Tags = "xamarin, android, material design, icons    ";
     }
 }
