@@ -83,13 +83,13 @@ namespace VSMaterialIcons.UI
 
         public static object WindowTextKey { get; private set; } = SystemColors.WindowTextBrushKey;
         
-        public static object TextBoxBackgroundBrushKey { get; private set; }
+        public static object TextBoxBackgroundBrushKey { get; private set; } = SystemColors.WindowBrushKey;
 
-        public static object TextBoxBorderBrushKey { get; private set; }
+        public static object TextBoxBorderBrushKey { get; private set; } = SystemColors.InactiveBorderBrushKey;
 
-        public static object TextBoxMouseOverBorderBrushKey { get; private set; }
+        public static object TextBoxMouseOverBorderBrushKey { get; private set; } = SystemColors.ActiveBorderBrushKey;
 
-        public static object TextBoxSelectionBrushKey { get; private set; }
+        public static object TextBoxSelectionBrushKey { get; private set; } = SystemColors.ActiveCaptionBrushKey;
 
 
 

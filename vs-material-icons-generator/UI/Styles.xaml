@@ -130,8 +130,6 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
-
-
     <Style x:Key="ListItemNameTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType={x:Type Window}},
             Converter={StaticResource FontSizeConverter}, ConverterParameter=2.0}" />
@@ -199,11 +197,8 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="PreviewNameTextBoxStyle" TargetType="TextBox">
+    <Style x:Key="BaseTextBoxStyle" TargetType="TextBox">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.UIText}}" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="0 4" />
         <Setter Property="Background" Value="{DynamicResource {x:Static ui:Brushes.TextBoxBackgroundBrushKey}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static ui:Brushes.TextBoxBorderBrushKey}}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static ui:Brushes.TextBoxSelectionBrushKey}}" />
@@ -212,6 +207,21 @@
                 <Setter Property = "BorderBrush" Value="{DynamicResource {x:Static ui:Brushes.TextBoxMouseOverBorderBrushKey}}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PreviewNameTextBoxStyle" TargetType="TextBox"
+           BasedOn="{StaticResource BaseTextBoxStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.UIText}}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="0 4" />
+    </Style>
+
+    <Style x:Key="SearchTextBoxStyle" TargetType="TextBox"
+           BasedOn="{StaticResource BaseTextBoxStyle}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Width" Value="360" />
     </Style>
 
     <Style x:Key="CloseButtonStyle" TargetType="Button"
