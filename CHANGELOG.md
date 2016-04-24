@@ -1,6 +1,5 @@
 # Roadmap
 
-- [ ] Enhance UI
 - [ ] Ease process of removing already added icons 
 
 Features that have a checkmark are complete and available for
@@ -18,3 +17,8 @@ on the official Visual Studio extension gallery.
 
 - [x] Initial release
 - [x] Add icons from google public icons repo
+
+## 1.1
+**2016-04-24**
+
+- [x] New UI, with preview and VS styling

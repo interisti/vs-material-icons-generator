@@ -91,15 +91,6 @@
     <Compile Include="VS\OutputPane.cs" />
     <Compile Include="VS\Project.cs" />
     <Compile Include="VS\ServiceLocator.cs" />
-    <Compile Include="___Lib\IconColors.cs" />
-    <Compile Include="___Lib\IconDownloader.cs" />
-    <Compile Include="___Lib\IconLocation.cs" />
-    <Compile Include="UI\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="VS\StatusBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">
@@ -266,9 +257,6 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="source.extension.resx">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

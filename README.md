@@ -20,6 +20,7 @@ Right-click on Xamarin.Android Project and click "Manage Material Icons..."
 
 ![Context Menu](art/context-menu.png)
 
+![Main Window](art/main-window.png)
 
 ## Contribute
 Check out the [contribution guidelines](CONTRIBUTING.md)
@@ -30,6 +31,10 @@ to install the
 [Extensibility Tools 2015](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)
 extension for Visual Studio which enables some features
 used by this project.
+
+## Credits
+* Inspired by [android-material-design-icon-generator-plugin](https://github.com/konifar/android-material-design-icon-generator-plugin)
+* Icons From [Google's Material Design Icons Repository](https://github.com/google/material-design-icons)
 
 ## License
 [Apache 2.0](LICENSE)
