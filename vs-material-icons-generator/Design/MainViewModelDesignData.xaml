@@ -1,0 +1,53 @@
+﻿<vm:MainViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mscorlib="clr-namespace:System;assembly=mscorlib"
+    xmlns:vm="clr-namespace:VSMaterialIcons.ViewModels"
+    xmlns:model="clr-namespace:VSMaterialIcons.Models">
+    <vm:MainViewModel.FilteredItems>
+        <vm:IconViewModel>
+            <vm:IconViewModel.Icon>
+                <model:Icon Name="test icon 1" IsNew="True">
+                    <model:Icon.Group>
+                        <model:Group Id="test_groud_1" Name="Test Group" />
+                    </model:Icon.Group>
+                    <model:Icon.Keywords>
+                        <mscorlib:String>keyword 1</mscorlib:String>
+                        <mscorlib:String>keyword 2</mscorlib:String>
+                    </model:Icon.Keywords>
+                </model:Icon>
+            </vm:IconViewModel.Icon>
+        </vm:IconViewModel>
+        <vm:IconViewModel>
+            <vm:IconViewModel.Icon>
+                <model:Icon Name="test icon 2" IsNew="False">
+                    <model:Icon.Group>
+                        <model:Group Id="test_groud_1" Name="Test Group" />
+                    </model:Icon.Group>
+                    <model:Icon.Keywords>
+                        <mscorlib:String>keyword 1</mscorlib:String>
+                        <mscorlib:String>keyword 3</mscorlib:String>
+                    </model:Icon.Keywords>
+                </model:Icon>
+            </vm:IconViewModel.Icon>
+        </vm:IconViewModel>
+    </vm:MainViewModel.FilteredItems>
+    <vm:MainViewModel.SelectedIcon>
+        <vm:IconViewModel>
+            <vm:IconViewModel.Icon>
+                <model:Icon Name="test icon 1" IsNew="True">
+                    <model:Icon.Group>
+                        <model:Group Id="test_groud_1" Name="Test Group" />
+                    </model:Icon.Group>
+                    <model:Icon.Keywords>
+                        <mscorlib:String>keyword 1</mscorlib:String>
+                        <mscorlib:String>keyword 2</mscorlib:String>
+                    </model:Icon.Keywords>
+                </model:Icon>
+            </vm:IconViewModel.Icon>
+        </vm:IconViewModel>
+    </vm:MainViewModel.SelectedIcon>
+    <vm:MainViewModel.FilterExpression>filter expression</vm:MainViewModel.FilterExpression>
+
+</vm:MainViewModel>

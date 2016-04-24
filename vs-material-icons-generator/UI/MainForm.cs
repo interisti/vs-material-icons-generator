@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using VSMaterialIcons.UI;
 
 namespace VSMaterialIcons
 {

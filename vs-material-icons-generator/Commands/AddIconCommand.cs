@@ -142,7 +142,7 @@ namespace VSMaterialIcons
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            new MainForm().ShowDialog();
+            new UI.MainWindow().ShowDialog();
         }
     }
 }
