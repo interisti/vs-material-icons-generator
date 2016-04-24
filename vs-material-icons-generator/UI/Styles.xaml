@@ -209,4 +209,23 @@
            BasedOn="{StaticResource CloseButtonStyle}">
         <Setter Property="Margin" Value="0 4" />
     </Style>
+
+    <Style x:Key="HyperlinkStyle" TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.ControlLinkTextKey}}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.ControlLinkTextHoverKey}}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+            </Trigger>
+
+            <Trigger Property="NavigateUri" Value="{x:Null}">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.WindowTextKey}}" />
+                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                <Setter Property="IsEnabled" Value="False" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

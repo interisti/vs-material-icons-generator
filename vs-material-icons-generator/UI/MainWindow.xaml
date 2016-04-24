@@ -28,6 +28,9 @@
         <CommandBinding
             Command="{x:Static ui:Commands.FocusOnSearchBox}"
             Executed="FocusOnSearchBox_Executed" />
+        <CommandBinding
+            Command="{x:Static ui:Commands.OpenExternalLink}"
+            Executed="ExecuteOpenLicenseLink" />
     </vsui:DialogWindow.CommandBindings>
     <vsui:DialogWindow.InputBindings>
         <KeyBinding
@@ -49,6 +52,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+
             <!-- container of the search control -->
             <Border Grid.Column="1" x:Name="_searchControlParent"
                     VerticalAlignment="Center"
@@ -213,16 +217,34 @@
             </Grid>
         </Grid>
 
-        <StackPanel Grid.Row="2"
-                    Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}"
-                    Orientation="Horizontal"
-                    FlowDirection="RightToLeft"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Bottom">
-            <Button 
-                Style="{StaticResource CloseButtonStyle}"
-                Content="Close"
-                IsCancel="True"/>
-        </StackPanel>
+        <Grid Grid.Row="2"
+              Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       FontWeight="Bold" Margin="4 8 0 0"
+                       Text="Icons from Google's Material Design icons"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
+            <TextBlock Grid.Column="1" 
+                       FontWeight="Bold" Margin="4 8 0 0"
+                       VerticalAlignment="Center">
+                <Hyperlink
+                    NavigateUri="https://github.com/google/material-design-icons"
+                    Style="{StaticResource HyperlinkStyle}"
+                    Command="{x:Static ui:Commands.OpenExternalLink}">
+                    <Run Text="repository" />
+                </Hyperlink>
+            </TextBlock>
+
+            <Button Grid.Column="3"
+                    Style="{StaticResource CloseButtonStyle}"
+                    Content="Close" IsCancel="True"/>
+        </Grid>
     </Grid>
 </vsui:DialogWindow>

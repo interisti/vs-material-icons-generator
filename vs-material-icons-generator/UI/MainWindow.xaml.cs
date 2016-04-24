@@ -1,8 +1,11 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Input;
 using VSMaterialIcons.ViewModels;
 using VSMaterialIcons.VS;
@@ -40,6 +43,24 @@ namespace VSMaterialIcons.UI
         private void FocusOnSearchBox_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _windowSearchHost.Activate();
+        }
+
+        private void ExecuteOpenLicenseLink(object sender, ExecutedRoutedEventArgs e)
+        {
+            var hyperlink = e.OriginalSource as Hyperlink;
+            if (hyperlink != null && hyperlink.NavigateUri != null)
+            {
+                e.Handled = true;
+
+                try
+                {
+                    Process.Start(hyperlink.NavigateUri.AbsoluteUri);
+                }
+                catch (Exception ex)
+                {
+                    ActivityLog.TryLogError("Material Icons Generator", ex.Message);
+                }
+            }
         }
 
         #endregion

@@ -184,7 +184,7 @@ namespace VSMaterialIcons.ViewModels
 
 
         public RelayCommand AddToProjectCommand { get; set; }
-        private void AddToProject()
+        private async void AddToProject()
         {
 
         }
@@ -198,7 +198,7 @@ namespace VSMaterialIcons.ViewModels
         }
 
 
-        #region Helpers
+        #region Utils
         public string GenerateUrl(string group_id, string icon_id, string folder, string color, string size)
         {
             return $"https://raw.githubusercontent.com/google/material-design-icons/master/{group_id}/{folder}/{icon_id}_{color}_{size}.png";
