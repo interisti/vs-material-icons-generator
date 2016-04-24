@@ -11,7 +11,7 @@
                    xmlns:ui="clr-namespace:VSMaterialIcons.UI"
                    mc:Ignorable="d"
                    Title="Material Icons Generator"
-                   WindowStartupLocation="CenterOwner">
+                   WindowStartupLocation="CenterScreen">
     <vsui:DialogWindow.Resources>
         <ResourceDictionary>
             <vm:MainViewModel x:Key="MainViewModel" />
@@ -38,12 +38,13 @@
           d:DataContext="{d:DesignData Source=/Design/MainViewModelDesignData.xaml, IsDesignTimeCreatable=True}"
           Loaded="{eb:EventBinding Command=LoadCommand}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="2">
+        <Grid Grid.ColumnSpan="2"
+              Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -51,6 +52,7 @@
             <!-- container of the search control -->
             <Border Grid.Column="1" x:Name="_searchControlParent"
                     VerticalAlignment="Center"
+                    Margin="4 0"
                     Width="320"
                     MinHeight="22"
                     MinWidth="224" />
@@ -212,8 +214,10 @@
         </Grid>
 
         <StackPanel Grid.Row="2"
+                    Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Right"
+                    FlowDirection="RightToLeft"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom">
             <Button 
                 Style="{StaticResource CloseButtonStyle}"

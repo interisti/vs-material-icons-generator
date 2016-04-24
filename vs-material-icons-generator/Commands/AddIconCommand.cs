@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
+using VSMaterialIcons.VS;
 
 namespace VSMaterialIcons
 {
@@ -40,13 +41,12 @@ namespace VSMaterialIcons
         private AddIconCommand(Package package)
         {
             if (package == null)
-            {
                 throw new ArgumentNullException("package");
-            }
 
             this.package = package;
+            ServiceLocator.InitializePackageServiceProvider(this.package);
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var commandService = ServiceLocator.GetGlobalService<IMenuCommandService, OleMenuCommandService>();
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
