@@ -10,7 +10,15 @@ namespace VSMaterialIcons.Models
         public string Folder { get; set; }
 
         public string Extension { get; set; }
-        
+
+        public string Destination(string baseDir, string icon) =>
+            System.IO.Path.Combine(baseDir, RESOURCES_FOLDER, this.Folder, $"{icon}{this.Extension}");
+
+
+
+
+
+
 
         public static Type GetMDPI()
         {

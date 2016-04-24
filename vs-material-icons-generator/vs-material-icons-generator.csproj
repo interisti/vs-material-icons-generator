@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="UI\Styles.cs" />
     <Compile Include="Utils\ColorUtils.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\OS.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -87,6 +88,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VSCommandTable.vsct</DependentUpon>
     </Compile>
+    <Compile Include="VS\OutputPane.cs" />
+    <Compile Include="VS\Project.cs" />
     <Compile Include="VS\ServiceLocator.cs" />
     <Compile Include="___Lib\IconColors.cs" />
     <Compile Include="___Lib\IconDownloader.cs" />
@@ -97,7 +100,7 @@
     <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ProgressIndicator.cs" />
+    <Compile Include="VS\StatusBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>

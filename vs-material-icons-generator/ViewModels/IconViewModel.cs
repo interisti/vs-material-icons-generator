@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
 using System.Net.Cache;
 using System.Net.Http;
 using System.Windows.Media.Imaging;
 using VSMaterialIcons.Common;
 using VSMaterialIcons.Models;
+using VSMaterialIcons.VS;
 using VSMaterialIcons.Utils;
 
 namespace VSMaterialIcons.ViewModels
@@ -186,7 +188,55 @@ namespace VSMaterialIcons.ViewModels
         public RelayCommand AddToProjectCommand { get; set; }
         private async void AddToProject()
         {
+            try
+            {
+                this.IsBusy = true;
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+                StatusBar.DisplayMessage("Downloading icons ...");
 
+                var project = VS.Project.GetActiveProject();
+                var projectDir = VS.Project.GetProjectDirectory(project);
+
+                var selectedTypes = new List<Type>();
+                if (this.Mdpi.IsSelected) selectedTypes.Add(this.Mdpi.Item);
+                if (this.Hdpi.IsSelected) selectedTypes.Add(this.Hdpi.Item);
+                if (this.XHdpi.IsSelected) selectedTypes.Add(this.XHdpi.Item);
+                if (this.XXHdpi.IsSelected) selectedTypes.Add(this.XXHdpi.Item);
+                if (this.XXXHdpi.IsSelected) selectedTypes.Add(this.XXXHdpi.Item);
+
+                foreach (var type in selectedTypes)
+                {
+                    var color = (this.Color.IsKnown) ? this.Color : Pallete.Black;
+                    var iconUrl = this.GenerateUrl(this.Icon.Group.Id, this.Icon.Id,
+                        this.XHdpi.Item.Folder, color.Name, this.Size.Value);
+
+                    byte[] icon;
+                    using (var client = new HttpClient())
+                        icon = await client.GetByteArrayAsync(iconUrl);
+
+                    if (!this.Color.IsKnown)
+                        icon = ColorUtils.ReplaceColor(icon, this.Color.Color);
+
+                    var filepath = type.Destination(projectDir, this.Name);
+                    FileUtils.WriteAllBytes(icon, filepath);
+                    // add to project
+                    VS.Project.AddFileToProject(project, filepath, "AndroidResource");
+                }
+
+                project.Save();
+            }
+            catch (System.Exception ex)
+            {
+                OutputPane.Output(ex.Message);
+                OutputPane.Output(ex.StackTrace);
+                OutputPane.Activate();
+            }
+            finally
+            {
+                StatusBar.Clear();
+                this.IsBusy = false;
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private bool CanAddToProject()
@@ -194,7 +244,8 @@ namespace VSMaterialIcons.ViewModels
             return this.Icon != null && this.Color != null && this.Size != null &&
                 (this.Mdpi.IsSelected || this.Hdpi.IsSelected || this.XHdpi.IsSelected
                     || this.XXHdpi.IsSelected || this.XXXHdpi.IsSelected) &&
-                    !string.IsNullOrEmpty(this.Name);
+                    !string.IsNullOrEmpty(this.Name) &&
+                    !this.IsBusy;
         }
 
 

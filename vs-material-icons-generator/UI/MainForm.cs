@@ -8,31 +8,27 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using VSMaterialIcons.UI;
+using VSMaterialIcons.VS;
 
 namespace VSMaterialIcons
 {
     public partial class MainForm : Form
     {
-        private ProgressIndicator progressIndicator;
-
         public MainForm()
         {
             InitializeComponent();
-
-            this.progressIndicator = new ProgressIndicator(AddIconCommand.Instance.StatusBar);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             // start waiting
-            this.progressIndicator.DisplayProgress("Downloading icons from repo ...");
+            VS.StatusBar.DisplayMessage("Downloading icons from repo ...");
 
             this.LoadIcons();
             this.LoadColors();
             this.LoadSizes();
             // stop waiting
-            this.progressIndicator.ClearProgress();
+            VS.StatusBar.Clear();
 
             this.iconComboBox.SelectedIndexChanged += ConfigurationComboBox_SelectedIndexChanged;
             this.colorComboBox.SelectedIndexChanged += ConfigurationComboBox_SelectedIndexChanged;
@@ -84,7 +80,7 @@ namespace VSMaterialIcons
                 if (string.IsNullOrEmpty(icon))
                     return;
                 // start waiting
-                this.progressIndicator.DisplayProgress("Downloading icon ...");
+                VS.StatusBar.DisplayMessage("Downloading icon ...");
 
                 var color = this.SelectedColor;
                 var size = this.SelectedSize;
@@ -101,14 +97,14 @@ namespace VSMaterialIcons
             }
             catch (Exception ex)
             {
-                AddIconCommand.Instance.OutputPane.OutputString(ex.Message + Environment.NewLine);
-                AddIconCommand.Instance.OutputPane.OutputString(ex.StackTrace + Environment.NewLine);
-                AddIconCommand.Instance.OutputPane.Activate();
+                OutputPane.Output(ex.Message);
+                OutputPane.Output(ex.StackTrace);
+                OutputPane.Activate();
             }
             finally
             {
                 // stop waiting
-                this.progressIndicator.ClearProgress();
+                VS.StatusBar.Clear();
             }
         }
 
@@ -121,7 +117,9 @@ namespace VSMaterialIcons
                     return;
 
                 // start waiting
-                this.progressIndicator.DisplayProgress("Downloading icons ...");
+                VS.StatusBar.DisplayMessage("Downloading icons ...");
+                var project = VS.Project.GetActiveProject();
+                var projectDir = VS.Project.GetProjectDirectory(project);
 
                 var folders = new List<string>();
                 if (this.hdpiCheckBox.Checked) folders.Add(IconLocation.DRAWABLE_HDPI_FOLDER);
@@ -142,58 +140,27 @@ namespace VSMaterialIcons
                     if (!IconColors.IsKnownColor(color))
                         data = IconColors.ReplaceColor(data, IconColors.GetColor(color));
                     // save
-                    var baseDir = this.GetProjectDir();
-                    var fullPath = Path.Combine(baseDir, IconLocation.RESOURCES_FOLDER, folder,
+                    var fullPath = Path.Combine(projectDir, IconLocation.RESOURCES_FOLDER, folder,
                         name + IconLocation.ICON_EXTENSION);
                     // save to folder
                     IconLocation.SaveIcon(data, fullPath);
                     // add to project
-                    this.AddFileToProject(fullPath);
+                    VS.Project.AddFileToProject(project, fullPath, "AndroidResource");
                 }
 
-                this.SaveProject();
+                project.Save();
             }
             catch (Exception ex)
             {
-                AddIconCommand.Instance.OutputPane.OutputString(ex.Message + Environment.NewLine);
-                AddIconCommand.Instance.OutputPane.OutputString(ex.StackTrace + Environment.NewLine);
-                AddIconCommand.Instance.OutputPane.Activate();
+                OutputPane.Output(ex.Message);
+                OutputPane.Output(ex.StackTrace);
+                OutputPane.Activate();
             }
             finally
             {
                 // stop waiting
-                this.progressIndicator.ClearProgress();
+                VS.StatusBar.Clear();
             }
-        }
-
-        private string GetProjectDir()
-        {
-            var project = this.GetActiveProject();
-
-            return Path.GetDirectoryName(project.FileName);
-        }
-
-        private void AddFileToProject(string filename)
-        {
-            var project = this.GetActiveProject();
-
-            var file = project.ProjectItems.AddFromFile(filename);
-            file.Properties.Item("ItemType").Value = "AndroidResource";
-        }
-
-        private void SaveProject()
-        {
-            var project = this.GetActiveProject();
-
-            project.Save();
-        }
-
-        private EnvDTE.Project GetActiveProject()
-        {
-            var dteService = AddIconCommand.Instance.DTE;
-            return ((object[])dteService.ActiveSolutionProjects)
-                .Select(x => (EnvDTE.Project)x)
-                .FirstOrDefault();
         }
 
 
