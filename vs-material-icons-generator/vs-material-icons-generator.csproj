@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddIconCommand.cs" />
     <Compile Include="Common\ErrorFloodGate.cs" />
+    <Compile Include="Common\UIThreadHelper.cs" />
     <Compile Include="Common\Selectable.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\FontSizeConverter.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="UI\Brushes.cs" />
+    <Compile Include="UI\Commands.cs" />
     <Compile Include="UI\Domain.cs" />
     <Compile Include="UI\EventBinding\DependencyObjectExtensions.cs" />
     <Compile Include="UI\EventBinding\EventBindingExtension.cs" />
@@ -85,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VSCommandTable.vsct</DependentUpon>
     </Compile>
+    <Compile Include="VS\ServiceLocator.cs" />
     <Compile Include="___Lib\IconColors.cs" />
     <Compile Include="___Lib\IconDownloader.cs" />
     <Compile Include="___Lib\IconLocation.cs" />
@@ -155,6 +158,7 @@
     <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Imaging, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.Imaging.14.2.25123\lib\net45\Microsoft.VisualStudio.Imaging.dll</HintPath>
       <Private>True</Private>

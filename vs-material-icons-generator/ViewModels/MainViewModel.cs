@@ -8,16 +8,33 @@ namespace VSMaterialIcons.ViewModels
     {
         public MainViewModel()
         {
-            this.FilterCommand = new RelayCommand(this.DoFilter);
             this.LoadCommand = new RelayCommand(this.DoLoad);
         }
 
+
+        private ObservableCollection<Models.Size> _availableSizes = new ObservableCollection<Models.Size>(Models.Size.GetDefault());
+        public ObservableCollection<Models.Size> AvailableSizes
+        {
+            get { return _availableSizes; }
+            set { this.Set(ref this._availableSizes, value); }
+        }
 
         private ObservableCollection<IconViewModel> _items;
         public ObservableCollection<IconViewModel> Items
         {
             get { return _items; }
             set { this.Set(ref this._items, value); this.DoFilter(); }
+        }
+
+        public RelayCommand LoadCommand { get; set; }
+        private async void DoLoad()
+        {
+            this.IsBusy = true;
+            this.Items = new ObservableCollection<IconViewModel>(
+                (await Models.Icon.GetIconsAsync())
+                .Select(x => new IconViewModel(x))
+                .ToList());
+            this.IsBusy = false;
         }
 
         private ObservableCollection<IconViewModel> _filteredItems;
@@ -31,25 +48,9 @@ namespace VSMaterialIcons.ViewModels
         public string FilterExpression
         {
             get { return _filterExpression; }
-            set { this.Set(ref this._filterExpression, value); }
+            set { this.Set(ref this._filterExpression, value); this.DoFilter(); }
         }
 
-        private IconViewModel _selectedIcon;
-        public IconViewModel SelectedIcon
-        {
-            get { return _selectedIcon; }
-            set { this.Set(ref this._selectedIcon, value); }
-        }
-
-        private ObservableCollection<Models.Size> _availableSizes = new ObservableCollection<Models.Size>(Models.Size.GetDefault());
-        public ObservableCollection<Models.Size> AvailableSizes
-        {
-            get { return _availableSizes; }
-            set { this.Set(ref this._availableSizes, value); }
-        }
-
-
-        public RelayCommand FilterCommand { get; set; }
         private void DoFilter()
         {
             if (string.IsNullOrEmpty(this.FilterExpression))
@@ -63,15 +64,11 @@ namespace VSMaterialIcons.ViewModels
             }
         }
 
-        public RelayCommand LoadCommand { get; set; }
-        private async void DoLoad()
+        private IconViewModel _selectedIcon;
+        public IconViewModel SelectedIcon
         {
-            this.IsBusy = true;
-            this.Items = new ObservableCollection<IconViewModel>(
-                (await Models.Icon.GetIconsAsync())
-                .Select(x => new IconViewModel(x))
-                .ToList());
-            this.IsBusy = false;
+            get { return _selectedIcon; }
+            set { this.Set(ref this._selectedIcon, value); }
         }
     }
 }

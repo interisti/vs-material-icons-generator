@@ -24,6 +24,16 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </vsui:DialogWindow.Resources>
+    <vsui:DialogWindow.CommandBindings>
+        <CommandBinding
+            Command="{x:Static ui:Commands.FocusOnSearchBox}"
+            Executed="FocusOnSearchBox_Executed" />
+    </vsui:DialogWindow.CommandBindings>
+    <vsui:DialogWindow.InputBindings>
+        <KeyBinding
+            Command="{x:Static ui:Commands.FocusOnSearchBox}"
+            Gesture="CTRL+E" />
+    </vsui:DialogWindow.InputBindings>
     <Grid DataContext="{StaticResource MainViewModel}"
           d:DataContext="{d:DesignData Source=/Design/MainViewModelDesignData.xaml, IsDesignTimeCreatable=True}"
           Loaded="{eb:EventBinding Command=LoadCommand}">
@@ -38,12 +48,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource SearchTextBoxStyle}"
-                     Text="{Binding FilterExpression, UpdateSourceTrigger=PropertyChanged}"
-                     
-                     TextChanged="{eb:EventBinding Command=FilterCommand}">
-            </TextBox>
+            <!-- container of the search control -->
+            <Border Grid.Column="1" x:Name="_searchControlParent"
+                    VerticalAlignment="Center"
+                    Width="320"
+                    MinHeight="22"
+                    MinWidth="224" />
         </Grid>
 
         <Grid Grid.Row="1"
