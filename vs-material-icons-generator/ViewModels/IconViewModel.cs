@@ -46,7 +46,11 @@ namespace VSMaterialIcons.ViewModels
         public string Name
         {
             get { return _name; }
-            set { this.Set(ref this._name, value); }
+            set
+            {
+                this.Set(ref this._name, value);
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private void GenerateName()
@@ -189,7 +193,8 @@ namespace VSMaterialIcons.ViewModels
         {
             return this.Icon != null && this.Color != null && this.Size != null &&
                 (this.Mdpi.IsSelected || this.Hdpi.IsSelected || this.XHdpi.IsSelected
-                    || this.XXHdpi.IsSelected || this.XXXHdpi.IsSelected);
+                    || this.XXHdpi.IsSelected || this.XXXHdpi.IsSelected) &&
+                    !string.IsNullOrEmpty(this.Name);
         }
 
 

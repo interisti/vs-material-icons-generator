@@ -7,6 +7,7 @@
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.Runtime.InteropServices;
+using VSMaterialIcons.UI;
 
 namespace VSMaterialIcons
 {
@@ -52,8 +53,11 @@ namespace VSMaterialIcons
         /// </summary>
         protected override void Initialize()
         {
-            AddIconCommand.Initialize(this);
             base.Initialize();
+            Styles.LoadVsStyles();
+            Brushes.LoadVsBrushes();
+
+            AddIconCommand.Initialize(this);
         }
 
         #endregion

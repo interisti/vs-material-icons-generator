@@ -5,6 +5,7 @@ using System.Runtime.Caching;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using VSMaterialIcons.Common;
+using VSMaterialIcons.UI;
 
 namespace VSMaterialIcons.Converters
 {
@@ -30,7 +31,7 @@ namespace VSMaterialIcons.Converters
         // This leads to a memory savings.
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return null;
+            if (Domain.IsInDesignMode) return null;
 
             var iconUrl = (value is string) ? new Uri((string)value) : value as Uri;
             var defaultPackageIcon = parameter as BitmapImage;

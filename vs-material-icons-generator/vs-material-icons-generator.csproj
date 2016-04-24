@@ -56,6 +56,8 @@
     <Compile Include="Common\ErrorFloodGate.cs" />
     <Compile Include="Common\Selectable.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\FontSizeConverter.cs" />
+    <Compile Include="Converters\FontSizeScalingConverter.cs" />
     <Compile Include="Converters\IconUrlToImageCacheConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Models\Group.cs" />
@@ -63,12 +65,14 @@
     <Compile Include="Models\Pallete.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
+    <Compile Include="UI\Brushes.cs" />
+    <Compile Include="UI\Domain.cs" />
     <Compile Include="UI\EventBinding\DependencyObjectExtensions.cs" />
     <Compile Include="UI\EventBinding\EventBindingExtension.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\ObservableWindow.cs" />
+    <Compile Include="UI\Styles.cs" />
     <Compile Include="Utils\ColorUtils.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\OS.cs" />

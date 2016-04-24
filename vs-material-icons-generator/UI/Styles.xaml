@@ -1,12 +1,105 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ui="clr-namespace:VSMaterialIcons.UI">
+                    xmlns:vs="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
+                    xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
+                    xmlns:ui="clr-namespace:VSMaterialIcons.UI"
+                    xmlns:converters="clr-namespace:VSMaterialIcons.Converters">
 
-    <Style TargetType="ui:MainWindow">
+    <converters:FontSizeConverter x:Key="FontSizeConverter" />
+
+
+    <!-- Default styles -->
+    <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}"
+           BasedOn="{StaticResource {x:Static ui:Styles.ThemedComboStyleKey}}"/>
+
+    <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}"
+           BasedOn="{StaticResource {x:Static ui:Styles.ScrollBarStyleKey}}"/>
+
+    <Style x:Key="{x:Type ScrollViewer}" TargetType="{x:Type ScrollViewer}"
+           BasedOn="{StaticResource {x:Static ui:Styles.ScrollViewerStyleKey}}"/>
+
+    <!-- Template used by ListBoxItem that represents a package. -->
+    <ControlTemplate
+      x:Key="ListBoxItemTemplate"
+      TargetType="{x:Type ListBoxItem}">
+        <Border
+        x:Name="Bd"
+        BorderThickness="0"
+        Background="{TemplateBinding Background}"
+        Padding="0"
+        SnapsToDevicePixels="true">
+            <ContentPresenter
+          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <!-- set the background for IsEnabled == false -->
+            <Trigger
+          Property="IsEnabled"
+          Value="false">
+                <Setter
+            Property="Background"
+            TargetName="Bd"
+            Value="{DynamicResource {x:Static ui:Brushes.ListPaneBackground}}" />
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition
+              Property="IsMouseOver"
+              Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter
+            Property="Background"
+            TargetName="Bd"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentMouseOverBrushKey}}" />
+                <Setter
+            Property="TextBlock.Foreground"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentMouseOverTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition
+              Property="Selector.IsSelectionActive"
+              Value="False" />
+                    <Condition
+              Property="IsSelected"
+              Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter
+            Property="Background"
+            TargetName="Bd"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentInactiveSelectedBrushKey}}" />
+                <Setter
+            Property="TextBlock.Foreground"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentInactiveSelectedTextBrushKey}}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition
+              Property="Selector.IsSelectionActive"
+              Value="True" />
+                    <Condition
+              Property="IsSelected"
+              Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter
+            Property="Background"
+            TargetName="Bd"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentSelectedBrushKey}}" />
+                <Setter
+            Property="TextBlock.Foreground"
+            TargetName="Bd"
+            Value="{DynamicResource {x:Static ui:Brushes.ContentSelectedTextBrushKey}}" />
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <Style TargetType="ui:MainWindow" BasedOn="{StaticResource {x:Type vs:DialogWindowBase}}">
         <Setter Property="Width" Value="840" />
         <Setter Property="Height" Value="640" />
-        <Setter Property="WindowStyle" Value="SingleBorderWindow" />
-        <Setter Property="ResizeMode" Value="NoResize" />
     </Style>
 
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
@@ -17,6 +110,12 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static ui:Brushes.ListPaneBackground}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static ui:Brushes.UIText}}" />
+    </Style>
+
+    <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Template" Value="{StaticResource ListBoxItemTemplate}" />
     </Style>
 
     <Style x:Key="ListItemIconImageStyle" TargetType="Image">
@@ -26,21 +125,22 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
+
+
     <Style x:Key="ListItemNameTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType={x:Type Window}},
+            Converter={StaticResource FontSizeConverter}, ConverterParameter=2.0}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 
     <Style x:Key="ListItemGroupTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#999" />
-        <Setter Property="FontSize" Value="11" />
     </Style>
 
     <Style x:Key="ListItemKeywordsTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#999" />
-        <Setter Property="FontSize" Value="11" />
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 
     <Style x:Key="ListItemIsNewBadgeTextBlockStyle" TargetType="TextBlock">
@@ -63,13 +163,11 @@
     </Style>
 
     <Style x:Key="PreviewNameTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
     <Style x:Key="PreviewGroupTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#999" />
         <Setter Property="FontSize" Value="12" />
     </Style>
 
@@ -94,5 +192,12 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="0 4" />
+    </Style>
+
+    <Style x:Key="CloseButtonStyle" TargetType="Button">
+        <Setter Property="Padding" Value="20 4" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
 </ResourceDictionary>
