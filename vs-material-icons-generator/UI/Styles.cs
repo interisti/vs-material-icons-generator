@@ -29,5 +29,11 @@ namespace VSMaterialIcons.UI
 
         [Browsable(false)]
         public static object ScrollViewerStyleKey => VsResourceKeys.ScrollViewerStyleKey ?? typeof(ScrollViewer);
+
+        [Browsable(false)]
+        public static object CheckBoxStyleKey => VsResourceKeys.ThemedDialogCheckBoxStyleKey ?? typeof(CheckBox);
+
+        [Browsable(false)]
+        public static object ButtonStyleKey => VsResourceKeys.ThemedDialogButtonStyleKey ?? typeof(Button);
     }
 }

@@ -82,6 +82,21 @@ namespace VSMaterialIcons.UI
         public static object UIText { get; private set; } = SystemColors.ControlTextBrushKey;
 
         public static object WindowTextKey { get; private set; } = SystemColors.WindowTextBrushKey;
+        
+        public static object TextBoxBackgroundBrushKey { get; private set; }
+
+        public static object TextBoxBorderBrushKey { get; private set; }
+
+        public static object TextBoxMouseOverBorderBrushKey { get; private set; }
+
+        public static object TextBoxSelectionBrushKey { get; private set; }
+
+
+
+
+
+
+
 
         public static void LoadVsBrushes()
         {
@@ -124,6 +139,11 @@ namespace VSMaterialIcons.UI
             ContentSelectedBrushKey = colorResources["ContentSelectedBrushKey"];
             ContentSelectedTextBrushKey = colorResources["ContentSelectedTextBrushKey"];
             ContentBrushKey = colorResources["ContentBrushKey"];
+            TextBoxBackgroundBrushKey = colorResources["TextBoxBackgroundBrushKey"];
+            TextBoxBorderBrushKey = colorResources["TextBoxBorderBrushKey"];
+            TextBoxMouseOverBorderBrushKey = colorResources["TextBoxMouseOverBorderBrushKey"];
+            TextBoxSelectionBrushKey = colorResources["TextBoxSelectionBrushKey"];
+
         }
 
         private static IDictionary<string, ThemeResourceKey> GetColorResources()

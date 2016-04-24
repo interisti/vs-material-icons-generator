@@ -10,7 +10,8 @@
                    xmlns:model="clr-namespace:VSMaterialIcons.Models"
                    xmlns:ui="clr-namespace:VSMaterialIcons.UI"
                    mc:Ignorable="d"
-                   Title="Material Icons Generator">
+                   Title="Material Icons Generator"
+                   WindowStartupLocation="CenterOwner">
     <vsui:DialogWindow.Resources>
         <ResourceDictionary>
             <vm:MainViewModel x:Key="MainViewModel" />
@@ -29,167 +30,177 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <TextBox Grid.ColumnSpan="2" FontSize="14" VerticalContentAlignment="Center"
                  Text="{Binding FilterExpression, UpdateSourceTrigger=PropertyChanged}"
                  TextChanged="{eb:EventBinding Command=FilterCommand}">
         </TextBox>
 
-        <ListBox Grid.Row="1"
+        <Grid Grid.Row="1"
+              Background="{DynamicResource {x:Static ui:Brushes.DetailPaneBackground}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ListBox 
                  Style="{StaticResource ListBoxStyle}"
                  ItemsSource="{Binding FilteredItems}"
                  SelectedItem="{Binding SelectedIcon}"
                  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="6 4" HorizontalAlignment="Stretch">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="6 4" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
                                Style="{StaticResource ListItemIconImageStyle}" 
                                Source="{Binding ListItemUrl, Converter={StaticResource IconUrlToImageCacheConverter}, IsAsync=True}" />
-                        <TextBlock Grid.Column="1" Grid.Row="0"
+                            <TextBlock Grid.Column="1" Grid.Row="0"
                                    Style="{StaticResource ListItemNameTextBlockStyle}" 
                                    Text="{Binding Icon.Name}" />
-                        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+                            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                                    Style="{StaticResource ListItemGroupTextBlockStyle}" 
                                    Text="{Binding Icon.Group.Name}" />
-                        <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
+                            <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
                                    Style="{StaticResource ListItemKeywordsTextBlockStyle}" 
                                    Text="{Binding Icon.KeywordsString}" />
-                        <TextBlock Grid.Column="2" Grid.Row="0"
+                            <TextBlock Grid.Column="2" Grid.Row="0"
                                    Style="{StaticResource ListItemIsNewBadgeTextBlockStyle}"
                                    Visibility="{Binding Icon.IsNew, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-        <Grid Grid.Row="1" Grid.Column="1"
-              Visibility="{Binding SelectedIcon, Converter={StaticResource NullToVisibilityConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!--Genenral Info & preview-->
-            <Grid Grid.Row="0">
+            <Grid Grid.Column="1"
+                  Visibility="{Binding SelectedIcon, Converter={StaticResource NullToVisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" 
+                <!--Genenral Info & preview-->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" 
                        Style="{StaticResource PreviewIconImageStyle}" 
                        Source="{Binding SelectedIcon.PreviewImage}" />
-                <TextBlock Grid.Row="0" Grid.Column="1" 
+                    <TextBlock Grid.Row="0" Grid.Column="1" 
                            Style="{StaticResource PreviewNameTextBlockStyle}" 
                            Text="{Binding SelectedIcon.Icon.Name}" />
-                <TextBlock Grid.Row="1" Grid.Column="1" 
+                    <TextBlock Grid.Row="1" Grid.Column="1" 
                            Style="{StaticResource PreviewGroupTextBlockStyle}" 
                            Text="{Binding SelectedIcon.Icon.Group.Name}" />
-            </Grid>
+                </Grid>
 
-            <Separator Grid.Row="1" Margin="6 0" />
+                <Separator Grid.Row="1" Margin="6 0" />
 
-            <!--Configuration-->
-            <Grid Grid.Row="2" Margin="6">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <!--Configuration-->
+                <Grid Grid.Row="2" Margin="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0"
+                    <TextBlock Grid.Column="0" Grid.Row="0"
                            Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Color: " />
-                <ComboBox Grid.Column="1" Grid.Row="0"
+                    <ComboBox Grid.Column="1" Grid.Row="0"
                           Style="{StaticResource PreviewComboBoxStyle}"
                           ItemsSource="{Binding Source={x:Static model:Pallete.MATERIAL_PALLETE}}"
                           SelectedItem="{Binding SelectedIcon.Color}"
                           DisplayMemberPath="Name" />
 
-                <TextBlock Grid.Column="0" Grid.Row="1" 
+                    <TextBlock Grid.Column="0" Grid.Row="1" 
                            Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Size: " />
-                <ComboBox Grid.Column="1" Grid.Row="1"
+                    <ComboBox Grid.Column="1" Grid.Row="1"
                           Style="{StaticResource PreviewComboBoxStyle}"
                           ItemsSource="{Binding AvailableSizes}"
                           SelectedItem="{Binding SelectedIcon.Size}"
                           DisplayMemberPath="Name" />
 
-                <TextBlock Grid.Column="0" Grid.Row="2" 
+                    <TextBlock Grid.Column="0" Grid.Row="2" 
                            Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Image: " />
-                <StackPanel Grid.Column="1" Grid.Row="2"
+                    <StackPanel Grid.Column="1" Grid.Row="2"
                             Orientation="Horizontal">
 
-                    <CheckBox 
+                        <CheckBox 
                               Style="{StaticResource PreviewCheckBoxStyle}"
                               Content="{Binding SelectedIcon.Mdpi.Item.Name}"
                               IsChecked="{Binding SelectedIcon.Mdpi.IsSelected}" />
 
-                    <CheckBox 
+                        <CheckBox 
                               Style="{StaticResource PreviewCheckBoxStyle}"
                               Content="{Binding SelectedIcon.Hdpi.Item.Name}"
                               IsChecked="{Binding SelectedIcon.Hdpi.IsSelected}" />
 
-                    <CheckBox 
+                        <CheckBox 
                               Style="{StaticResource PreviewCheckBoxStyle}"
                               Content="{Binding SelectedIcon.XHdpi.Item.Name}"
                               IsChecked="{Binding SelectedIcon.XHdpi.IsSelected}" />
 
-                    <CheckBox 
+                        <CheckBox 
                               Style="{StaticResource PreviewCheckBoxStyle}"
                               Content="{Binding SelectedIcon.XXHdpi.Item.Name}"
                               IsChecked="{Binding SelectedIcon.XXHdpi.IsSelected}" />
 
-                    <CheckBox 
+                        <CheckBox 
                               Style="{StaticResource PreviewCheckBoxStyle}"
                               Content="{Binding SelectedIcon.XXXHdpi.Item.Name}"
                               IsChecked="{Binding SelectedIcon.XXXHdpi.IsSelected}" />
-                </StackPanel>
+                    </StackPanel>
 
 
-                <TextBlock Grid.Column="0" Grid.Row="3" 
+                    <TextBlock Grid.Column="0" Grid.Row="3" 
                            Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Name: " />
-                <TextBox Grid.Row="3" Grid.Column="1"
+                    <TextBox Grid.Row="3" Grid.Column="1"
                          Style="{StaticResource PreviewNameTextBoxStyle}"
                          Text="{Binding SelectedIcon.Name}"/>
 
-                <Button Grid.Row="4" Grid.Column="1" 
-                        HorizontalAlignment="Right" Padding="10 4"
-                        Content="Add to Project"
-                        Command="{Binding SelectedIcon.AddToProjectCommand}"/>
+                    <Button Grid.Row="4" Grid.Column="1" 
+                            Content="Add to Project"
+                            Style="{StaticResource AddToProjectButtonStyle}"
+                            Command="{Binding SelectedIcon.AddToProjectCommand}"/>
+                </Grid>
             </Grid>
         </Grid>
 
-        <Button Grid.Row="2" Grid.Column="1" 
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Button 
                 Style="{StaticResource CloseButtonStyle}"
-                Content="Close" />
+                Content="Close"
+                IsCancel="True"/>
+        </StackPanel>
     </Grid>
-    </vsui:DialogWindow>
+</vsui:DialogWindow>
