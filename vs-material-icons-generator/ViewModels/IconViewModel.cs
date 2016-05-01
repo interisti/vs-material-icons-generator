@@ -208,7 +208,7 @@ namespace VSMaterialIcons.ViewModels
                 {
                     var color = (this.Color.IsKnown) ? this.Color : Pallete.Black;
                     var iconUrl = this.GenerateUrl(this.Icon.Group.Id, this.Icon.Id,
-                        this.XHdpi.Item.Folder, color.Name, this.Size.Value);
+                        type.Folder, color.Name, this.Size.Value);
 
                     byte[] icon;
                     using (var client = new HttpClient())
