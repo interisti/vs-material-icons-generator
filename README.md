@@ -32,6 +32,9 @@ to install the
 extension for Visual Studio which enables some features
 used by this project.
 
+## Xamarin Studio
+* [xs-material-icons-generator](https://github.com/interisti/xs-material-icons-generator)
+
 ## Credits
 * Inspired by [android-material-design-icon-generator-plugin](https://github.com/konifar/android-material-design-icon-generator-plugin)
 * Icons From [Google's Material Design Icons Repository](https://github.com/google/material-design-icons)
