@@ -33,7 +33,7 @@ namespace VSMaterialIcons.Models
 
         public static async Task<List<Icon>> GetIconsAsync()
         {
-            var url = "https://design.google.com/icons/data/grid.json";
+            var url = "https://material.io/icons/data/grid.json";
             using (var client = new HttpClient())
             {
                 var response = await client.GetStringAsync(url);
