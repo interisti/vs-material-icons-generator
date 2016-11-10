@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
+using RestSharp;
 
 namespace VSMaterialIcons.Models
 {
@@ -33,28 +34,28 @@ namespace VSMaterialIcons.Models
 
         public static async Task<List<Icon>> GetIconsAsync()
         {
-            var url = "https://material.io/icons/data/grid.json";
-            using (var client = new HttpClient())
+            var client = new RestClient("https://material.io");
+            var request = new RestRequest("/icons/data/grid.json", Method.GET);
+            request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
+            request.AddHeader("cache-control", "max-age=0");
+            var response = await client.ExecuteTaskAsync(request);
+            var json = JObject.Parse(response.Content);
+
+            var groups = json["groups"].Select(item => new Group()
             {
-                var response = await client.GetStringAsync(url);
-                var json = JObject.Parse(response);
+                Id = item["data"]["id"].Value<string>(),
+                Name = item["data"]["name"].Value<string>(),
+                Length = item["length"].Value<int>()
+            }).ToList();
 
-                var groups = json["groups"].Select(item => new Group()
-                {
-                    Id = item["data"]["id"].Value<string>(),
-                    Name = item["data"]["name"].Value<string>(),
-                    Length = item["length"].Value<int>()
-                }).ToList();
-
-                return json["icons"].Select(item => new Icon()
-                {
-                    Id = item["id"].Value<string>(),
-                    Name = item["name"].Value<string>(),
-                    Group = groups.FirstOrDefault(x => x.Id == item["group_id"].Value<string>()),
-                    Keywords = item["keywords"].Values<string>().ToList(),
-                    IsNew = item["is_new"].Value<bool>()
-                }).ToList();
-            }
+            return json["icons"].Select(item => new Icon()
+            {
+                Id = item["id"].Value<string>(),
+                Name = item["name"].Value<string>(),
+                Group = groups.FirstOrDefault(x => x.Id == item["group_id"].Value<string>()),
+                Keywords = item["keywords"].Values<string>().ToList(),
+                IsNew = item["is_new"].Value<bool>()
+            }).ToList();
         }
     }
 }
