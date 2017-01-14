@@ -40,7 +40,10 @@ namespace VSMaterialIcons
         /// <param name="package">Owner package, not null.</param>
         private AddIconCommand(Package package)
         {
-            this.package = package ?? throw new ArgumentNullException("package");
+            if (package == null)
+                throw new ArgumentNullException("package");
+
+            this.package = package;
             ServiceLocator.InitializePackageServiceProvider(this.package);
 
             var commandService = ServiceLocator.GetGlobalService<IMenuCommandService, OleMenuCommandService>();

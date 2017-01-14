@@ -110,7 +110,8 @@ namespace EventBinding
 
         public static void HandlerIntern(object sender, object args, string cmdName, string commandParameter)
         {
-            if (sender is FrameworkElement fe)
+            var fe = sender as FrameworkElement;
+            if (fe != null)
             {
                 ICommand cmd = GetCommand(fe, cmdName);
                 object commandParam = null;
@@ -166,7 +167,9 @@ namespace EventBinding
         internal static GalaSoft.MvvmLight.ViewModelBase FindViewModel(FrameworkElement target)
         {
             if (target == null) return null;
-            if (target.DataContext is GalaSoft.MvvmLight.ViewModelBase vm) return vm;
+
+            var vm = target.DataContext as GalaSoft.MvvmLight.ViewModelBase;
+            if (vm != null) return vm;
 
             var parent = target.GetParentObject() as FrameworkElement;
 
