@@ -39,9 +39,7 @@ namespace VSMaterialIcons.Converters
             {
                 return null;
             }
-
-            var iconBitmapImage = _bitmapImageCache.Get(iconUrl.ToString()) as BitmapImage;
-            if (iconBitmapImage != null)
+            if (_bitmapImageCache.Get(iconUrl.ToString()) is BitmapImage iconBitmapImage)
             {
                 return iconBitmapImage;
             }

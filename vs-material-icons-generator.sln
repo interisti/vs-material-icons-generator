@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vs-material-icons-generator", "vs-material-icons-generator\vs-material-icons-generator.csproj", "{64BE9264-C23B-4F0F-8523-EE397F70A8B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vs-material-icons-generator", "src\vs-material-icons-generator.csproj", "{64BE9264-C23B-4F0F-8523-EE397F70A8B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68039C65-F79A-4FF2-AA8C-49334DA31148}"
 	ProjectSection(SolutionItems) = preProject

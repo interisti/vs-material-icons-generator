@@ -110,8 +110,7 @@ namespace EventBinding
 
         public static void HandlerIntern(object sender, object args, string cmdName, string commandParameter)
         {
-            var fe = sender as FrameworkElement;
-            if (fe != null)
+            if (sender is FrameworkElement fe)
             {
                 ICommand cmd = GetCommand(fe, cmdName);
                 object commandParam = null;
@@ -139,9 +138,9 @@ namespace EventBinding
             }
 #if DEBUG
             throw new Exception("EventBinding path error: '" + cmdName + "' property not found on '" + vmType + "' 'DelegateCommand'");
-#endif
-
+#else
             return null;
+#endif
         }
 
         internal static object GetCommandParameter(FrameworkElement target, object args, string commandParameter)
@@ -167,9 +166,7 @@ namespace EventBinding
         internal static GalaSoft.MvvmLight.ViewModelBase FindViewModel(FrameworkElement target)
         {
             if (target == null) return null;
-
-            var vm = target.DataContext as GalaSoft.MvvmLight.ViewModelBase;
-            if (vm != null) return vm;
+            if (target.DataContext is GalaSoft.MvvmLight.ViewModelBase vm) return vm;
 
             var parent = target.GetParentObject() as FrameworkElement;
 
