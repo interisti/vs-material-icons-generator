@@ -91,7 +91,7 @@ namespace MaterialIconsGenerator
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            new UI.MainWindow().ShowDialog();
+            new Views.MainWindow().ShowDialog();
         }
     }
 }

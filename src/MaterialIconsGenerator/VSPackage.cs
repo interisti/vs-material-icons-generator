@@ -6,7 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using MaterialIconsGenerator.UI;
+using MaterialIconsGenerator.Views;
 using Microsoft.VisualStudio.Shell;
 
 namespace MaterialIconsGenerator

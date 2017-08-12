@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace MaterialIconsGenerator.UI
+namespace MaterialIconsGenerator.Views
 {
     public static class Commands
     {

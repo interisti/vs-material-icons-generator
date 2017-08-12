@@ -71,15 +71,15 @@
     <Compile Include="Models\Pallete.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
-    <Compile Include="UI\Brushes.cs" />
-    <Compile Include="UI\Commands.cs" />
-    <Compile Include="UI\Domain.cs" />
-    <Compile Include="UI\EventBinding\DependencyObjectExtensions.cs" />
-    <Compile Include="UI\EventBinding\EventBindingExtension.cs" />
-    <Compile Include="UI\MainWindow.xaml.cs">
+    <Compile Include="Views\Brushes.cs" />
+    <Compile Include="Views\Commands.cs" />
+    <Compile Include="Views\Domain.cs" />
+    <Compile Include="Views\EventBinding\DependencyObjectExtensions.cs" />
+    <Compile Include="Views\EventBinding\EventBindingExtension.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Styles.cs" />
+    <Compile Include="Views\Styles.cs" />
     <Compile Include="Utils\ColorUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
@@ -291,11 +291,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </DesignData>
-    <Page Include="UI\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Styles.xaml">
+    <Page Include="Views\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

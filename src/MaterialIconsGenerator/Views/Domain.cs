@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 
-namespace MaterialIconsGenerator.UI
+namespace MaterialIconsGenerator.Views
 {
     public sealed class Domain
     {

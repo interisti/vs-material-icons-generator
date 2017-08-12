@@ -5,7 +5,7 @@ using System.Runtime.Caching;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using MaterialIconsGenerator.Common;
-using MaterialIconsGenerator.UI;
+using MaterialIconsGenerator.Views;
 
 namespace MaterialIconsGenerator.Converters
 {

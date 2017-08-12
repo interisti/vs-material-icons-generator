@@ -10,7 +10,7 @@ using System.Windows.Input;
 using MaterialIconsGenerator.ViewModels;
 using MaterialIconsGenerator.VS;
 
-namespace MaterialIconsGenerator.UI
+namespace MaterialIconsGenerator.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

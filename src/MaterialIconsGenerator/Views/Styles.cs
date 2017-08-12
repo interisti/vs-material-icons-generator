@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Microsoft.VisualStudio.Shell;
 
-namespace MaterialIconsGenerator.UI
+namespace MaterialIconsGenerator.Views
 {
     public class Styles
     {

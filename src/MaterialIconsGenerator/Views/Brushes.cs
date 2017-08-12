@@ -9,7 +9,7 @@ using System.Windows;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 
-namespace MaterialIconsGenerator.UI
+namespace MaterialIconsGenerator.Views
 {
     public static class Brushes
     {

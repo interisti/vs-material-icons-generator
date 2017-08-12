@@ -1,4 +1,4 @@
-﻿<vsui:DialogWindow x:Class="MaterialIconsGenerator.UI.MainWindow"
+﻿<vsui:DialogWindow x:Class="MaterialIconsGenerator.Views.MainWindow"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
                    xmlns:converters="clr-namespace:MaterialIconsGenerator.Converters"
                    xmlns:vm="clr-namespace:MaterialIconsGenerator.ViewModels"
                    xmlns:model="clr-namespace:MaterialIconsGenerator.Models"
-                   xmlns:ui="clr-namespace:MaterialIconsGenerator.UI"
+                   xmlns:views="clr-namespace:MaterialIconsGenerator.Views"
                    mc:Ignorable="d"
                    Title="Material Icons Generator"
                    WindowStartupLocation="CenterScreen">
@@ -20,21 +20,21 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../UI/Styles.xaml" />
+                <ResourceDictionary Source="../Views/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </vsui:DialogWindow.Resources>
     <vsui:DialogWindow.CommandBindings>
         <CommandBinding
-            Command="{x:Static ui:Commands.FocusOnSearchBox}"
+            Command="{x:Static views:Commands.FocusOnSearchBox}"
             Executed="FocusOnSearchBox_Executed" />
         <CommandBinding
-            Command="{x:Static ui:Commands.OpenExternalLink}"
+            Command="{x:Static views:Commands.OpenExternalLink}"
             Executed="ExecuteOpenLicenseLink" />
     </vsui:DialogWindow.CommandBindings>
     <vsui:DialogWindow.InputBindings>
         <KeyBinding
-            Command="{x:Static ui:Commands.FocusOnSearchBox}"
+            Command="{x:Static views:Commands.FocusOnSearchBox}"
             Gesture="CTRL+E" />
     </vsui:DialogWindow.InputBindings>
     <Grid DataContext="{StaticResource MainViewModel}"
@@ -47,7 +47,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.ColumnSpan="2"
-              Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}">
+              Background="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultBrushKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -63,7 +63,7 @@
         </Grid>
 
         <Grid Grid.Row="1"
-              Background="{DynamicResource {x:Static ui:Brushes.DetailPaneBackground}}">
+              Background="{DynamicResource {x:Static views:Brushes.DetailPaneBackground}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="*" />
@@ -218,7 +218,7 @@
         </Grid>
 
         <Grid Grid.Row="2"
-              Background="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultBrushKey}}">
+              Background="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultBrushKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -230,14 +230,14 @@
                        FontWeight="Bold" Margin="4 8 0 0"
                        Text="Icons from Google's Material Design icons"
                        VerticalAlignment="Center"
-                       Foreground="{DynamicResource {x:Static ui:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
+                       Foreground="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
             <TextBlock Grid.Column="1" 
                        FontWeight="Bold" Margin="4 8 0 0"
                        VerticalAlignment="Center">
                 <Hyperlink
                     NavigateUri="https://github.com/google/material-design-icons"
                     Style="{StaticResource HyperlinkStyle}"
-                    Command="{x:Static ui:Commands.OpenExternalLink}">
+                    Command="{x:Static views:Commands.OpenExternalLink}">
                     <Run Text="repository" />
                 </Hyperlink>
             </TextBlock>
