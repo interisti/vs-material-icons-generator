@@ -195,7 +195,7 @@ namespace MaterialIconsGenerator.ViewModels
                 StatusBar.DisplayMessage("Downloading icons ...");
 
                 var project = Project.GetActiveProject();
-                var projectDir = Project.GetProjectDirectory(project);
+                var projectDir = project.GetRootDirectory();
 
                 var selectedTypes = new List<Type>();
                 if (this.Mdpi.IsSelected) selectedTypes.Add(this.Mdpi.Item);
@@ -220,7 +220,7 @@ namespace MaterialIconsGenerator.ViewModels
                     var filepath = type.Destination(projectDir, this.Name);
                     FileUtils.WriteAllBytes(icon, filepath);
                     // add to project
-                    Project.AddFileToProject(project, filepath, "AndroidResource");
+                    project.AddFile(filepath, "AndroidResource");
                 }
 
                 project.Save();

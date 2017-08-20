@@ -1,33 +1,44 @@
-﻿using EnvDTE;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EnvDTE;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.VS
 {
-    public class Project
+    public class Project : IProject
     {
-        public static EnvDTE.Project GetActiveProject()
+        private EnvDTE.Project _vsProject;
+
+        public Project(EnvDTE.Project project)
+        {
+            this._vsProject = project;
+        }
+
+        public string GetRootDirectory()
+        {
+            return Path.GetDirectoryName(this._vsProject.FileName);
+        }
+
+        public void AddFile(string filename, string type)
+        {
+            var file = this._vsProject.ProjectItems.AddFromFile(filename);
+            file.Properties.Item("ItemType").Value = type;
+        }
+
+        public void Save()
+        {
+            this._vsProject.Save();
+        }
+
+
+        public static Project GetActiveProject()
         {
             var dteService = ServiceLocator.GetGlobalService<DTE, DTE>();
-            return ((object[])dteService.ActiveSolutionProjects)
+            var vsProject = ((object[])dteService.ActiveSolutionProjects)
                 .Select(x => (EnvDTE.Project)x)
                 .FirstOrDefault();
-        }
 
-        public static string GetProjectDirectory(EnvDTE.Project project)
-        {
-            return Path.GetDirectoryName(project.FileName);
-        }
-
-        public static void AddFileToProject(EnvDTE.Project project,
-            string filename, string type)
-        {
-            var file = project.ProjectItems.AddFromFile(filename);
-            file.Properties.Item("ItemType").Value = type;
+            return vsProject == null ? null : new Project(vsProject);
         }
     }
 }
