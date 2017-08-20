@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MaterialIconsGenerator.Android")]
+[assembly: AssemblyTitle("MaterialIconsGenerator.Providers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MaterialIconsGenerator.Android")]
+[assembly: AssemblyProduct("MaterialIconsGenerator.Providers")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8707c85f-7685-4ec1-94a9-65f7151b2deb")]
+[assembly: Guid("6c5abaeb-08fd-4f2f-83e6-bc7857a610d0")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MaterialIconsGenerator.iOS")]
+[assembly: AssemblyTitle("MaterialIconsGenerator.ProjectManagers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MaterialIconsGenerator.iOS")]
+[assembly: AssemblyProduct("MaterialIconsGenerator.ProjectManagers")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e067f3aa-654e-4ea1-81b0-8e8d67ef4eda")]
+[assembly: Guid("0571d5af-b263-4e0e-a1b5-137763922499")]
 
 // Version information for an assembly consists of the following four values:
 //
