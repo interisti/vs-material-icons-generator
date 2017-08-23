@@ -9,17 +9,9 @@ namespace MaterialIconsGenerator.Core
 
         string Reference { get; }
 
-        bool IsAndroidSupported { get; }
+        IEnumerable<string> GetSizes();
 
-        bool IsiOSSupported { get; }
-
-        IEnumerable<string> GetAndroidSizes();
-
-        IEnumerable<string> GetiOSSizes();
-
-        IEnumerable<string> GetAndroidDensities();
-
-        IEnumerable<string> GetiOSDensities();
+        IEnumerable<string> GetDensities();
 
         Task<IEnumerable<IIcon>> Get();
 

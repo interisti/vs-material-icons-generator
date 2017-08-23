@@ -7,59 +7,16 @@ using RestSharp;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
-    public class GoogleIconsProvider : IIconProvider
+    public abstract class GoogleIconsProvider : IIconProvider
     {
         public string Name => "Google Material Icons";
 
         public string Reference => "https://github.com/google/material-design-icons";
+        
 
-        public bool IsAndroidSupported => true;
+        public abstract IEnumerable<string> GetSizes();
 
-        public bool IsiOSSupported => true;
-
-        public IEnumerable<string> GetAndroidSizes()
-        {
-            return new List<string>()
-            {
-                "18dp",
-                "24dp",
-                "36dp",
-                "48dp"
-            };
-        }
-
-        public IEnumerable<string> GetiOSSizes()
-        {
-            return new List<string>()
-            {
-                "",
-                "18pt",
-                "36pt",
-                "48pt"
-            };
-        }
-
-        public IEnumerable<string> GetAndroidDensities()
-        {
-            return new List<string>()
-            {
-                "mdpi",
-                "hdpi",
-                "xhdpi",
-                "xxhdpi",
-                "xxxhdpi"
-            };
-        }
-
-        public IEnumerable<string> GetiOSDensities()
-        {
-            return new List<string>()
-            {
-                "",
-                "2X",
-                "3X"
-            };
-        }
+        public abstract IEnumerable<string> GetDensities();
 
         public async Task<IEnumerable<IIcon>> Get()
         {
