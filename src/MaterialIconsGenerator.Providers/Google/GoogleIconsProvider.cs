@@ -13,6 +13,54 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public string Reference => "https://github.com/google/material-design-icons";
 
+        public bool IsAndroidSupported => true;
+
+        public bool IsiOSSupported => true;
+
+        public IEnumerable<string> GetAndroidSizes()
+        {
+            return new List<string>()
+            {
+                "18dp",
+                "24dp",
+                "36dp",
+                "48dp"
+            };
+        }
+
+        public IEnumerable<string> GetiOSSizes()
+        {
+            return new List<string>()
+            {
+                "",
+                "18pt",
+                "36pt",
+                "48pt"
+            };
+        }
+
+        public IEnumerable<string> GetAndroidDensities()
+        {
+            return new List<string>()
+            {
+                "mdpi",
+                "hdpi",
+                "xhdpi",
+                "xxhdpi",
+                "xxxhdpi"
+            };
+        }
+
+        public IEnumerable<string> GetiOSDensities()
+        {
+            return new List<string>()
+            {
+                "",
+                "2X",
+                "3X"
+            };
+        }
+
         public async Task<IEnumerable<IIcon>> Get()
         {
             var client = new RestClient("https://material.io");
