@@ -38,7 +38,8 @@ namespace MaterialIconsGenerator.Providers.Google
                 Id = item["id"].Value<string>(),
                 Name = item["name"].Value<string>(),
                 Category = groups.FirstOrDefault(x => x.Id == item["group_id"].Value<string>()),
-                Keywords = item["keywords"].Values<string>().ToList()
+                Keywords = item["keywords"].Values<string>().ToList(),
+                Provider = this
             }).ToList();
         }
 

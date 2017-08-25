@@ -12,5 +12,7 @@ namespace MaterialIconsGenerator.Providers.Google
         public IIconCategory Category { get; set; }
 
         public IEnumerable<string> Keywords { get; set; } = new List<string>();
+
+        public IIconProvider Provider { get; set; }
     }
 }

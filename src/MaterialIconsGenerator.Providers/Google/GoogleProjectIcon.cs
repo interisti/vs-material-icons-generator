@@ -15,6 +15,7 @@ namespace MaterialIconsGenerator.Providers.Google
             this.Color = color;
             this.Size = size;
             this.Density = density;
+            this.Provider = icon.Provider;
         }
 
         public string Id { get; set; }
@@ -30,6 +31,8 @@ namespace MaterialIconsGenerator.Providers.Google
         public string Density { get; set; }
 
         public string FullName => $"{this.Name}_{this.Color.Name}_{this.Density}";
+
+        public IIconProvider Provider { get; set; }
 
         public async Task<byte[]> Download()
         {

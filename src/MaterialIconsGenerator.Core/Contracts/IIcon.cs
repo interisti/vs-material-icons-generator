@@ -11,5 +11,7 @@ namespace MaterialIconsGenerator.Core
         IIconCategory Category { get; }
 
         IEnumerable<string> Keywords { get; }
+
+        IIconProvider Provider { get; }
     }
 }
