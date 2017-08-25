@@ -8,13 +8,13 @@ namespace MaterialIconsGenerator.Providers.Google
             : base(icon, color, size, density)
         { }
 
-        public override string FullName => $"{this.Name}_{this.Color.Name}_{this.Density}";
+        public override string FullName => $"{this.Icon.Name}_{this.Color.Name}_{this.Density}";
 
         protected override  string GenerateUrl()
         {
             var downloadColor = this.Color.Color == System.Drawing.Color.White ? "white" : "black";
 
-            return $"/google/material-design-icons/master/{this.Category.Id}/drawable-{this.Density}/{this.Id}_{downloadColor}_{this.Size}.png";
+            return $"https://raw.githubusercontent.com/google/material-design-icons/master/{this.Icon.Category.Id}/drawable-{this.Density}/{this.Icon.Id}_{downloadColor}_{this.Size}.png";
         }
     }
 }

@@ -12,6 +12,8 @@ namespace MaterialIconsGenerator.Core
 
         IEnumerable<string> Keywords { get; }
 
+        string PreviewUrl { get; }
+
         IIconProvider Provider { get; }
     }
 }

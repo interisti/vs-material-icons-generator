@@ -4,21 +4,15 @@ namespace MaterialIconsGenerator.Core
 {
     public interface IProjectIcon
     {
-        string Id { get; }
-
-        string Name { get; }
+        IIcon Icon { get; }
 
         string FullName { get; }
-
-        IIconCategory Category { get; }
 
         IIconColor Color { get; }
 
         string Size { get; }
 
         string Density { get; }
-
-        IIconProvider Provider { get; }
 
 
         Task<byte[]> Download();

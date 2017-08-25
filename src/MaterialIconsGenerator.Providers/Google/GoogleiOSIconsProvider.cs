@@ -9,8 +9,8 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             return new List<string>()
             {
-                "",
                 "18pt",
+                "24pt",
                 "36pt",
                 "48pt"
             };
@@ -20,7 +20,7 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             return new List<string>()
             {
-                "",
+                "1X",
                 "2X",
                 "3X"
             };

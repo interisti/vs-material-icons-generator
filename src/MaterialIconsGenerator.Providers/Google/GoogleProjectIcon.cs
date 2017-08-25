@@ -9,20 +9,13 @@ namespace MaterialIconsGenerator.Providers.Google
     {
         public GoogleProjectIcon(IIcon icon, IIconColor color, string size, string density)
         {
-            this.Id = icon.Id;
-            this.Name = icon.Name;
-            this.Category = icon.Category;
+            this.Icon = icon;
             this.Color = color;
             this.Size = size;
             this.Density = density;
-            this.Provider = icon.Provider;
         }
 
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public IIconCategory Category { get; set; }
+        public IIcon Icon { get; }
 
         public IIconColor Color { get; set; }
 
@@ -32,11 +25,9 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public abstract string FullName { get; }
 
-        public IIconProvider Provider { get; set; }
-
         public async Task<byte[]> Download()
         {
-            var client = new RestClient("https://raw.githubusercontent.com");
+            var client = new RestClient();
             var request = new RestRequest(this.GenerateUrl(), Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");
