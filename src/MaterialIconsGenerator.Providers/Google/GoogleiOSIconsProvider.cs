@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
@@ -23,6 +24,11 @@ namespace MaterialIconsGenerator.Providers.Google
                 "2X",
                 "3X"
             };
+        }
+
+        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        {
+            return new GoogleiOSProjectIcon(icon, color, size, density);
         }
     }
 }

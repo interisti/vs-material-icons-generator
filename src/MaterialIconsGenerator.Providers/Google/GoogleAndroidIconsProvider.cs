@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
@@ -25,6 +26,11 @@ namespace MaterialIconsGenerator.Providers.Google
                 "xxhdpi",
                 "xxxhdpi"
             };
+        }
+
+        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        {
+            return new GoogleAndroidProjectIcon(icon, color, size, density);
         }
     }
 }

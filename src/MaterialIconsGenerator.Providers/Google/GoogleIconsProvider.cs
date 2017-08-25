@@ -43,9 +43,6 @@ namespace MaterialIconsGenerator.Providers.Google
             }).ToList();
         }
 
-        public IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density)
-        {
-            return new GoogleProjectIcon(icon, color, size, density);
-        }
+        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density);
     }
 }

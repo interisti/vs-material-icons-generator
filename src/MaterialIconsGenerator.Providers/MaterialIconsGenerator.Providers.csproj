@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Google\GoogleiOSIconsProvider.cs" />
     <Compile Include="Google\GoogleAndroidIconsProvider.cs" />
+    <Compile Include="Google\GoogleAndroidProjectIcon.cs" />
+    <Compile Include="Google\GoogleiOSProjectIcon.cs" />
     <Compile Include="Google\GoogleProjectIcon.cs" />
     <Compile Include="Google\GoogleIcon.cs" />
     <Compile Include="Google\GoogleIconCategory.cs" />

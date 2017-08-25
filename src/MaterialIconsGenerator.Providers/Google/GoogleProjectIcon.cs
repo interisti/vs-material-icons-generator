@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
-    public class GoogleProjectIcon : IProjectIcon
+    public abstract class GoogleProjectIcon : IProjectIcon
     {
         public GoogleProjectIcon(IIcon icon, IIconColor color, string size, string density)
         {
@@ -30,7 +30,7 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public string Density { get; set; }
 
-        public string FullName => $"{this.Name}_{this.Color.Name}_{this.Density}";
+        public abstract string FullName { get; }
 
         public IIconProvider Provider { get; set; }
 
@@ -45,7 +45,7 @@ namespace MaterialIconsGenerator.Providers.Google
             return this.Tint(response.RawBytes);
         }
 
-        private byte[] Tint(byte[] data)
+        protected byte[] Tint(byte[] data)
         {
             if (this.Color.Color == System.Drawing.Color.White ||
                 this.Color.Color == System.Drawing.Color.Black)
@@ -56,11 +56,6 @@ namespace MaterialIconsGenerator.Providers.Google
             return ColorUtils.Tint(data, this.Color.Color);
         }
 
-        private string GenerateUrl()
-        {
-            var downloadColor = this.Color.Color == System.Drawing.Color.White ? "white" : "black";
-
-            return $"/google/material-design-icons/master/{this.Category.Id}/drawable-{this.Density}/{this.Id}_{downloadColor}_{this.Size}.png";
-        }
+        protected abstract string GenerateUrl();
     }
 }
