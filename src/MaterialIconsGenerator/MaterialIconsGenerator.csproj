@@ -65,6 +65,7 @@
     <Compile Include="Converters\FontSizeConverter.cs" />
     <Compile Include="Converters\FontSizeScalingConverter.cs" />
     <Compile Include="Converters\IconUrlToImageCacheConverter.cs" />
+    <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Icon.cs" />
@@ -304,6 +305,10 @@
     <ProjectReference Include="..\MaterialIconsGenerator.Core\MaterialIconsGenerator.Core.csproj">
       <Project>{FAE9336F-2D13-4BA2-A137-BB425B303A51}</Project>
       <Name>MaterialIconsGenerator.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MaterialIconsGenerator.Providers\MaterialIconsGenerator.Providers.csproj">
+      <Project>{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}</Project>
+      <Name>MaterialIconsGenerator.Providers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

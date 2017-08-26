@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MaterialIconsGenerator.Providers.Google;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.ViewModels
 {
@@ -9,14 +11,6 @@ namespace MaterialIconsGenerator.ViewModels
         public MainViewModel()
         {
             this.LoadCommand = new RelayCommand(this.DoLoad);
-        }
-
-
-        private ObservableCollection<Models.Size> _availableSizes = new ObservableCollection<Models.Size>(Models.Size.GetDefault());
-        public ObservableCollection<Models.Size> AvailableSizes
-        {
-            get { return _availableSizes; }
-            set { this.Set(ref this._availableSizes, value); }
         }
 
         private ObservableCollection<IconViewModel> _items;
@@ -30,10 +24,13 @@ namespace MaterialIconsGenerator.ViewModels
         private async void DoLoad()
         {
             this.IsBusy = true;
+
+            IIconProvider provider = new GoogleAndroidIconsProvider();
             this.Items = new ObservableCollection<IconViewModel>(
-                (await Models.Icon.GetIconsAsync())
+                (await provider.Get())
                 .Select(x => new IconViewModel(x))
                 .ToList());
+
             this.IsBusy = false;
         }
 

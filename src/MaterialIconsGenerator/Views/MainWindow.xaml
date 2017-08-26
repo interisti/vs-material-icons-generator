@@ -18,6 +18,7 @@
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:IconUrlToImageCacheConverter x:Key="IconUrlToImageCacheConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:ListToStringConverter x:Key="ListToStringConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Views/Styles.xaml" />
@@ -90,19 +91,16 @@
 
                             <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
                                Style="{StaticResource ListItemIconImageStyle}" 
-                               Source="{Binding ListItemUrl, Converter={StaticResource IconUrlToImageCacheConverter}, IsAsync=True}" />
+                               Source="{Binding PreviewUrl, Converter={StaticResource IconUrlToImageCacheConverter}, IsAsync=True}" />
                             <TextBlock Grid.Column="1" Grid.Row="0"
                                    Style="{StaticResource ListItemNameTextBlockStyle}" 
                                    Text="{Binding Icon.Name}" />
                             <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                                    Style="{StaticResource ListItemGroupTextBlockStyle}" 
-                                   Text="{Binding Icon.Group.Name}" />
+                                   Text="{Binding Icon.Category.Name}" />
                             <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
                                    Style="{StaticResource ListItemKeywordsTextBlockStyle}" 
-                                   Text="{Binding Icon.KeywordsString}" />
-                            <TextBlock Grid.Column="2" Grid.Row="0"
-                                   Style="{StaticResource ListItemIsNewBadgeTextBlockStyle}"
-                                   Visibility="{Binding Icon.IsNew, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                   Text="{Binding Icon.Keywords, Converter={StaticResource ListToStringConverter}}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -168,8 +166,7 @@
                     <ComboBox Grid.Column="1" Grid.Row="1"
                           Style="{StaticResource PreviewComboBoxStyle}"
                           ItemsSource="{Binding AvailableSizes}"
-                          SelectedItem="{Binding SelectedIcon.Size}"
-                          DisplayMemberPath="Name" />
+                          SelectedItem="{Binding SelectedIcon.Size}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="2" 
                            Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Image: " />
