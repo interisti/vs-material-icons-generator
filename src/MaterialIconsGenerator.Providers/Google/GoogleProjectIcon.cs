@@ -25,7 +25,7 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public abstract string FullName { get; }
 
-        public async Task<byte[]> Download()
+        public async Task<byte[]> Get()
         {
             var client = new RestClient();
             var request = new RestRequest(this.GenerateUrl(), Method.GET);

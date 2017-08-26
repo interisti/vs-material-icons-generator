@@ -12,7 +12,7 @@ namespace MaterialIconsGenerator.ProjectManagers
         public async Task AddIcon(IProject project, IProjectIcon icon)
         {
             // download icon
-            var data = await icon.Download();
+            var data = await icon.Get();
 
             var root = project.GetRootDirectory();
             var filepath = Path.Combine(root, RESOURCES_FOLDER,

@@ -15,6 +15,6 @@ namespace MaterialIconsGenerator.Core
         string Density { get; }
 
 
-        Task<byte[]> Download();
+        Task<byte[]> Get();
     }
 }
