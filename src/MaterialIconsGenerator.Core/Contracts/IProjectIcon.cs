@@ -8,11 +8,11 @@ namespace MaterialIconsGenerator.Core
 
         string FullName { get; }
 
-        IIconColor Color { get; }
+        IIconColor Color { get; set; }
 
-        string Size { get; }
+        string Size { get; set; }
 
-        string Density { get; }
+        string Density { get; set; }
 
 
         Task<byte[]> Get();

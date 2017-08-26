@@ -144,9 +144,10 @@
         <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style x:Key="PreviewGroupTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="PreviewTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static views:Brushes.UIText}}" />
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0 4 0 4" />
     </Style>
 
     <Style x:Key="PreviewCaptionTextBlockStyle" TargetType="TextBlock">

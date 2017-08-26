@@ -27,7 +27,7 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public async Task<byte[]> Get()
         {
-            var client = new RestClient();
+            var client = new RestClient("https://raw.githubusercontent.com");
             var request = new RestRequest(this.GenerateUrl(), Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");

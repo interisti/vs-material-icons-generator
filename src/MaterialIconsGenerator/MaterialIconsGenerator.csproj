@@ -306,6 +306,10 @@
       <Project>{FAE9336F-2D13-4BA2-A137-BB425B303A51}</Project>
       <Name>MaterialIconsGenerator.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MaterialIconsGenerator.ProjectManagers\MaterialIconsGenerator.ProjectManagers.csproj">
+      <Project>{0571D5AF-B263-4E0E-A1B5-137763922499}</Project>
+      <Name>MaterialIconsGenerator.ProjectManagers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MaterialIconsGenerator.Providers\MaterialIconsGenerator.Providers.csproj">
       <Project>{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}</Project>
       <Name>MaterialIconsGenerator.Providers</Name>
