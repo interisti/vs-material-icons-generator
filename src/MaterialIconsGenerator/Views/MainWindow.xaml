@@ -225,7 +225,7 @@
 
             <TextBlock Grid.Column="0"
                        FontWeight="Bold" Margin="4 8 0 0"
-                       Text="Open issues or suggest a feature on github"
+                       Text="Open an issue or suggest a feature on github"
                        VerticalAlignment="Center"
                        Foreground="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
             <TextBlock Grid.Column="1" 
