@@ -1,0 +1,246 @@
+﻿<vsui:DialogWindow x:Class="MaterialIconsGenerator.Views.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:vsui="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
+                   xmlns:eb="clr-namespace:EventBinding"
+                   xmlns:converters="clr-namespace:MaterialIconsGenerator.Converters"
+                   xmlns:vm="clr-namespace:MaterialIconsGenerator.ViewModels"
+                   xmlns:views="clr-namespace:MaterialIconsGenerator.Views"
+                   xmlns:design="clr-namespace:MaterialIconsGenerator.Design"
+                   mc:Ignorable="d"
+                   Title="Material Icons Generator"
+                   WindowStartupLocation="CenterScreen">
+    <vsui:DialogWindow.Resources>
+        <ResourceDictionary>
+            <vm:MainViewModel x:Key="MainViewModel" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:IconUrlToImageCacheConverter x:Key="IconUrlToImageCacheConverter" />
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:ListToStringConverter x:Key="ListToStringConverter" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </vsui:DialogWindow.Resources>
+    <vsui:DialogWindow.CommandBindings>
+        <CommandBinding
+            Command="{x:Static views:Commands.FocusOnSearchBox}"
+            Executed="FocusOnSearchBox_Executed" />
+        <CommandBinding
+            Command="{x:Static views:Commands.OpenExternalLink}"
+            Executed="ExecuteOpenLicenseLink" />
+    </vsui:DialogWindow.CommandBindings>
+    <vsui:DialogWindow.InputBindings>
+        <KeyBinding
+            Command="{x:Static views:Commands.FocusOnSearchBox}"
+            Gesture="CTRL+E" />
+    </vsui:DialogWindow.InputBindings>
+    <Grid DataContext="{StaticResource MainViewModel}"
+          d:DataContext="{d:DesignInstance design:MainViewModelDesign, IsDesignTimeCreatable=True}"
+          Loaded="{eb:EventBinding Command=LoadCommand}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2"
+              Background="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- container of the search control -->
+            <Border Grid.Column="1" x:Name="_searchControlParent"
+                    VerticalAlignment="Center"
+                    Margin="4 0"
+                    Width="320"
+                    MinHeight="22"
+                    MinWidth="224" />
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Background="{DynamicResource {x:Static views:Brushes.DetailPaneBackground}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ListBox Style="{StaticResource ListBoxStyle}"
+                     ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                     ItemsSource="{Binding FilteredItems}"
+                     SelectedItem="{Binding SelectedIcon}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="6 4" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                   Style="{StaticResource ListItemIconImageStyle}" 
+                                   Source="{Binding PreviewUrl, Converter={StaticResource IconUrlToImageCacheConverter}, IsAsync=True}" />
+                            <TextBlock Grid.Column="1" Grid.Row="0"
+                                       Style="{StaticResource ListItemNameTextBlockStyle}" 
+                                       Text="{Binding Icon.Name}" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+                                       Style="{StaticResource ListItemGroupTextBlockStyle}" 
+                                       Text="{Binding Icon.Category.Name}" />
+                            <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
+                                       Style="{StaticResource ListItemKeywordsTextBlockStyle}" 
+                                       Text="{Binding Icon.Keywords, Converter={StaticResource ListToStringConverter}}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Column="1"
+                  DataContext="{Binding SelectedIcon}"
+                  Visibility="{Binding Path=DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--Genenral Info & preview-->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" 
+                           Style="{StaticResource PreviewIconImageStyle}" 
+                           Source="{Binding PreviewImage}" />
+
+                    <TextBlock Grid.Row="0" Grid.Column="1" 
+                               Style="{StaticResource PreviewNameTextBlockStyle}" 
+                               Text="{Binding Icon.Name}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" 
+                               Style="{StaticResource PreviewTextBlockStyle}" 
+                               Text="{Binding Icon.Category.Name}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" 
+                               Style="{StaticResource PreviewTextBlockStyle}" 
+                               Text="{Binding Icon.Keywords, Converter={StaticResource ListToStringConverter}}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1"
+                               Style="{StaticResource PreviewTextBlockStyle}">
+                        <Hyperlink NavigateUri="{Binding Icon.Provider.Reference, Mode=OneTime}"
+                                   Style="{StaticResource HyperlinkStyle}"
+                                   Command="{x:Static views:Commands.OpenExternalLink}">
+                            <Run Text="{Binding Icon.Provider.Name, Mode=OneTime}" />
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>
+
+                <Separator Grid.Row="1" Margin="6 0" />
+
+                <!--Configuration-->
+                <Grid Grid.Row="2" Margin="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0"
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Color: " />
+                    <ComboBox Grid.Column="1" Grid.Row="0"
+                              Style="{StaticResource PreviewComboBoxStyle}"
+                              ItemsSource="{Binding Colors}"
+                              SelectedItem="{Binding Color}"
+                              DisplayMemberPath="Name" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" 
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Size: " />
+                    <ComboBox Grid.Column="1" Grid.Row="1"
+                              Style="{StaticResource PreviewComboBoxStyle}"
+                              ItemsSource="{Binding Sizes}"
+                              SelectedItem="{Binding Size}" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" 
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Density: " />
+                    <ItemsControl Grid.Column="1" Grid.Row="2"
+                                  ItemsSource="{Binding Densities}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Style="{StaticResource PreviewCheckBoxStyle}"
+                                          Content="{Binding Item}"
+                                          IsChecked="{Binding IsSelected}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" 
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Name: " />
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                             Style="{StaticResource PreviewNameTextBoxStyle}"
+                             Text="{Binding Name}"/>
+
+                    <Button Grid.Row="4" Grid.Column="1" 
+                            Content="Add to Project"
+                            Style="{StaticResource AddToProjectButtonStyle}"
+                            Command="{Binding AddToProjectCommand}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Background="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       FontWeight="Bold" Margin="4 8 0 0"
+                       Text="Open an issue or suggest a feature on github"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
+            <TextBlock Grid.Column="1" 
+                       FontWeight="Bold" Margin="4 8 0 0"
+                       VerticalAlignment="Center">
+                <Hyperlink NavigateUri="https://github.com/interisti/vs-material-icons-generator"
+                           Style="{StaticResource HyperlinkStyle}"
+                           Command="{x:Static views:Commands.OpenExternalLink}">
+                    <Run Text="repository" />
+                </Hyperlink>
+            </TextBlock>
+
+            <Button Grid.Column="3"
+                    Style="{StaticResource CloseButtonStyle}"
+                    Content="Close" IsCancel="True"/>
+        </Grid>
+    </Grid>
+</vsui:DialogWindow>

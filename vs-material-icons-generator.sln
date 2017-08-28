@@ -1,16 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vs-material-icons-generator", "src\vs-material-icons-generator.csproj", "{64BE9264-C23B-4F0F-8523-EE397F70A8B2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68039C65-F79A-4FF2-AA8C-49334DA31148}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		CHANGELOG.md = CHANGELOG.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialIconsGenerator", "src\MaterialIconsGenerator\MaterialIconsGenerator.csproj", "{64BE9264-C23B-4F0F-8523-EE397F70A8B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialIconsGenerator.Core", "src\MaterialIconsGenerator.Core\MaterialIconsGenerator.Core.csproj", "{FAE9336F-2D13-4BA2-A137-BB425B303A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialIconsGenerator.ProjectManagers", "src\MaterialIconsGenerator.ProjectManagers\MaterialIconsGenerator.ProjectManagers.csproj", "{0571D5AF-B263-4E0E-A1B5-137763922499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialIconsGenerator.Providers", "src\MaterialIconsGenerator.Providers\MaterialIconsGenerator.Providers.csproj", "{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +28,23 @@ Global
 		{64BE9264-C23B-4F0F-8523-EE397F70A8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64BE9264-C23B-4F0F-8523-EE397F70A8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64BE9264-C23B-4F0F-8523-EE397F70A8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAE9336F-2D13-4BA2-A137-BB425B303A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE9336F-2D13-4BA2-A137-BB425B303A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE9336F-2D13-4BA2-A137-BB425B303A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE9336F-2D13-4BA2-A137-BB425B303A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0571D5AF-B263-4E0E-A1B5-137763922499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0571D5AF-B263-4E0E-A1B5-137763922499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0571D5AF-B263-4E0E-A1B5-137763922499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0571D5AF-B263-4E0E-A1B5-137763922499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C5ABAEB-08FD-4F2F-83E6-BC7857A610D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CB4F2F4-09F7-470C-9728-ADC0D161209A}
 	EndGlobalSection
 EndGlobal
