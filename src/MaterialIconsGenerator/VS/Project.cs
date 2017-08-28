@@ -37,13 +37,15 @@ namespace MaterialIconsGenerator.VS
             var solution = ServiceLocator.GetGlobalService<SVsSolution, IVsSolution>();
             if (solution == null) return ProjectType.Other;
 
-            solution.GetProjectOfUniqueName(this._vsProject.UniqueName, out IVsHierarchy hierarchy);
+            IVsHierarchy hierarchy;
+            solution.GetProjectOfUniqueName(this._vsProject.UniqueName, out hierarchy);
             if (hierarchy == null) return ProjectType.Other;
 
             var ap = hierarchy as IVsAggregatableProjectCorrected;
             if (ap == null) return ProjectType.Other;
 
-            ap.GetAggregateProjectTypeGuids(out string projectTypeGuids);
+            string projectTypeGuids;
+            ap.GetAggregateProjectTypeGuids(out projectTypeGuids);
             if (string.IsNullOrEmpty(projectTypeGuids)) return ProjectType.Other;
 
             // check if xamarin project
