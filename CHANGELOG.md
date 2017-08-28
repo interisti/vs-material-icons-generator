@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Ease process of removing already added icons 
+- [ ] [Support iOS](https://github.com/interisti/vs-material-icons-generator/issues/4)
+- [ ] [Support UWP](https://github.com/interisti/vs-material-icons-generator/issues/4)
 
 Features that have a checkmark are complete and available for
 download in the
@@ -22,3 +23,8 @@ on the official Visual Studio extension gallery.
 **2016-04-24**
 
 - [x] New UI, with preview and VS styling
+
+## 1.2
+**2017-08-29**
+
+- [x] Support Vector icons
