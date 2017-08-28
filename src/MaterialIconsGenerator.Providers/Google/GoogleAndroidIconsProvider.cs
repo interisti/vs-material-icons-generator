@@ -24,7 +24,9 @@ namespace MaterialIconsGenerator.Providers.Google
                 "hdpi",
                 "xhdpi",
                 "xxhdpi",
-                "xxxhdpi"
+                "xxxhdpi",
+                "drawable",
+                "drawable-v21"
             };
         }
 

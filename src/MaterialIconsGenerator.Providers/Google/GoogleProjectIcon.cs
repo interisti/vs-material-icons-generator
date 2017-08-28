@@ -25,15 +25,22 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public abstract string FullName { get; }
 
-        public async Task<byte[]> Get()
+        public virtual async Task<byte[]> Get()
+        {
+            var response = await this.Download(this.GenerateUrl());
+
+            return this.Tint(response);
+        }
+
+        protected async Task<byte[]> Download(string resource)
         {
             var client = new RestClient("https://raw.githubusercontent.com");
-            var request = new RestRequest(this.GenerateUrl(), Method.GET);
+            var request = new RestRequest(resource, Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");
             var response = await client.ExecuteTaskAsync(request);
 
-            return this.Tint(response.RawBytes);
+            return response.RawBytes;
         }
 
         protected byte[] Tint(byte[] data)
