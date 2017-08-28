@@ -4,8 +4,6 @@ namespace MaterialIconsGenerator.ViewModels
 {
     public class BaseViewModel : ViewModelBase
     {
-
-
         private bool _isBusy;
         public bool IsBusy
         {

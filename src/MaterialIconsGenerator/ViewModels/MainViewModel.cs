@@ -8,13 +8,20 @@ namespace MaterialIconsGenerator.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private IIconProvider _iconProvider;
-
         public MainViewModel()
         {
-            this._iconProvider = SimpleIoc.Default.GetInstance<IIconProvider>();
-
+            if (!IsInDesignModeStatic)
+            {
+                this._iconProvider = SimpleIoc.Default.GetInstance<IIconProvider>();
+            }
             this.LoadCommand = new RelayCommand(this.DoLoad);
+        }
+
+        private IIconProvider _iconProvider;
+        protected IIconProvider IconProvider
+        {
+            get { return _iconProvider; }
+            set { _iconProvider = value; }
         }
 
         private ObservableCollection<IconViewModel> _items;

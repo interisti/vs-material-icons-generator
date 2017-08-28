@@ -67,6 +67,7 @@
     <Compile Include="Converters\IconUrlToImageCacheConverter.cs" />
     <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Design\ViewModelDesignData.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Icon.cs" />
     <Compile Include="Models\Pallete.cs" />
@@ -288,10 +289,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <DesignData Include="Design\MainViewModelDesignData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </DesignData>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

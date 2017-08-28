@@ -8,6 +8,7 @@
                    xmlns:converters="clr-namespace:MaterialIconsGenerator.Converters"
                    xmlns:vm="clr-namespace:MaterialIconsGenerator.ViewModels"
                    xmlns:views="clr-namespace:MaterialIconsGenerator.Views"
+                   xmlns:design="clr-namespace:MaterialIconsGenerator.Design"
                    mc:Ignorable="d"
                    Title="Material Icons Generator"
                    WindowStartupLocation="CenterScreen">
@@ -38,7 +39,7 @@
             Gesture="CTRL+E" />
     </vsui:DialogWindow.InputBindings>
     <Grid DataContext="{StaticResource MainViewModel}"
-          d:DataContext="{d:DesignData Source=/Design/MainViewModelDesignData.xaml, IsDesignTimeCreatable=True}"
+          d:DataContext="{d:DesignInstance design:MainViewModelDesign, IsDesignTimeCreatable=True}"
           Loaded="{eb:EventBinding Command=LoadCommand}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -140,9 +141,14 @@
                     <TextBlock Grid.Row="2" Grid.Column="1" 
                                Style="{StaticResource PreviewTextBlockStyle}" 
                                Text="{Binding Icon.Keywords, Converter={StaticResource ListToStringConverter}}" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" 
-                               Style="{StaticResource PreviewTextBlockStyle}" 
-                               Text="{Binding Icon.Provider.Name}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1"
+                               Style="{StaticResource PreviewTextBlockStyle}">
+                        <Hyperlink NavigateUri="{Binding Icon.Provider.Reference, Mode=OneTime}"
+                                   Style="{StaticResource HyperlinkStyle}"
+                                   Command="{x:Static views:Commands.OpenExternalLink}">
+                            <Run Text="{Binding Icon.Provider.Name, Mode=OneTime}" />
+                        </Hyperlink>
+                    </TextBlock>
                 </Grid>
 
                 <Separator Grid.Row="1" Margin="6 0" />
@@ -219,13 +225,13 @@
 
             <TextBlock Grid.Column="0"
                        FontWeight="Bold" Margin="4 8 0 0"
-                       Text="Icons from Google's Material Design icons"
+                       Text="Open issues or suggest a feature on github"
                        VerticalAlignment="Center"
                        Foreground="{DynamicResource {x:Static views:Brushes.HeaderColorsDefaultTextBrushKey}}"/>
             <TextBlock Grid.Column="1" 
                        FontWeight="Bold" Margin="4 8 0 0"
                        VerticalAlignment="Center">
-                <Hyperlink NavigateUri="https://github.com/google/material-design-icons"
+                <Hyperlink NavigateUri="https://github.com/interisti/vs-material-icons-generator"
                            Style="{StaticResource HyperlinkStyle}"
                            Command="{x:Static views:Commands.OpenExternalLink}">
                     <Run Text="repository" />

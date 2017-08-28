@@ -16,8 +16,10 @@ namespace MaterialIconsGenerator.ViewModels
 
         public IconViewModel()
         {
-            this._projectManager = SimpleIoc.Default.GetInstance<IProjectManager>();
-
+            if (!IsInDesignModeStatic)
+            {
+                this._projectManager = SimpleIoc.Default.GetInstance<IProjectManager>();
+            }
             this.AddToProjectCommand = new RelayCommand(this.AddToProject, this.CanAddToProject);
         }
 
@@ -42,7 +44,7 @@ namespace MaterialIconsGenerator.ViewModels
         }
 
         private IProjectIcon _projectIcon;
-        private IProjectIcon ProjectIcon
+        protected IProjectIcon ProjectIcon
         {
             get { return this._projectIcon; }
             set { this.Set(ref this._projectIcon, value); }
@@ -100,7 +102,7 @@ namespace MaterialIconsGenerator.ViewModels
                 this.Set(ref this._size, value);
 
                 this.GenerateName();
-                this.UpdatePreviewImage(true);
+                this.UpdatePreviewImage();
                 this.AddToProjectCommand.RaiseCanExecuteChanged();
             }
         }
@@ -126,7 +128,10 @@ namespace MaterialIconsGenerator.ViewModels
 
         #region Preview
 
-        public string PreviewUrl => this.Icon.PreviewUrl;
+        public string PreviewUrl
+        {
+            get { return this.Icon.PreviewUrl; }
+        }
 
         private BitmapImage _previewImage;
         public BitmapImage PreviewImage
@@ -140,15 +145,17 @@ namespace MaterialIconsGenerator.ViewModels
             set { this.Set(ref _previewImage, value); }
         }
 
-        private async void UpdatePreviewImage(bool reset = false)
+        private async void UpdatePreviewImage()
         {
+            if (IsInDesignModeStatic) return;
+
             var data = await this.ProjectIcon.Get();
             this.PreviewImage = ImageUtils.BitmapFromByteArray(data);
         }
 
         #endregion
 
-
+        #region Save
         public RelayCommand AddToProjectCommand { get; set; }
         private async void AddToProject()
         {
@@ -189,12 +196,14 @@ namespace MaterialIconsGenerator.ViewModels
                 this.Size != null && this.Densities.Any(x => x.IsSelected) &&
                 !string.IsNullOrEmpty(this.Name) && !this.IsBusy;
         }
+        #endregion
 
         private void GenerateName()
         {
+            if (this.ProjectIcon == null) return;
+
             this.ProjectIcon.Color = this.Color;
             this.ProjectIcon.Size = this.Size;
-
             this.Name = this.ProjectIcon.FullName;
         }
     }
