@@ -35,7 +35,7 @@ namespace MaterialIconsGenerator.ViewModels
             this._size = sizes.First();
             this._sizes = new ObservableCollection<string>(sizes);
             this._densities = new ObservableCollection<Selectable<string>>(
-                densities.Select(density => new Selectable<string>(density, true,
+                densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),
                 (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())));
             this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon,
                 this.Color, this.Size, densities.First());

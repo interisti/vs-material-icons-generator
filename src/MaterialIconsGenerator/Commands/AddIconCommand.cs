@@ -95,11 +95,11 @@ namespace MaterialIconsGenerator
         {
             var project = Project.GetActiveProject();
             var projectType = project.GetProjectType();
-            if (projectType == ProjectType.Other)
+            if (projectType != ProjectType.XamarinAndroid)
             {
                 VsShellUtilities.ShowMessageBox(
                     this.ServiceProvider,
-                    "Extension currently works for Xamarin.Android and Xamarin.iOS projects",
+                    "Extension currently works for Xamarin.Android projects",
                     Vsix.Name,
                     OLEMSGICON.OLEMSGICON_INFO,
                     OLEMSGBUTTON.OLEMSGBUTTON_OK,
