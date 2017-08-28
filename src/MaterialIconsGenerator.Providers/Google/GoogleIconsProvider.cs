@@ -9,10 +9,15 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public abstract class GoogleIconsProvider : IIconProvider
     {
-        public string Name => "Google Material Icons";
+        public string Name
+        {
+            get { return "Google Material Icons"; }
+        }
 
-        public string Reference => "https://github.com/google/material-design-icons";
-        
+        public string Reference
+        {
+            get { return "https://github.com/google/material-design-icons"; }
+        }
 
         public abstract IEnumerable<string> GetSizes();
 

@@ -9,7 +9,10 @@ namespace MaterialIconsGenerator.Providers.Google
             : base(icon, color, size, density)
         { }
 
-        public override string FullName => throw new NotImplementedException();
+        public override string FullName
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         protected override string GenerateUrl()
         {

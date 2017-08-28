@@ -8,9 +8,12 @@ namespace MaterialIconsGenerator.Providers.Google
             : base(icon, color, size, density)
         { }
 
-        public override string FullName => $"{this.Icon.Id}_{this.Color.Name}_{this.Size}";
+        public override string FullName
+        {
+            get { return $"{this.Icon.Id}_{this.Color.Name}_{this.Size}"; }
+        }
 
-        protected override  string GenerateUrl()
+        protected override string GenerateUrl()
         {
             var downloadColor = this.Color.Color == System.Drawing.Color.White ? "white" : "black";
 
