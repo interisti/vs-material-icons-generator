@@ -6,10 +6,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using GalaSoft.MvvmLight.Ioc;
-using MaterialIconsGenerator.Core;
-using MaterialIconsGenerator.ProjectManagers;
-using MaterialIconsGenerator.Providers.Google;
 using MaterialIconsGenerator.Views;
 using Microsoft.VisualStudio.Shell;
 
@@ -60,10 +56,7 @@ namespace MaterialIconsGenerator
             base.Initialize();
             Styles.LoadVsStyles();
             Brushes.LoadVsBrushes();
-
-            SimpleIoc.Default.Register<IIconProvider, GoogleAndroidIconsProvider>();
-            SimpleIoc.Default.Register<IProjectManager, AndroidProjectManager>();
-
+            
             AddIconCommand.Initialize(this);
         }
 

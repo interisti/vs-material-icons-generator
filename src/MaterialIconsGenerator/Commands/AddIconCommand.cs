@@ -6,8 +6,13 @@
 
 using System;
 using System.ComponentModel.Design;
+using GalaSoft.MvvmLight.Ioc;
+using MaterialIconsGenerator.Core;
+using MaterialIconsGenerator.ProjectManagers;
+using MaterialIconsGenerator.Providers.Google;
 using MaterialIconsGenerator.VS;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MaterialIconsGenerator
 {
@@ -38,10 +43,7 @@ namespace MaterialIconsGenerator
         /// <param name="package">Owner package, not null.</param>
         private AddIconCommand(Package package)
         {
-            if (package == null)
-                throw new ArgumentNullException("package");
-
-            this.package = package;
+            this.package = package ?? throw new ArgumentNullException("package");
             ServiceLocator.InitializePackageServiceProvider(this.package);
 
             var commandService = ServiceLocator.GetGlobalService<IMenuCommandService, OleMenuCommandService>();
@@ -91,7 +93,41 @@ namespace MaterialIconsGenerator
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
+            var project = Project.GetActiveProject();
+            var projectType = project.GetProjectType();
+            if (projectType == ProjectType.Other)
+            {
+                VsShellUtilities.ShowMessageBox(
+                    this.ServiceProvider,
+                    "Extension currently works for Xamarin.Android and Xamarin.iOS projects",
+                    Vsix.Name,
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                return;
+            }
+
+            this.SetupIOC(projectType);
+
             new Views.MainWindow().ShowDialog();
+        }
+
+        private void SetupIOC(ProjectType projectType)
+        {
+            // cleanup ioc
+            SimpleIoc.Default.Unregister<IIconProvider>();
+            SimpleIoc.Default.Unregister<IProjectManager>();
+            // register ioc
+            if (projectType == ProjectType.XamarinAndroid)
+            {
+                SimpleIoc.Default.Register<IIconProvider, GoogleAndroidIconsProvider>();
+                SimpleIoc.Default.Register<IProjectManager, AndroidProjectManager>();
+            }
+            else if (projectType == ProjectType.XamariniOS)
+            {
+                SimpleIoc.Default.Register<IIconProvider, GoogleiOSIconsProvider>();
+                SimpleIoc.Default.Register<IProjectManager, iOSProjectManager>();
+            }
         }
     }
 }
