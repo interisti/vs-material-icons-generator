@@ -1,15 +1,27 @@
-﻿using System;
+﻿using System.IO;
 using System.Threading.Tasks;
 using MaterialIconsGenerator.Core;
+using MaterialIconsGenerator.Core.Utils;
 
 namespace MaterialIconsGenerator.ProjectManagers
 {
     public class iOSProjectManager : IProjectManager
     {
+        public const string RESOURCES_FOLDER = "Resources";
 
         public async Task AddIcon(IProject project, IProjectIcon icon)
         {
-            throw new NotImplementedException();
+            // download icon
+            var data = await icon.Get();
+            // save file
+            var root = project.GetRootDirectory();
+            var filename = $"{icon.FullName}@{icon.Density}.png".Replace("@1x", "");
+            var filepath = Path.Combine(root, RESOURCES_FOLDER, filename);
+            FileUtils.WriteAllBytes(data, filepath);
+            // add to project
+            project.AddFile(filepath, "BundleResource");
+            // save
+            project.Save();
         }
     }
 }
