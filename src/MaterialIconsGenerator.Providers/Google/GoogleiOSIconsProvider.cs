@@ -20,9 +20,9 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             return new List<string>()
             {
-                "1X",
-                "2X",
-                "3X"
+                "1x",
+                "2x",
+                "3x"
             };
         }
 
