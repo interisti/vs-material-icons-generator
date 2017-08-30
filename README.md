@@ -7,16 +7,18 @@ or get the [CI build](http://vsixgallery.com/extension/e1bf5443-bf81-49e6-bc33-0
 
 ---------------------------------------
 
-This plugin help you to set material design icons to your Android project
+This plugin help you to set material design icons to your Android or iOS project
 
 See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 ## Features
 
 - Add icons from google public icons repo
+- Support for Xamarin.Android project
+- Support for Xamarin.iOS project
 
 ### Add Icons
-Right-click on Xamarin.Android Project and click "Manage Material Icons..."
+Right-click on your Project and click "Manage Material Icons..."
 
 ![Context Menu](art/context-menu.png)
 

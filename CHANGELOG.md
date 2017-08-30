@@ -17,6 +17,7 @@ on the official Visual Studio extension gallery.
 **2016-04-16**
 
 - [x] Initial release
+- [x] Support for xamarin.android projects
 - [x] Add icons from google public icons repo
 
 ## 1.1
@@ -28,3 +29,8 @@ on the official Visual Studio extension gallery.
 **2017-08-29**
 
 - [x] Support Vector icons
+
+## 1.3
+**2017-08-30**
+
+- [x] Support for xamarin.ios projects
