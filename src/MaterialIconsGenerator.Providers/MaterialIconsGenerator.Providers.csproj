@@ -59,6 +59,11 @@
     <Compile Include="Google\GoogleIconCategory.cs" />
     <Compile Include="Google\GoogleIconsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templarian\TemplarianProjectIcon.cs" />
+    <Compile Include="Templarian\TemplarianAndroidProjectIcon.cs" />
+    <Compile Include="Templarian\TemplarianIcon.cs" />
+    <Compile Include="Templarian\TemplarianIconsProvider.cs" />
+    <Compile Include="Templarian\TemplarianAndroidIconsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MaterialIconsGenerator.Core\MaterialIconsGenerator.Core.csproj">
@@ -69,5 +74,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

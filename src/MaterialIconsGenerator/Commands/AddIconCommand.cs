@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Ioc;
 using MaterialIconsGenerator.Core;
 using MaterialIconsGenerator.ProjectManagers;
 using MaterialIconsGenerator.Providers.Google;
+using MaterialIconsGenerator.Providers.Templarian;
 using MaterialIconsGenerator.VS;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -123,7 +124,7 @@ namespace MaterialIconsGenerator
             // register ioc
             if (projectType == ProjectType.XamarinAndroid)
             {
-                SimpleIoc.Default.Register<IIconProvider, GoogleAndroidIconsProvider>();
+                SimpleIoc.Default.Register<IIconProvider, TemplarianAndroidIconsProvider>();
                 SimpleIoc.Default.Register<IProjectManager, AndroidProjectManager>();
             }
             else if (projectType == ProjectType.XamariniOS)
