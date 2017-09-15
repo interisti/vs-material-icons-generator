@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UWPProjectManager.cs" />
     <Compile Include="iOSProjectManager.cs" />
     <Compile Include="AndroidProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

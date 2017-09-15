@@ -19,6 +19,7 @@
             <converters:IconUrlToImageCacheConverter x:Key="IconUrlToImageCacheConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:ListToStringConverter x:Key="ListToStringConverter" />
+            <converters:EmptyListVisibilityConverter x:Key="EmptyListVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Views/Styles.xaml" />
@@ -183,8 +184,10 @@
                               SelectedItem="{Binding Size}" />
 
                     <TextBlock Grid.Column="0" Grid.Row="2" 
+                               Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Density: " />
                     <ItemsControl Grid.Column="1" Grid.Row="2"
+                                  Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                   ItemsSource="{Binding Densities}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

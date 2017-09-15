@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
@@ -38,7 +39,7 @@ namespace MaterialIconsGenerator.ViewModels
                 densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),
                 (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())));
             this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon,
-                this.Color, this.Size, densities.First());
+                this.Color, this.Size, densities.FirstOrDefault());
 
             this.GenerateName();
         }
@@ -166,10 +167,10 @@ namespace MaterialIconsGenerator.ViewModels
                 StatusBar.DisplayMessage("Downloading icons ...");
 
                 var project = Project.GetActiveProject();
-                var icons = this.Densities.Where(x => x.IsSelected).Select(density =>
-                 {
-                     return this.Icon.Provider.CreateProjectIcon(this.Icon, this.Color, this.Size, density.Item);
-                 });
+                var icons = this.Densities.Count == 0
+                    ? new List<IProjectIcon>() { this.Icon.Provider.CreateProjectIcon(this.Icon, this.Color, this.Size, null) }
+                    : this.Densities.Where(x => x.IsSelected).Select(density =>
+                    { return this.Icon.Provider.CreateProjectIcon(this.Icon, this.Color, this.Size, density.Item); });
 
                 foreach (var icon in icons)
                 {
@@ -192,9 +193,12 @@ namespace MaterialIconsGenerator.ViewModels
 
         private bool CanAddToProject()
         {
-            return this.Icon != null && this.Color != null &&
-                this.Size != null && this.Densities.Any(x => x.IsSelected) &&
-                !string.IsNullOrEmpty(this.Name) && !this.IsBusy;
+            return !this.IsBusy &&
+                this.Icon != null &&
+                this.Color != null &&
+                this.Size != null &&
+                (this.Densities.Count == 0 || this.Densities.Any(x => x.IsSelected)) &&
+                !string.IsNullOrEmpty(this.Name);
         }
         #endregion
 
