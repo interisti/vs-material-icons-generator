@@ -48,8 +48,8 @@ namespace MaterialIconsGenerator.VS
             ap.GetAggregateProjectTypeGuids(out projectTypeGuids);
             if (string.IsNullOrEmpty(projectTypeGuids)) return ProjectType.Other;
 
-            // check if xamarin project
-            if (!projectTypeGuids.Contains("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}")) return ProjectType.Other;
+            // check if UWP project
+            if (projectTypeGuids.Contains("{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A}")) return ProjectType.UWP;
             // check if android project
             if (projectTypeGuids.Contains("{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}")) return ProjectType.XamarinAndroid;
             // check if ios project

@@ -102,7 +102,7 @@ namespace MaterialIconsGenerator
             {
                 VsShellUtilities.ShowMessageBox(
                     this.ServiceProvider,
-                    "Extension currently works for Xamarin.Android or Xamarin.iOS projects",
+                    "Extension currently works for Xamarin.Android, Xamarin.iOS and UWP projects",
                     Vsix.Name,
                     OLEMSGICON.OLEMSGICON_INFO,
                     OLEMSGBUTTON.OLEMSGBUTTON_OK,
@@ -130,6 +130,11 @@ namespace MaterialIconsGenerator
             {
                 SimpleIoc.Default.Register<IIconProvider, GoogleiOSIconsProvider>();
                 SimpleIoc.Default.Register<IProjectManager, iOSProjectManager>();
+            }
+            else if (projectType == ProjectType.UWP)
+            {
+                SimpleIoc.Default.Register<IIconProvider, GoogleUWPIconsProvider>();
+                SimpleIoc.Default.Register<IProjectManager, UWPProjectManager>();
             }
         }
     }
