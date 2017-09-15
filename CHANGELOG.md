@@ -38,4 +38,4 @@ on the official Visual Studio extension gallery.
 ## 1.4
 **2017-09-15**
 
-- [x] Support for UWPios projects
+- [x] Support for UWP projects
