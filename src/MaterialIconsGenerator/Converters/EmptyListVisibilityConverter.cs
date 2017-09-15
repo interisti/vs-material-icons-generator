@@ -14,7 +14,8 @@ namespace MaterialIconsGenerator.Converters
                 return Visibility.Collapsed;
             else
             {
-                if (value is ICollection list)
+                var list = value as ICollection;
+                if (list != null)
                 {
                     if (list.Count == 0)
                         return Visibility.Collapsed;
