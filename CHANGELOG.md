@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] [Support iOS](https://github.com/interisti/vs-material-icons-generator/issues/4)
-- [ ] [Support UWP](https://github.com/interisti/vs-material-icons-generator/issues/4)
+- [x] [Support iOS](https://github.com/interisti/vs-material-icons-generator/issues/4)
+- [x] [Support UWP](https://github.com/interisti/vs-material-icons-generator/issues/4)
 
 Features that have a checkmark are complete and available for
 download in the
@@ -34,3 +34,8 @@ on the official Visual Studio extension gallery.
 **2017-08-30**
 
 - [x] Support for xamarin.ios projects
+
+## 1.4
+**2017-09-15**
+
+- [x] Support for UWPios projects

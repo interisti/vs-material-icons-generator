@@ -16,6 +16,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Add icons from google public icons repo
 - Support for Xamarin.Android project
 - Support for Xamarin.iOS project
+- Support for UWP project
 
 ### Add Icons
 Right-click on your Project and click "Manage Material Icons..."

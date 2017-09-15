@@ -11,7 +11,7 @@ namespace MaterialIconsGenerator
         public const string Name = "Material icons generator";
         public const string Description = @"This plugin help you to set material design icons to your Android or iOS project";
         public const string Language = "en-US";
-        public const string Version = "1.3";
+        public const string Version = "1.4";
         public const string Author = "Nika Nikabadze";
         public const string Tags = "xamarin, android, ios, material design, icons";
     }
