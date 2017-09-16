@@ -38,8 +38,12 @@ namespace MaterialIconsGenerator.Providers.Templarian
                 Name = item["name"].Value<string>(),
                 Category = null,
                 Keywords = item["tags"].Values<string>().ToList(),
+                Author = item["author"].Value<string>(),
+                Badge = "community",
                 Provider = this
-            }).ToList();
+            })
+            .Where(x => x.Author != "Google")
+            .ToList();
         }
 
         public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density);

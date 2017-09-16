@@ -44,6 +44,8 @@ namespace MaterialIconsGenerator.Providers.Google
                 Name = item["name"].Value<string>(),
                 Category = groups.FirstOrDefault(x => x.Id == item["group_id"].Value<string>()),
                 Keywords = item["keywords"].Values<string>().ToList(),
+                Author = "Google",
+                Badge = item["is_new"].Value<bool>() ? "new" : "",
                 Provider = this
             }).ToList();
         }

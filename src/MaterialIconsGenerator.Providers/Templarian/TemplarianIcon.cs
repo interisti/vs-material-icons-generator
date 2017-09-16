@@ -13,9 +13,13 @@ namespace MaterialIconsGenerator.Providers.Templarian
 
         public IEnumerable<string> Keywords { get; set; } = new List<string>();
 
+        public string Author { get; set; }
+
+        public string Badge { get; set; }
+
         public string PreviewUrl
         {
-            get { return $"https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/svg/{this.Id}.svg"; }
+            get { return $"https://materialdesignicons.com/api/download/{this.Id}/000000/1/FFFFFF/0/36"; }
         }
 
         public IIconProvider Provider { get; set; }

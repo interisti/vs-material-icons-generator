@@ -14,11 +14,12 @@ namespace MaterialIconsGenerator.Providers.Templarian
 
         public override string FullName
         {
-            get { return $"{this.Icon.Id}_{this.Color.Name}_{this.Size}"; }
+            get { return $"{this.Icon.Name}_{this.Color.Name}_{this.Size}"; }
         }
 
         public override async Task<byte[]> Get()
         {
+            return null;
             return (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? await this.GetVector()
                 : await base.Get();

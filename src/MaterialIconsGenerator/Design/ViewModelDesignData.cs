@@ -45,6 +45,8 @@ namespace MaterialIconsGenerator.Design
             this.Name = $"icon_{new Random().Next()}";
             this.Category = new IconCategoryDesign();
             this.Keywords = new List<string>() { $"keyword_{new Random().Next()}", $"keyword_{new Random().Next()}" };
+            this.Author = "Author";
+            this.Badge = "new";
             this.PreviewUrl = "https://raw.githubusercontent.com/google/material-design-icons/master/action/drawable-mdpi/ic_3d_rotation_black_24dp.png";
             this.Provider = new IconProviderDesign();
         }
@@ -56,6 +58,10 @@ namespace MaterialIconsGenerator.Design
         public IIconCategory Category { get; set; }
 
         public IEnumerable<string> Keywords { get; set; }
+
+        public string Author { get; set; }
+
+        public string Badge { get; set; }
 
         public string PreviewUrl { get; set; }
 

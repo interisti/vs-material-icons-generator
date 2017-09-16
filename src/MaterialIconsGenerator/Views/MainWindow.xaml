@@ -20,6 +20,7 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:ListToStringConverter x:Key="ListToStringConverter" />
             <converters:EmptyListVisibilityConverter x:Key="EmptyListVisibilityConverter" />
+            <converters:EmptyStringVisibilityConverter x:Key="EmptyStringVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Views/Styles.xaml" />
@@ -101,6 +102,10 @@
                             <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
                                        Style="{StaticResource ListItemKeywordsTextBlockStyle}" 
                                        Text="{Binding Icon.Keywords, Converter={StaticResource ListToStringConverter}}" />
+                            <TextBlock Grid.Column="2" Grid.Row="0"
+                                       Style="{StaticResource ListItemIsNewBadgeTextBlockStyle}"
+                                       Text="{Binding Icon.Badge}"
+                                       Visibility="{Binding Icon.Badge, Converter={StaticResource EmptyStringVisibilityConverter}}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -150,6 +155,9 @@
                             <Run Text="{Binding Icon.Provider.Name, Mode=OneTime}" />
                         </Hyperlink>
                     </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="1" 
+                               Style="{StaticResource PreviewTextBlockStyle}" 
+                               Text="{Binding Icon.Author}" />
                 </Grid>
 
                 <Separator Grid.Row="1" Margin="6 0" />
