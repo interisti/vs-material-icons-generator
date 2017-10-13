@@ -19,7 +19,6 @@ namespace MaterialIconsGenerator.Providers.Templarian
 
         public override async Task<byte[]> Get()
         {
-            return null;
             return (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? await this.GetVector()
                 : await base.Get();
