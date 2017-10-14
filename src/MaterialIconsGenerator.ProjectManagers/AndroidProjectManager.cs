@@ -9,12 +9,12 @@ namespace MaterialIconsGenerator.ProjectManagers
     {
         public const string RESOURCES_FOLDER = "Resources";
 
-        public async Task AddIcon(IProject project, IProjectIcon icon)
+        public async Task AddIcon(IProject project, IProjectIcon icon, string name)
         {
             // download icon
             var data = await icon.Get();
             // save file
-            var filepath = this.GetFilePath(project, icon);
+            var filepath = this.GetFilePath(project, icon, name);
             FileUtils.WriteAllBytes(data, filepath);
             // add to project
             project.AddFile(filepath, "AndroidResource");
@@ -22,12 +22,12 @@ namespace MaterialIconsGenerator.ProjectManagers
             project.Save();
         }
 
-        private string GetFilePath(IProject project, IProjectIcon icon)
+        private string GetFilePath(IProject project, IProjectIcon icon, string name)
         {
             var root = project.GetRootDirectory();
             return (icon.Density == "drawable" || icon.Density == "drawable-v21")
-                ? Path.Combine(root, RESOURCES_FOLDER, icon.Density, $"{icon.FullName}.xml")
-                : Path.Combine(root, RESOURCES_FOLDER, $"drawable-{icon.Density}", $"{icon.FullName}.png");
+                ? Path.Combine(root, RESOURCES_FOLDER, icon.Density, $"{name}.xml")
+                : Path.Combine(root, RESOURCES_FOLDER, $"drawable-{icon.Density}", $"{name}.png");
         }
     }
 }

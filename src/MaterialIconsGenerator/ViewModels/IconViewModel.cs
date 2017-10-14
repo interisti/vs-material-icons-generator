@@ -174,7 +174,7 @@ namespace MaterialIconsGenerator.ViewModels
 
                 foreach (var icon in icons)
                 {
-                    await this._projectManager.AddIcon(project, icon);
+                    await this._projectManager.AddIcon(project, icon, this.Name);
                 }
             }
             catch (System.Exception ex)
@@ -197,6 +197,7 @@ namespace MaterialIconsGenerator.ViewModels
                 this.Icon != null &&
                 this.Color != null &&
                 this.Size != null &&
+                !string.IsNullOrEmpty(this.Name) &&
                 (this.Densities.Count == 0 || this.Densities.Any(x => x.IsSelected)) &&
                 !string.IsNullOrEmpty(this.Name);
         }

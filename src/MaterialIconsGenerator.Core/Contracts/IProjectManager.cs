@@ -4,6 +4,6 @@ namespace MaterialIconsGenerator.Core
 {
     public interface IProjectManager
     {
-        Task AddIcon(IProject project, IProjectIcon icon);
+        Task AddIcon(IProject project, IProjectIcon icon, string name);
     }
 }
