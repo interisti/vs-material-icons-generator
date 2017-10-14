@@ -39,3 +39,8 @@ on the official Visual Studio extension gallery.
 **2017-09-15**
 
 - [x] Support for UWP projects
+
+## 1.5
+**2017-10-14**
+
+- [x] Fix "Name" bug
