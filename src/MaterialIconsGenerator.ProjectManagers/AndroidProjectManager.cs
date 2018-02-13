@@ -13,6 +13,11 @@ namespace MaterialIconsGenerator.ProjectManagers
         {
             // download icon
             var data = await icon.Get();
+            // TEMP solution to https://github.com/interisti/vs-material-icons-generator/issues/17
+            if (data == null)
+            {
+                return;
+            }
             // save file
             var filepath = this.GetFilePath(project, icon, name);
             FileUtils.WriteAllBytes(data, filepath);

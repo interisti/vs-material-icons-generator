@@ -166,11 +166,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Grid.Row="0"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Color: " />
-                    <ComboBox Grid.Column="1" Grid.Row="0"
+                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
                               Style="{StaticResource PreviewComboBoxStyle}"
                               ItemsSource="{Binding Colors}"
                               SelectedItem="{Binding Color}"
@@ -178,7 +179,7 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="1" 
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Size: " />
-                    <ComboBox Grid.Column="1" Grid.Row="1"
+                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
                               Style="{StaticResource PreviewComboBoxStyle}"
                               ItemsSource="{Binding Sizes}"
                               SelectedItem="{Binding Size}" />
@@ -186,7 +187,7 @@
                     <TextBlock Grid.Column="0" Grid.Row="2" 
                                Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Density: " />
-                    <ItemsControl Grid.Column="1" Grid.Row="2"
+                    <ItemsControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
                                   Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                   ItemsSource="{Binding Densities}">
                         <ItemsControl.ItemsPanel>
@@ -205,11 +206,16 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="3" 
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Name: " />
-                    <TextBox Grid.Row="3" Grid.Column="1"
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
                              Style="{StaticResource PreviewNameTextBoxStyle}"
                              Text="{Binding Name}"/>
 
-                    <Button Grid.Row="4" Grid.Column="1" 
+
+                    <TextBlock Grid.Column="1" Grid.Row="4"
+                               Style="{StaticResource ErrorTextBlockStyle}" 
+                               Text="{Binding Error}" />
+
+                    <Button Grid.Column="2" Grid.Row="4"
                             Content="Add to Project"
                             Style="{StaticResource AddToProjectButtonStyle}"
                             Command="{Binding AddToProjectCommand}"/>

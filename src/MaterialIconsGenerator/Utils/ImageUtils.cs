@@ -21,5 +21,7 @@ namespace MaterialIconsGenerator.Utils
             image.Freeze();
             return image;
         }
+
+        public static BitmapImage EmptyBitmap = new BitmapImage();
     }
 }

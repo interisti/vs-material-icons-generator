@@ -44,6 +44,17 @@ namespace MaterialIconsGenerator.ViewModels
             this.GenerateName();
         }
 
+        private string _error;
+        public string Error
+        {
+            get { return _error; }
+            set
+            {
+                this.Set(ref _error, value);
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         private IProjectIcon _projectIcon;
         protected IProjectIcon ProjectIcon
         {
@@ -143,7 +154,19 @@ namespace MaterialIconsGenerator.ViewModels
                     this.UpdatePreviewImage();
                 return _previewImage;
             }
-            set { this.Set(ref _previewImage, value); }
+            set
+            {
+                if (value == null)
+                {
+#if DEBUG
+                    throw new System.Exception("null is invalid value for PreviewImage");
+#else
+                    return;
+#endif
+                }
+
+                this.Set(ref _previewImage, value);
+            }
         }
 
         private async void UpdatePreviewImage()
@@ -151,7 +174,18 @@ namespace MaterialIconsGenerator.ViewModels
             if (IsInDesignModeStatic) return;
 
             var data = await this.ProjectIcon.Get();
-            this.PreviewImage = ImageUtils.BitmapFromByteArray(data);
+
+            // TEMP solution to https://github.com/interisti/vs-material-icons-generator/issues/17
+            if (data == null)
+            {
+                this.PreviewImage = ImageUtils.EmptyBitmap;
+                this.Error = "Icon does not exists, try another size";
+            }
+            else
+            {
+                this.PreviewImage = ImageUtils.BitmapFromByteArray(data);
+                this.Error = string.Empty;
+            }
         }
 
         #endregion
@@ -199,7 +233,8 @@ namespace MaterialIconsGenerator.ViewModels
                 this.Size != null &&
                 !string.IsNullOrEmpty(this.Name) &&
                 (this.Densities.Count == 0 || this.Densities.Any(x => x.IsSelected)) &&
-                !string.IsNullOrEmpty(this.Name);
+                !string.IsNullOrEmpty(this.Name) &&
+                string.IsNullOrEmpty(this.Error);
         }
         #endregion
 

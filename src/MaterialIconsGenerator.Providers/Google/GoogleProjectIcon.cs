@@ -40,6 +40,11 @@ namespace MaterialIconsGenerator.Providers.Google
             request.AddHeader("cache-control", "max-age=0");
             var response = await client.ExecuteTaskAsync(request);
 
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return null;
+            }
+
             return response.RawBytes;
         }
 
