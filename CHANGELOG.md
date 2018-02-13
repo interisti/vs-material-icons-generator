@@ -44,3 +44,8 @@ on the official Visual Studio extension gallery.
 **2017-10-14**
 
 - [x] Fix "Name" bug
+
+## 1.5.1
+**2018-02-13**
+
+- [x] temp Fix for non existent icon sizes
