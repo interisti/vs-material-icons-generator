@@ -18,10 +18,11 @@ namespace MaterialIconsGenerator.Providers.Google
             var category = this.Icon.Category.Id;
             var density = this.Density == "1x" ? "" : $"_{this.Density}";
             var id = this.Icon.Id;
+            var color = this.Color.Color == System.Drawing.Color.White ? "_white" : "";
             var size = this.Size == "24pt" ? "" : $"_{this.Size}";
             var extension = "png";
 
-            return $"google/material-design-icons/master/{category}/ios/{id}{size}.imageset/{id}{size}{density}.{extension}";
+            return $"google/material-design-icons/master/{category}/ios/{id}{color}{size}.imageset/{id}{color}{size}{density}.{extension}";
         }
     }
 }
