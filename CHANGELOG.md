@@ -49,3 +49,8 @@ on the official Visual Studio extension gallery.
 **2018-02-13**
 
 - [x] temp Fix for non existent icon sizes
+
+## 1.5.2
+**2018-02-16**
+
+- [x] fix ios white icons download
