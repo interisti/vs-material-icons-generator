@@ -12,10 +12,8 @@ namespace MaterialIconsGenerator.Providers.Google
             : base(icon, color, size, density)
         { }
 
-        public override string FullName
-        {
-            get { return $"{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}"; }
-        }
+        public override string FullName =>
+            $"{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}";
 
         public override async Task<byte[]> Get()
         {

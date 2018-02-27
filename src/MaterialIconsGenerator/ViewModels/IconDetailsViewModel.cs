@@ -24,16 +24,16 @@ namespace MaterialIconsGenerator.ViewModels
             this.AddToProjectCommand = new RelayCommand(this.AddToProject, this.CanAddToProject);
         }
 
-        public IconDetailsViewModel(IIcon icon)
+        public IconDetailsViewModel(IIcon icon, ISize size = null, IIconColor color = null)
             : this()
         {
             var sizes = icon.Provider.GetSizes();
             var densities = icon.Provider.GetDensities();
 
             this._icon = icon;
-            this._color = MaterialIconColor.Black;
+            this._color = color ?? MaterialIconColor.Black;
             this._colors = new ObservableCollection<IIconColor>(MaterialIconColor.Get());
-            this._size = sizes.First();
+            this._size = size ?? sizes.First();
             this._sizes = new ObservableCollection<ISize>(sizes);
             this._densities = new ObservableCollection<Selectable<string>>(
                 densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),

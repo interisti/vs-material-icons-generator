@@ -79,7 +79,7 @@ namespace MaterialIconsGenerator.ViewModels
             {
                 if (this.Set(ref this._selectedIcon, value))
                 {
-                    this.SelectedIconDetails = new IconDetailsViewModel(this._selectedIcon.Icon);
+                    this.UpdateSelectedIconDetails(value);
                 }
             }
         }
@@ -88,7 +88,17 @@ namespace MaterialIconsGenerator.ViewModels
         public IconDetailsViewModel SelectedIconDetails
         {
             get { return _selectedIconDetails; }
-            set { this.Set(ref this._selectedIconDetails, value); }
+        }
+
+        private void UpdateSelectedIconDetails(IconListViewModel selectedIcon)
+        {
+            var icon = selectedIcon.Icon;
+            // get last selected size and color
+            var size = this._selectedIconDetails?.Size;
+            var color = this._selectedIconDetails?.Color;
+
+            this._selectedIconDetails = new IconDetailsViewModel(icon, size, color);
+            this.RaisePropertyChanged(nameof(this.SelectedIconDetails));
         }
     }
 }
