@@ -14,27 +14,32 @@ namespace MaterialIconsGenerator.Design
         [PreferredConstructor]
         public MainViewModelDesign()
         {
-            this.FilteredItems = new ObservableCollection<IconViewModel>()
+            this.FilteredItems = new ObservableCollection<IconListViewModel>()
             {
-                new IconViewModelDesign(new IconDesign()),
-                new IconViewModelDesign(new IconDesign()),
-                new IconViewModelDesign(new IconDesign()),
-                new IconViewModelDesign(new IconDesign()),
-                new IconViewModelDesign(new IconDesign()),
-                new IconViewModelDesign(new IconDesign())
+                new IconListViewModelDesign(new IconDesign()),
+                new IconListViewModelDesign(new IconDesign()),
+                new IconListViewModelDesign(new IconDesign()),
+                new IconListViewModelDesign(new IconDesign()),
+                new IconListViewModelDesign(new IconDesign()),
+                new IconListViewModelDesign(new IconDesign())
             };
-            this.SelectedIcon = new IconViewModelDesign(new IconDesign());
+            this.SelectedIcon = new IconListViewModelDesign(new IconDesign());
             this.IconProvider = new IconProviderDesign();
         }
     }
 
-    internal class IconViewModelDesign : IconViewModel
+    internal class IconListViewModelDesign : IconListViewModel
     {
-        public IconViewModelDesign(IIcon icon)
+        public IconListViewModelDesign(IIcon icon)
             : base(icon)
-        {
+        { }
+    }
 
-        }
+    internal class IconDetailsViewModelDesign : IconDetailsViewModel
+    {
+        public IconDetailsViewModelDesign(IIcon icon)
+            : base(icon)
+        { }
     }
 
     internal class IconDesign : IIcon

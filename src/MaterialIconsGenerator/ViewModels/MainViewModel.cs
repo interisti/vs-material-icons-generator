@@ -24,8 +24,8 @@ namespace MaterialIconsGenerator.ViewModels
             set { _iconProvider = value; }
         }
 
-        private ObservableCollection<IconViewModel> _items;
-        public ObservableCollection<IconViewModel> Items
+        private ObservableCollection<IconListViewModel> _items;
+        public ObservableCollection<IconListViewModel> Items
         {
             get { return _items; }
             set { this.Set(ref this._items, value); this.DoFilter(); }
@@ -36,16 +36,16 @@ namespace MaterialIconsGenerator.ViewModels
         {
             this.IsBusy = true;
 
-            this.Items = new ObservableCollection<IconViewModel>(
+            this.Items = new ObservableCollection<IconListViewModel>(
                 (await this._iconProvider.Get())
-                .Select(x => new IconViewModel(x))
+                .Select(x => new IconListViewModel(x))
                 .ToList());
 
             this.IsBusy = false;
         }
 
-        private ObservableCollection<IconViewModel> _filteredItems;
-        public ObservableCollection<IconViewModel> FilteredItems
+        private ObservableCollection<IconListViewModel> _filteredItems;
+        public ObservableCollection<IconListViewModel> FilteredItems
         {
             get { return _filteredItems; }
             set { this.Set(ref this._filteredItems, value); }
@@ -66,16 +66,29 @@ namespace MaterialIconsGenerator.ViewModels
             }
             else
             {
-                this.FilteredItems = new ObservableCollection<IconViewModel>(
+                this.FilteredItems = new ObservableCollection<IconListViewModel>(
                     this.Items.Where(x => x.Icon.Name.Contains(this.FilterExpression)));
             }
         }
 
-        private IconViewModel _selectedIcon;
-        public IconViewModel SelectedIcon
+        private IconListViewModel _selectedIcon;
+        public IconListViewModel SelectedIcon
         {
             get { return _selectedIcon; }
-            set { this.Set(ref this._selectedIcon, value); }
+            set
+            {
+                if (this.Set(ref this._selectedIcon, value))
+                {
+                    this.SelectedIconDetails = new IconDetailsViewModel(this._selectedIcon.Icon);
+                }
+            }
+        }
+
+        private IconDetailsViewModel _selectedIconDetails;
+        public IconDetailsViewModel SelectedIconDetails
+        {
+            get { return _selectedIconDetails; }
+            set { this.Set(ref this._selectedIconDetails, value); }
         }
     }
 }

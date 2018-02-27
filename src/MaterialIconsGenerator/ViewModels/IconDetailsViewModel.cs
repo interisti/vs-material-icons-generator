@@ -11,11 +11,11 @@ using MaterialIconsGenerator.VS;
 
 namespace MaterialIconsGenerator.ViewModels
 {
-    public class IconViewModel : BaseViewModel
+    public class IconDetailsViewModel : BaseViewModel
     {
         private IProjectManager _projectManager;
 
-        public IconViewModel()
+        public IconDetailsViewModel()
         {
             if (!IsInDesignModeStatic)
             {
@@ -24,7 +24,7 @@ namespace MaterialIconsGenerator.ViewModels
             this.AddToProjectCommand = new RelayCommand(this.AddToProject, this.CanAddToProject);
         }
 
-        public IconViewModel(IIcon icon)
+        public IconDetailsViewModel(IIcon icon)
             : this()
         {
             var sizes = icon.Provider.GetSizes();
@@ -139,11 +139,6 @@ namespace MaterialIconsGenerator.ViewModels
         #endregion
 
         #region Preview
-
-        public string PreviewUrl
-        {
-            get { return this.Icon.PreviewUrl; }
-        }
 
         private BitmapImage _previewImage;
         public BitmapImage PreviewImage

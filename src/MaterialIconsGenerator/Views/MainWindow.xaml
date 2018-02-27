@@ -107,7 +107,7 @@
             </ListBox>
 
             <Grid Grid.Column="1"
-                  DataContext="{Binding SelectedIcon}"
+                  DataContext="{Binding SelectedIconDetails}"
                   Visibility="{Binding Path=DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="140" />
@@ -183,8 +183,7 @@
                               Style="{StaticResource PreviewComboBoxStyle}"
                               ItemsSource="{Binding Sizes}"
                               SelectedItem="{Binding Size}"
-                              DisplayMemberPath="Title" 
-                              SelectedValuePath="Id" />
+                              DisplayMemberPath="Title" />
 
                     <TextBlock Grid.Column="0" Grid.Row="2" 
                                Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"

@@ -74,6 +74,7 @@
     <Compile Include="Models\Pallete.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
+    <Compile Include="ViewModels\IconListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Brushes.cs" />
     <Compile Include="Views\Commands.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\OS.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\IconViewModel.cs" />
+    <Compile Include="ViewModels\IconDetailsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="VSPackage.cs" />
     <Compile Include="VSCommandTable.cs">
