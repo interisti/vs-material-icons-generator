@@ -54,3 +54,8 @@ on the official Visual Studio extension gallery.
 **2018-02-16**
 
 - [x] fix ios white icons download
+
+## 1.5.3
+**2018-02-28**
+
+- [x] save last color and size selection
