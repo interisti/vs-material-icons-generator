@@ -64,7 +64,7 @@ namespace MaterialIconsGenerator.Design
 
     internal class ProjectIconDesign : IProjectIcon
     {
-        public ProjectIconDesign(IIcon icon, IIconColor color, string size, string density)
+        public ProjectIconDesign(IIcon icon, IIconColor color, ISize size, string density)
         {
             this.Icon = icon;
             this.FullName = icon.Name;
@@ -79,7 +79,7 @@ namespace MaterialIconsGenerator.Design
 
         public IIconColor Color { get; set; }
 
-        public string Size { get; set; }
+        public ISize Size { get; set; }
 
         public string Density { get; set; }
 
@@ -115,6 +115,15 @@ namespace MaterialIconsGenerator.Design
         public string Name { get; set; }
     }
 
+    internal class SizeDesign : ISize
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Title => this.Name;
+    }
+
     internal class IconProviderDesign : IIconProvider
     {
         public IconProviderDesign()
@@ -127,7 +136,7 @@ namespace MaterialIconsGenerator.Design
 
         public string Reference { get; set; }
 
-        public IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        public IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
         {
             return new ProjectIconDesign(icon, color, size, density);
         }
@@ -149,14 +158,14 @@ namespace MaterialIconsGenerator.Design
             };
         }
 
-        public IEnumerable<string> GetSizes()
+        public IEnumerable<ISize> GetSizes()
         {
-            return new List<string>()
+            return new List<ISize>()
             {
-                "18dp",
-                "24dp",
-                "36dp",
-                "48dp"
+                new SizeDesign{ Id = "18", Name ="18dp" },
+                new SizeDesign{ Id = "24", Name ="24dp" },
+                new SizeDesign{ Id = "36", Name ="36dp" },
+                new SizeDesign{ Id = "48", Name ="48dp" }
             };
         }
     }

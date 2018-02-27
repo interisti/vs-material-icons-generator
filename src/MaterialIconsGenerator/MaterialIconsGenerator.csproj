@@ -74,6 +74,7 @@
     <Compile Include="Models\Pallete.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Brushes.cs" />
     <Compile Include="Views\Commands.cs" />
     <Compile Include="Views\Domain.cs" />

@@ -10,7 +10,7 @@ namespace MaterialIconsGenerator.Core
 
         IIconColor Color { get; set; }
 
-        string Size { get; set; }
+        ISize Size { get; set; }
 
         string Density { get; set; }
 

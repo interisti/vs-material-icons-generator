@@ -7,7 +7,7 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public abstract class GoogleProjectIcon : IProjectIcon
     {
-        public GoogleProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        public GoogleProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
         {
             this.Icon = icon;
             this.Color = color;
@@ -19,7 +19,7 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public IIconColor Color { get; set; }
 
-        public string Size { get; set; }
+        public ISize Size { get; set; }
 
         public string Density { get; set; }
 

@@ -5,14 +5,14 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public class GoogleiOSIconsProvider : GoogleIconsProvider
     {
-        public override IEnumerable<string> GetSizes()
+        public override IEnumerable<ISize> GetSizes()
         {
-            return new List<string>()
+            return new List<ISize>()
             {
-                "18pt",
-                "24pt",
-                "36pt",
-                "48pt"
+                new GoogleSize{ Id = "18", Name ="18pt" },
+                new GoogleSize{ Id = "24", Name ="24pt" },
+                new GoogleSize{ Id = "36", Name ="36pt" },
+                new GoogleSize{ Id = "48", Name ="48pt" }
             };
         }
 
@@ -26,7 +26,7 @@ namespace MaterialIconsGenerator.Providers.Google
             };
         }
 
-        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
         {
             return new GoogleiOSProjectIcon(icon, color, size, density);
         }

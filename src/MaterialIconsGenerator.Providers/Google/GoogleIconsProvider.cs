@@ -19,7 +19,7 @@ namespace MaterialIconsGenerator.Providers.Google
             get { return "https://github.com/google/material-design-icons"; }
         }
 
-        public abstract IEnumerable<string> GetSizes();
+        public abstract IEnumerable<ISize> GetSizes();
 
         public abstract IEnumerable<string> GetDensities();
 
@@ -48,6 +48,6 @@ namespace MaterialIconsGenerator.Providers.Google
             }).ToList();
         }
 
-        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, string size, string density);
+        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density);
     }
 }

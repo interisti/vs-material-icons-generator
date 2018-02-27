@@ -8,13 +8,13 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public class GoogleAndroidProjectIcon : GoogleProjectIcon
     {
-        public GoogleAndroidProjectIcon(IIcon icon, IIconColor color, string size, string density)
+        public GoogleAndroidProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
             : base(icon, color, size, density)
         { }
 
         public override string FullName
         {
-            get { return $"{this.Icon.Id}_{this.Color.Name}_{this.Size}"; }
+            get { return $"{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}"; }
         }
 
         public override async Task<byte[]> Get()
@@ -36,7 +36,7 @@ namespace MaterialIconsGenerator.Providers.Google
                 : this.Color.Color == System.Drawing.Color.White ? "white" : "black";
             var size = (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? "24dp"
-                : this.Size;
+                : this.Size.Name;
             var extension = (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? "xml"
                 : "png";
@@ -51,8 +51,8 @@ namespace MaterialIconsGenerator.Providers.Google
             // update xml
             var xml = new XmlDocument();
             xml.LoadXml(Encoding.ASCII.GetString(response));
-            xml.FirstChild.Attributes["android:width"].Value = this.Size;
-            xml.FirstChild.Attributes["android:height"].Value = this.Size;
+            xml.FirstChild.Attributes["android:width"].Value = this.Size.Name;
+            xml.FirstChild.Attributes["android:height"].Value = this.Size.Name;
             xml.FirstChild.FirstChild.Attributes["android:fillColor"].Value = this.ToHexColor(this.Color.Color);
 
             return Encoding.ASCII.GetBytes(xml.OuterXml);

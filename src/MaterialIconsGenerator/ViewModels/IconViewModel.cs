@@ -34,7 +34,7 @@ namespace MaterialIconsGenerator.ViewModels
             this._color = MaterialIconColor.Black;
             this._colors = new ObservableCollection<IIconColor>(MaterialIconColor.Get());
             this._size = sizes.First();
-            this._sizes = new ObservableCollection<string>(sizes);
+            this._sizes = new ObservableCollection<ISize>(sizes);
             this._densities = new ObservableCollection<Selectable<string>>(
                 densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),
                 (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())));
@@ -98,15 +98,15 @@ namespace MaterialIconsGenerator.ViewModels
             }
         }
 
-        private ObservableCollection<string> _sizes;
-        public ObservableCollection<string> Sizes
+        private ObservableCollection<ISize> _sizes;
+        public ObservableCollection<ISize> Sizes
         {
             get { return this._sizes; }
             set { this.Set(ref this._sizes, value); }
         }
 
-        private string _size;
-        public string Size
+        private ISize _size;
+        public ISize Size
         {
             get { return this._size; }
             set
