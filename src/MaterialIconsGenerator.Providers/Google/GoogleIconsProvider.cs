@@ -22,26 +22,32 @@ namespace MaterialIconsGenerator.Providers.Google
         public async Task<IEnumerable<IIcon>> Get()
         {
             var client = new RestClient("https://material.io");
-            var request = new RestRequest("/icons/data/grid.json", Method.GET);
+            var request = new RestRequest("/tools/icons/static/data.json", Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");
             var response = await client.ExecuteTaskAsync(request);
             var json = JObject.Parse(response.Content);
 
-            var groups = json["groups"].Select(item => new GoogleIconCategory()
-            {
-                Id = item["data"]["id"].Value<string>(),
-                Name = item["data"]["name"].Value<string>()
-            }).ToList();
+            return json["categories"]
+                .SelectMany(category =>
+                {
+                    var iconCategory = new GoogleIconCategory()
+                    {
+                        Id = category["name"].Value<string>(),
+                        Name = category["name"].Value<string>()
+                    };
 
-            return json["icons"].Select(item => new GoogleIcon()
-            {
-                Id = item["id"].Value<string>(),
-                Name = item["name"].Value<string>(),
-                Category = groups.FirstOrDefault(x => x.Id == item["group_id"].Value<string>()),
-                Keywords = item["keywords"].Values<string>().ToList(),
-                Provider = this
-            }).ToList();
+                    return category["icons"]
+                        .Select(item => new GoogleIcon()
+                        {
+                            Id = $"ic_{item["id"].Value<string>()}",
+                            Name = item["id"].Value<string>(),
+                            Category = iconCategory,
+                            Keywords = new List<string>(),
+                            Provider = this
+                        })
+                        .ToList();
+                });
         }
 
         public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density);
