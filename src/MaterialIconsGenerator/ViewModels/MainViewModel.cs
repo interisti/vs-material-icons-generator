@@ -92,12 +92,20 @@ namespace MaterialIconsGenerator.ViewModels
 
         private void UpdateSelectedIconDetails(IconListViewModel selectedIcon)
         {
-            var icon = selectedIcon.Icon;
-            // get last selected size and color
-            var size = this._selectedIconDetails?.Size;
-            var color = this._selectedIconDetails?.Color;
+            if (selectedIcon is null)
+            {
+                this._selectedIconDetails = null;
+            }
+            else
+            {
+                var icon = selectedIcon.Icon;
+                // get last selected size and color
+                var size = this._selectedIconDetails?.Size;
+                var color = this._selectedIconDetails?.Color;
 
-            this._selectedIconDetails = new IconDetailsViewModel(icon, size, color);
+                this._selectedIconDetails = new IconDetailsViewModel(icon, size, color);
+            }
+
             this.RaisePropertyChanged(nameof(this.SelectedIconDetails));
         }
     }
