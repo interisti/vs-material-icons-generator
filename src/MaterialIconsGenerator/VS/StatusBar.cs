@@ -23,10 +23,12 @@ namespace MaterialIconsGenerator.VS
         {
             var statusBar = ServiceLocator.GetGlobalService<SVsStatusbar, IVsStatusbar>();
 
+            statusBar.FreezeOutput(0);
+
             object icon = (short)Constants.SBAI_Deploy;
             statusBar.Animation(0, ref icon);
-            statusBar.SetText("");
             statusBar.Clear();
+            statusBar.SetText(string.Empty);
         }
     }
 }
