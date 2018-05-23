@@ -112,7 +112,7 @@ namespace MaterialIconsGenerator
 
             this.SetupIOC(projectType);
 
-            new Views.MainWindow().ShowDialog();
+            new Views.MainWindow().ShowModal();
         }
 
         private void SetupIOC(ProjectType projectType)
