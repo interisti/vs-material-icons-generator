@@ -193,7 +193,6 @@ namespace MaterialIconsGenerator.ViewModels
             {
                 this.IsBusy = true;
                 this.AddToProjectCommand.RaiseCanExecuteChanged();
-                StatusBar.DisplayMessage("Downloading icons ...");
 
                 var project = Project.GetActiveProject();
                 var icons = this.Densities.Count == 0
@@ -214,7 +213,6 @@ namespace MaterialIconsGenerator.ViewModels
             }
             finally
             {
-                StatusBar.Clear();
                 this.IsBusy = false;
                 this.AddToProjectCommand.RaiseCanExecuteChanged();
             }

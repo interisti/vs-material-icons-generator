@@ -101,7 +101,6 @@
     <Compile Include="VS\Project.cs" />
     <Compile Include="VS\ProjectType.cs" />
     <Compile Include="VS\ServiceLocator.cs" />
-    <Compile Include="VS\StatusBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
