@@ -6,8 +6,12 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using MaterialIconsGenerator.Views;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
+using Task = System.Threading.Tasks.Task;
 
 namespace MaterialIconsGenerator
 {
@@ -28,11 +32,12 @@ namespace MaterialIconsGenerator
     /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
     /// </para>
     /// </remarks>
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)] // Info on this package for Help/About
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExistsAndFullyLoaded_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.guidAddIconCommandPackageString)]
-    public sealed class VSPackage : Package
+    public sealed class VSPackage : AsyncPackage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddIconCommand"/> class.
@@ -47,16 +52,14 @@ namespace MaterialIconsGenerator
 
         #region Package Members
 
-        /// <summary>
-        /// Initialization of the package; this method is called right after the package is sited, so this is the place
-        /// where you can put all the initialization code that rely on services provided by VisualStudio.
-        /// </summary>
-        protected override void Initialize()
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
+            // Switches to the UI thread in order to consume some services used in command initialization
+            await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
             Styles.LoadVsStyles();
             Brushes.LoadVsBrushes();
-            
+
             AddIconCommand.Initialize(this);
         }
 
