@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using EnvDTE;
-using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using VsServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
@@ -32,54 +31,7 @@ namespace MaterialIconsGenerator.VS
 
         public static IServiceProvider PackageServiceProvider { get; private set; }
 
-        public static TService GetInstanceSafe<TService>() where TService : class
-        {
-            try
-            {
-                return GetInstance<TService>();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public static TService GetInstance<TService>() where TService : class
-        {
-            return UIThreadHelper.JoinableTaskFactory.Run(async delegate
-            {
-                // VS Threading Rule #1
-                // Access to ServiceProvider and a lot of casts are performed in this method,
-                // and so this method can RPC into main thread. Switch to main thread explictly, since method has STA requirement
-                await UIThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                // Special case IServiceProvider
-                if (typeof(TService) == typeof(IServiceProvider))
-                {
-                    var serviceProvider = await GetServiceProviderAsync();
-                    return (TService)serviceProvider;
-                }
-
-                // then try to find the service as a component model, then try dte then lastly try global service
-                // Per bug #2072, avoid calling GetGlobalService() from within the Initialize() method of NuGetPackage class.
-                // Doing so is illegal and may cause VS to hang. As a result of that, we defer calling GetGlobalService to the last option.
-                var serviceFromDTE = await GetDTEServiceAsync<TService>();
-                if (serviceFromDTE != null)
-                {
-                    return serviceFromDTE;
-                }
-
-                var serviceFromComponentModel = await GetComponentModelServiceAsync<TService>();
-                if (serviceFromComponentModel != null)
-                {
-                    return serviceFromComponentModel;
-                }
-
-                var globalService = await GetGlobalServiceAsync<TService, TService>();
-                return globalService;
-            });
-        }
-
+        
         public static TInterface GetGlobalService<TService, TInterface>() where TInterface : class
         {
             return UIThreadHelper.JoinableTaskFactory.Run(GetGlobalServiceAsync<TService, TInterface>);
@@ -111,14 +63,6 @@ namespace MaterialIconsGenerator.VS
 
             var dte = await GetGlobalServiceAsync<SDTE, DTE>();
             return dte != null ? QueryService(dte, typeof(TService)) as TService : null;
-        }
-
-        private static async Task<TService> GetComponentModelServiceAsync<TService>() where TService : class
-        {
-            Debug.Assert(ThreadHelper.CheckAccess());
-
-            IComponentModel componentModel = await GetGlobalServiceAsync<SComponentModel, IComponentModel>();
-            return componentModel?.GetService<TService>();
         }
 
         private static async Task<IServiceProvider> GetServiceProviderAsync()
