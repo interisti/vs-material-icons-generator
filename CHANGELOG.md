@@ -59,3 +59,9 @@ on the official Visual Studio extension gallery.
 **2018-02-28**
 
 - [x] save last color and size selection
+
+
+## 1.7.0
+**2019-01-23**
+
+- [x] revert icons source back to material.io
