@@ -50,6 +50,11 @@ namespace MaterialIconsGenerator.Providers.Google
 
         protected byte[] Tint(byte[] data)
         {
+            if (data == null)
+            {
+                return data;
+            }
+
             if (this.Color.Color == System.Drawing.Color.White ||
                 this.Color.Color == System.Drawing.Color.Black)
             {
