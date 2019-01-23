@@ -170,11 +170,10 @@ namespace MaterialIconsGenerator.ViewModels
 
             var data = await this.ProjectIcon.Get();
 
-            // TEMP solution to https://github.com/interisti/vs-material-icons-generator/issues/17
             if (data == null)
             {
                 this.PreviewImage = ImageUtils.EmptyBitmap;
-                this.Error = "Icon does not exists, try another size";
+                this.Error = "Icon or size does not exists in Google's github repo";
             }
             else
             {
