@@ -7,5 +7,9 @@ namespace MaterialIconsGenerator.Core
         string Name { get; }
 
         Color Color { get; }
+
+        bool IsEditable { get; }
+
+        bool Edit(string hex);
     }
 }

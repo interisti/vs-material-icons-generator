@@ -105,6 +105,10 @@ namespace MaterialIconsGenerator.Design
         public string Name { get; set; }
 
         public Color Color { get; set; }
+
+        public bool IsEditable { get => true; }
+
+        public bool Edit(string hex) => false;
     }
 
     internal class IconCategoryDesign : IIconCategory

@@ -10,6 +10,10 @@ namespace MaterialIconsGenerator.Models
 
         public Color Color { get; set; }
 
+        public bool IsEditable { get => false; }
+
+        public bool Edit(string hex) => false;
+
         #region Black & White
         public static MaterialIconColor White = new MaterialIconColor() { Name = "white", Color = Color.White };
         public static MaterialIconColor Black = new MaterialIconColor() { Name = "black", Color = Color.Black };
