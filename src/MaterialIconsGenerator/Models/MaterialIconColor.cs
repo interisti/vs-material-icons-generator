@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using MaterialIconsGenerator.Core;
 
-namespace MaterialIconsGenerator.Core
+namespace MaterialIconsGenerator.Models
 {
     public class MaterialIconColor : IIconColor
     {

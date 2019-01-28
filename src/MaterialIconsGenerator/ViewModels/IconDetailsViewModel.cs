@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using MaterialIconsGenerator.Common;
 using MaterialIconsGenerator.Core;
+using MaterialIconsGenerator.Models;
 using MaterialIconsGenerator.Utils;
 using MaterialIconsGenerator.VS;
 
