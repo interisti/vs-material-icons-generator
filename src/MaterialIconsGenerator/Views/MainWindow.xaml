@@ -171,11 +171,24 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="0"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Color: " />
-                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
-                              Style="{StaticResource PreviewComboBoxStyle}"
-                              ItemsSource="{Binding Colors}"
-                              SelectedItem="{Binding Color}"
-                              DisplayMemberPath="Name" />
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox Grid.Column="0"
+                                  Style="{StaticResource PreviewComboBoxStyle}"
+                                  ItemsSource="{Binding Colors}"
+                                  SelectedItem="{Binding MaterialColorSelected}"
+                                  DisplayMemberPath="Name" />
+
+                        <TextBox Grid.Column="1"
+                                 Margin="2 4 2 6" 
+                                 Style="{StaticResource PreviewNameTextBoxStyle}"
+                                 Text="{Binding ColorCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                    </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="1" 
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Size: " />
@@ -206,7 +219,8 @@
                     </ItemsControl>
 
                     <TextBlock Grid.Column="0" Grid.Row="3" 
-                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Name: " />
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" 
+                               Text="Name: " />
                     <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
                              Style="{StaticResource PreviewNameTextBoxStyle}"
                              Text="{Binding Name}"/>

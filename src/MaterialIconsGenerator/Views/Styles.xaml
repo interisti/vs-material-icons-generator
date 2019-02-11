@@ -9,7 +9,7 @@
 
     <!-- Default styles -->
     <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}"
-           BasedOn="{StaticResource {x:Static views:Styles.ThemedComboStyleKey}}"/>
+           BasedOn="{StaticResource {x:Static views:Styles.ComboStyleKey}}"/>
 
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}"
            BasedOn="{StaticResource {x:Static views:Styles.ScrollBarStyleKey}}"/>
@@ -157,8 +157,8 @@
     </Style>
 
     <Style x:Key="PreviewComboBoxStyle" TargetType="ComboBox"
-           BasedOn="{StaticResource {x:Static views:Styles.ThemedComboStyleKey}}">
-        <Setter Property="FontSize" Value="12" />
+           BasedOn="{StaticResource {x:Static views:Styles.ComboStyleKey}}">
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Margin" Value="0 4" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -6,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using MaterialIconsGenerator.Common;
 using MaterialIconsGenerator.Core;
+using MaterialIconsGenerator.Models;
 using MaterialIconsGenerator.Utils;
 using MaterialIconsGenerator.VS;
 
@@ -29,15 +31,21 @@ namespace MaterialIconsGenerator.ViewModels
         {
             var sizes = icon.Provider.GetSizes();
             var densities = icon.Provider.GetDensities();
-
+            // fill selection controls
             this._icon = icon;
-            this._color = color ?? MaterialIconColor.Black;
             this._colors = new ObservableCollection<IIconColor>(MaterialIconColor.Get());
             this._size = size ?? sizes.First();
             this._sizes = new ObservableCollection<ISize>(sizes);
             this._densities = new ObservableCollection<Selectable<string>>(
                 densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),
                 (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())));
+
+            // fill user selection
+            this._color = color ?? MaterialIconColor.Black;
+            this._colorCode = this.ColorToCode(this._color.Color);
+            this._materialColorSelected = this._color is MaterialIconColor 
+                ? this._color 
+                : MaterialIconColor.Black;
             this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon,
                 this.Color, this.Size, densities.FirstOrDefault());
 
@@ -84,11 +92,45 @@ namespace MaterialIconsGenerator.ViewModels
         }
 
         #region Configuration
+        private IIconColor _materialColorSelected;
+        public IIconColor MaterialColorSelected
+        {
+            get { return this._materialColorSelected; }
+            set
+            {
+                this.Set(ref this._materialColorSelected, value);
+
+                // 1. update color code
+                this.Set(ref this._colorCode, this.ColorToCode(value.Color), "ColorCode");
+                // 2. update private color
+                this.Color = value;
+            }
+        }
+
+        private string _colorCode;
+        public string ColorCode
+        {
+            get { return this._colorCode; }
+            set
+            {
+                this.Set(ref this._colorCode, value);
+
+                var customColor = CustomColor.FromHex(value);
+                if (customColor != null)
+                {
+                    // update private color
+                    this.Color = customColor;
+                }
+            }
+        }
+
+
+
         private IIconColor _color;
         public IIconColor Color
         {
             get { return this._color; }
-            set
+            private set
             {
                 this.Set(ref this._color, value);
 
@@ -237,6 +279,11 @@ namespace MaterialIconsGenerator.ViewModels
             this.ProjectIcon.Color = this.Color;
             this.ProjectIcon.Size = this.Size;
             this.Name = this.ProjectIcon.FullName;
+        }
+
+        private string ColorToCode(System.Drawing.Color color)
+        {
+            return $"#{color.A.ToString("X2")}{color.R.ToString("X2")}{color.G.ToString("X2")}{color.B.ToString("X2")}";
         }
     }
 }

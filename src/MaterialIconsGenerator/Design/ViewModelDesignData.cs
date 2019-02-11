@@ -99,12 +99,14 @@ namespace MaterialIconsGenerator.Design
         public IconColorDesign()
         {
             this.Name = $"name_{new Random().Next()}";
-            this.Color = Color.Black;
+            this.Color = Color.Indigo;
         }
 
         public string Name { get; set; }
 
         public Color Color { get; set; }
+
+        public bool IsEditable { get => true; }
     }
 
     internal class IconCategoryDesign : IIconCategory

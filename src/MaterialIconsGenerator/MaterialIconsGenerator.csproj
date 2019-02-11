@@ -69,9 +69,10 @@
     <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Design\ViewModelDesignData.cs" />
+    <Compile Include="Models\CustomColor.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Icon.cs" />
-    <Compile Include="Models\Pallete.cs" />
+    <Compile Include="Models\MaterialIconColor.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="ViewModels\IconListViewModel.cs" />

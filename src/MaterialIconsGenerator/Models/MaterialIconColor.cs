@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using MaterialIconsGenerator.Core;
 
-namespace MaterialIconsGenerator.Core
+namespace MaterialIconsGenerator.Models
 {
     public class MaterialIconColor : IIconColor
     {
@@ -340,9 +341,9 @@ namespace MaterialIconsGenerator.Core
         public static MaterialIconColor YellowA700 = new MaterialIconColor() { Name = "yellow_A700", Color = ColorTranslator.FromHtml("#ffd600") };
         #endregion
 
-        public static List<MaterialIconColor> Get()
+        public static List<IIconColor> Get()
         {
-            return new List<MaterialIconColor>()
+            return new List<IIconColor>()
             {
                 #region Black & White
                 White,

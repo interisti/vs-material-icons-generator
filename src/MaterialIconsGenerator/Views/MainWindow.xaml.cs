@@ -1,14 +1,15 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using System;
+﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
 using MaterialIconsGenerator.ViewModels;
 using MaterialIconsGenerator.VS;
+using Microsoft.VisualStudio.PlatformUI;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MaterialIconsGenerator.Views
 {
@@ -47,8 +48,7 @@ namespace MaterialIconsGenerator.Views
 
         private void ExecuteOpenLicenseLink(object sender, ExecutedRoutedEventArgs e)
         {
-            var hyperlink = e.OriginalSource as Hyperlink;
-            if (hyperlink != null && hyperlink.NavigateUri != null)
+            if (e.OriginalSource is Hyperlink hyperlink && hyperlink.NavigateUri != null)
             {
                 e.Handled = true;
 
