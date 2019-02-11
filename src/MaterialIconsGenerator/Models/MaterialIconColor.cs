@@ -10,10 +10,6 @@ namespace MaterialIconsGenerator.Models
 
         public Color Color { get; set; }
 
-        public bool IsEditable { get => false; }
-
-        public bool Edit(string hex) => false;
-
         #region Black & White
         public static MaterialIconColor White = new MaterialIconColor() { Name = "white", Color = Color.White };
         public static MaterialIconColor Black = new MaterialIconColor() { Name = "black", Color = Color.Black };
@@ -345,9 +341,9 @@ namespace MaterialIconsGenerator.Models
         public static MaterialIconColor YellowA700 = new MaterialIconColor() { Name = "yellow_A700", Color = ColorTranslator.FromHtml("#ffd600") };
         #endregion
 
-        public static List<MaterialIconColor> Get()
+        public static List<IIconColor> Get()
         {
-            return new List<MaterialIconColor>()
+            return new List<IIconColor>()
             {
                 #region Black & White
                 White,

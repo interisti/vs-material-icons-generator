@@ -57,7 +57,6 @@ namespace MaterialIconsGenerator
             // Switches to the UI thread in order to consume some services used in command initialization
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            Styles.LoadVsStyles();
             Brushes.LoadVsBrushes();
 
             AddIconCommand.Initialize(this);
