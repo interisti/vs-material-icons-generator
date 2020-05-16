@@ -98,13 +98,7 @@ namespace MaterialIconsGenerator.ViewModels
             }
             else
             {
-                var icon = selectedIcon.Icon;
-                // get last selected theme, size and color
-                var theme = this._selectedIconDetails?.Theme;
-                var size = this._selectedIconDetails?.Size;
-                var color = this._selectedIconDetails?.Color;
-
-                this._selectedIconDetails = new IconDetailsViewModel(icon, theme, size, color);
+                this._selectedIconDetails = new IconDetailsViewModel(selectedIcon.Icon, this._selectedIconDetails);
             }
 
             this.RaisePropertyChanged(nameof(this.SelectedIconDetails));

@@ -26,31 +26,28 @@ namespace MaterialIconsGenerator.ViewModels
             this.AddToProjectCommand = new RelayCommand(this.AddToProject, this.CanAddToProject);
         }
 
-        public IconDetailsViewModel(IIcon icon, IIconTheme theme = null, ISize size = null, IIconColor color = null)
+        public IconDetailsViewModel(IIcon icon, IconDetailsViewModel copy = null)
             : this()
         {
-            var sizes = icon.Provider.GetSizes();
-            var densities = icon.Provider.GetDensities();
-            var themes = icon.Provider.GetThemes();
-            // fill selection controls
             this._icon = icon;
-            this._colors = new ObservableCollection<IIconColor>(MaterialIconColor.Get());
-            this._theme = theme ?? themes.First();
-            this._themes = new ObservableCollection<IIconTheme>(themes);
-            this._size = size ?? sizes.First();
-            this._sizes = new ObservableCollection<ISize>(sizes);
-            this._densities = new ObservableCollection<Selectable<string>>(
-                densities.Select(density => new Selectable<string>(density, !density.Contains("drawable"),
-                (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())));
-
-            // fill user selection
-            this._color = color ?? MaterialIconColor.Black;
+            this._colors = copy?.Colors ?? new ObservableCollection<IIconColor>(MaterialIconColor.Get());
+            this._theme = copy?.Theme ?? icon.Provider.GetThemes().First();
+            this._themes = copy?.Themes ?? new ObservableCollection<IIconTheme>(icon.Provider.GetThemes());
+            this._size = copy?.Size ?? icon.Provider.GetSizes().First();
+            this._sizes = copy?.Sizes ?? new ObservableCollection<ISize>(icon.Provider.GetSizes());
+            this._densities = copy?.Densities ?? new ObservableCollection<Selectable<string>>(
+                icon.Provider.GetDensities().Select(density =>
+                    new Selectable<string>(density, true, (x) => this.AddToProjectCommand.RaiseCanExecuteChanged())
+                )
+            );
+            this._color = copy?.Color ?? MaterialIconColor.Black;
             this._colorCode = this.ColorToCode(this._color.Color);
             this._materialColorSelected = this._color is MaterialIconColor
                 ? this._color
                 : MaterialIconColor.Black;
-            this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon, this.Theme,
-                this.Color, this.Size, densities.FirstOrDefault());
+            this._projectIcon = icon.Provider.CreateProjectIcon(
+                this.Icon, this.Theme, this.Color, this.Size, icon.Provider.GetDensities().FirstOrDefault()
+            );
 
             this.GenerateName();
         }
