@@ -9,11 +9,9 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public abstract class GoogleIconsProvider : IIconProvider
     {
-        public string Name =>
-            "Google Material Icons";
+        public string Name => "Google Material Icons";
 
-        public string Reference =>
-            "https://material.io/resources/icons";
+        public string Reference => "https://material.io/resources/icons";
 
         public abstract IEnumerable<ISize> GetSizes();
 
@@ -23,36 +21,42 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public async Task<IEnumerable<IIcon>> Get()
         {
-            var client = new RestClient("https://vs-material-icons-generator.s3.amazonaws.com");
-            var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET);
-            request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
-            request.AddHeader("cache-control", "max-age=0");
-            var response = await client.ExecuteTaskAsync(request);
-            var json = JObject.Parse(response.Content);
+            try
+            {
+                var client = new RestClient("https://vs-material-icons-generator.s3.amazonaws.com");
+                var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET);
+                request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
+                request.AddHeader("cache-control", "max-age=0");
+                var response = await client.ExecuteTaskAsync(request);
+                var json = JObject.Parse(response.Content);
 
-            return json["categories"]
-                .SelectMany(category =>
-                {
-                    var iconCategory = new GoogleIconCategory()
+                return json["categories"]
+                    .SelectMany(category =>
                     {
-                        Id = category["id"].Value<string>(),
-                        Name = category["name"].Value<string>()
-                    };
-
-                    return category["icons"]
-                        .Select(item => new GoogleIcon()
+                        var iconCategory = new GoogleIconCategory()
                         {
-                            Id = item["id"].Value<string>(),
-                            Name = item["name"].Value<string>(),
-                            Category = iconCategory,
-                            Keywords = item["keywords"].Values<string>(),
-                            Provider = this
-                        })
-                        .ToList();
-                });
+                            Id = category["id"].Value<string>(),
+                            Name = category["name"].Value<string>()
+                        };
+
+                        return category["icons"]
+                            .Select(item => new GoogleIcon()
+                            {
+                                Id = item["id"].Value<string>(),
+                                Name = item["name"].Value<string>(),
+                                Category = iconCategory,
+                                Keywords = item["keywords"].Values<string>(),
+                                Provider = this
+                            })
+                            .ToList();
+                    });
+            }
+            catch
+            {
+                return new List<IIcon>();
+            }
         }
 
         public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density);
-
     }
 }

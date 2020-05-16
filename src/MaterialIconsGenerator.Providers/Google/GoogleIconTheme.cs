@@ -9,7 +9,6 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public string Name { get; set; }
 
-
         public static IList<IIconTheme> _themes = new List<IIconTheme>()
         {
             new GoogleIconTheme{ Id = "material-icons", Name ="Material Icons" },

@@ -51,6 +51,17 @@ namespace MaterialIconsGenerator.ViewModels
             this.GenerateName();
         }
 
+        private string _busyMessage;
+        public string BusyMessage
+        {
+            get { return _busyMessage; }
+            set
+            {
+                this.Set(ref _busyMessage, value);
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         private string _error;
         public string Error
         {
@@ -228,17 +239,26 @@ namespace MaterialIconsGenerator.ViewModels
         {
             if (IsInDesignModeStatic) return;
 
-            var data = await this.ProjectIcon.Get();
+            try
+            {
+                var data = await this.ProjectIcon.Get();
 
-            if (data == null)
-            {
-                this.PreviewImage = ImageUtils.EmptyBitmap;
-                this.Error = "Icon or size does not exists :(";
+                if (data == null)
+                {
+                    this.PreviewImage = ImageUtils.EmptyBitmap;
+                    this.Error = "Icon or size does not exists :(";
+                }
+                else
+                {
+                    this.PreviewImage = ImageUtils.BitmapFromByteArray(data);
+                    this.Error = string.Empty;
+                }
             }
-            else
+            catch (System.Exception ex)
             {
-                this.PreviewImage = ImageUtils.BitmapFromByteArray(data);
-                this.Error = string.Empty;
+                this.Error = $"{ex.Message}\n{ex.StackTrace}";
+                this.PreviewImage = ImageUtils.EmptyBitmap;
+
             }
         }
 
@@ -251,6 +271,8 @@ namespace MaterialIconsGenerator.ViewModels
             try
             {
                 this.IsBusy = true;
+                this.BusyMessage = string.Empty;
+                this.Error = string.Empty;
                 this.AddToProjectCommand.RaiseCanExecuteChanged();
 
                 var project = Project.GetActiveProject();
@@ -264,17 +286,17 @@ namespace MaterialIconsGenerator.ViewModels
 
                 foreach (var icon in icons)
                 {
+                    this.BusyMessage = $"Downloading {(icon.Density ?? "")} ...";
                     await this._projectManager.AddIcon(project, icon, this.Name);
                 }
             }
             catch (System.Exception ex)
             {
-                OutputPane.Output(ex.Message);
-                OutputPane.Output(ex.StackTrace);
-                OutputPane.Activate();
+                this.Error = $"{ex.Message}\n{ex.StackTrace}";
             }
             finally
             {
+                this.BusyMessage = string.Empty;
                 this.IsBusy = false;
                 this.AddToProjectCommand.RaiseCanExecuteChanged();
             }
@@ -289,8 +311,7 @@ namespace MaterialIconsGenerator.ViewModels
                 this.Size != null &&
                 !string.IsNullOrEmpty(this.Name) &&
                 (this.Densities.Count == 0 || this.Densities.Any(x => x.IsSelected)) &&
-                !string.IsNullOrEmpty(this.Name) &&
-                string.IsNullOrEmpty(this.Error);
+                !string.IsNullOrEmpty(this.Name);
         }
         #endregion
 

@@ -39,7 +39,10 @@ namespace MaterialIconsGenerator.Design
     {
         public IconDetailsViewModelDesign(IIcon icon)
             : base(icon)
-        { }
+        {
+            this.BusyMessage = "Downloading icon ...";
+            this.Error = "Test Error";
+        }
     }
 
     internal class IconDesign : IIcon

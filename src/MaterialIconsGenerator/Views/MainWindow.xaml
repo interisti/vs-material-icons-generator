@@ -163,6 +163,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -197,7 +198,7 @@
                                  Margin="2 4 2 6" 
                                  Style="{StaticResource PreviewNameTextBoxStyle}"
                                  Text="{Binding ColorCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        
+
                     </Grid>
 
                     <TextBlock Grid.Column="0" Grid.Row="2" 
@@ -236,14 +237,18 @@
                              Text="{Binding Name}"/>
 
 
-                    <TextBlock Grid.Column="1" Grid.Row="5"
-                               Style="{StaticResource ErrorTextBlockStyle}" 
-                               Text="{Binding Error}" />
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
+                               Style="{StaticResource BusyMessageTextBlockStyle}" 
+                               Text="{Binding BusyMessage}" />
 
                     <Button Grid.Column="2" Grid.Row="5"
                             Content="Add to Project"
                             Style="{StaticResource AddToProjectButtonStyle}"
                             Command="{Binding AddToProjectCommand}"/>
+
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+                               Style="{StaticResource ErrorTextBlockStyle}" 
+                               Text="{Binding Error}" />
                 </Grid>
             </Grid>
         </Grid>
