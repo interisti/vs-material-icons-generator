@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Diagnostics;
 
 namespace MaterialIconsGenerator.Converters
 {
@@ -18,20 +17,37 @@ namespace MaterialIconsGenerator.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var boolValue = (bool)value;
-            if (Inverted)
+            bool bValue = false;
+            if (value is bool)
             {
-                boolValue = !boolValue;
+                bValue = (bool)value;
+            }
+            else if (value is bool?)
+            {
+                var tmp = (bool?)value;
+                bValue = tmp.HasValue ? tmp.Value : false;
             }
 
-            return boolValue ? Visibility.Visible : Visibility.Collapsed;
+            if (Inverted)
+            {
+                bValue = !bValue;
+            }
+
+            return (bValue) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // no op
-            Debug.Fail("Not Implemented");
-            return null;
+            var bValue = (value is Visibility)
+            ? (Visibility)value == Visibility.Visible
+            : false;
+
+            if (Inverted)
+            {
+                bValue = !bValue;
+            }
+
+            return bValue;
         }
     }
 }

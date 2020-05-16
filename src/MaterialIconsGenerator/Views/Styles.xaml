@@ -242,4 +242,14 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style x:Key="BusyProgressBarStyle" TargetType="vs:SmoothProgressBar"
+           BasedOn="{StaticResource {x:Static views:Styles.ProgressBarStyleKey}}">
+        <Setter Property="IsIndeterminate" Value="True" />
+        <Setter Property="Margin" Value="24 0" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
 </ResourceDictionary>

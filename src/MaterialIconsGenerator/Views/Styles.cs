@@ -24,5 +24,8 @@ namespace MaterialIconsGenerator.Views
 
         [Browsable(false)]
         public static object ButtonStyleKey => VsResourceKeys.ThemedDialogButtonStyleKey ?? typeof(Button);
+
+        [Browsable(false)]
+        public static object ProgressBarStyleKey => VsResourceKeys.ProgressBarStyleKey ?? typeof(ProgressBar);
     }
 }

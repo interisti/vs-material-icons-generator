@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <vm:MainViewModel x:Key="MainViewModel" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" Inverted="True" />
             <converters:IconUrlToImageCacheConverter x:Key="IconUrlToImageCacheConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:ListToStringConverter x:Key="ListToStringConverter" />
@@ -71,7 +72,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ListBox Style="{StaticResource ListBoxStyle}"
+            <vsui:SmoothProgressBar Grid.Column="0" Grid.ColumnSpan="2"
+                                    Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                    Style="{StaticResource BusyProgressBarStyle}" />
+
+            <ListBox Grid.Column="0" 
+                     Visibility="{Binding IsBusy, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" 
+                     Style="{StaticResource ListBoxStyle}"
                      ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                      ItemsSource="{Binding FilteredItems}"
                      SelectedItem="{Binding SelectedIcon}">

@@ -91,13 +91,6 @@ namespace MaterialIconsGenerator.Views
 
         public static object TextBoxSelectionBrushKey { get; private set; } = SystemColors.ActiveCaptionBrushKey;
 
-
-
-
-
-
-
-
         public static void LoadVsBrushes()
         {
             ActiveBorderKey = VsBrushes.ActiveBorderKey;
