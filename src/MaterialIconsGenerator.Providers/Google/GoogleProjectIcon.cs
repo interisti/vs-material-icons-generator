@@ -26,6 +26,8 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public string Density { get; set; }
 
+        public virtual bool IsVector => false;
+
         public virtual string FullName =>
             $"ic_{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}";
 

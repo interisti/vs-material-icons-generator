@@ -25,9 +25,7 @@ namespace MaterialIconsGenerator.ProjectManagers
         private string GetFilePath(IProject project, IProjectIcon icon, string name)
         {
             var root = project.GetRootDirectory();
-            return (icon.Density == "drawable" || icon.Density == "drawable-v21")
-                ? Path.Combine(root, RESOURCES_FOLDER, icon.Density, $"{name}.xml")
-                : Path.Combine(root, RESOURCES_FOLDER, $"drawable-{icon.Density}", $"{name}.png");
+            return Path.Combine(root, RESOURCES_FOLDER, icon.Density, $"{name}.{(icon.IsVector ? "xml" : "png")}");
         }
     }
 }

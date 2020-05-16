@@ -12,9 +12,15 @@ namespace MaterialIconsGenerator.Providers.Google
             : base(icon, theme, color, size, density)
         { }
 
+        public override bool IsVector => Density == "drawable" ||
+            Density == "drawable-v21" ||
+            Density == "drawable-v24" ||
+            Density == "mipmap-anydpi-v26" ||
+            Density == "drawable-anydpi";
+
         public override async Task<byte[]> Get()
         {
-            return (this.Density == "drawable" || this.Density == "drawable-v21")
+            return this.IsVector
                 ? await this.GetVector()
                 : await base.Get();
         }
@@ -23,16 +29,10 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             var theme = this.Theme.Id;
             var category = this.Icon.Category.Id;
-            var density = this.Density == "drawable-v21" || this.Density == "drawable"
-                ? "drawable"
-                : $"drawable-{this.Density}";
+            var density = (this.IsVector ? "drawable" : this.Density).Replace("mipmap", "drawable");
             var id = this.Icon.Id;
-            var size = (this.Density == "drawable" || this.Density == "drawable-v21")
-                ? "24dp"
-                : this.Size.Id;
-            var extension = (this.Density == "drawable" || this.Density == "drawable-v21")
-                ? "xml"
-                : "png";
+            var size = this.IsVector ? "24dp" : this.Size.Id;
+            var extension = this.IsVector ? "xml" : "png";
 
             return $"icon-providers/google/assets/{category}/{density}/{theme}/{id}_{size}.{extension}";
         }

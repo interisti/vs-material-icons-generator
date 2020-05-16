@@ -91,6 +91,8 @@ namespace MaterialIconsGenerator.Design
 
         public string Density { get; set; }
 
+        public bool IsVector => false;
+
         public Task<byte[]> Get()
         {
             return null;

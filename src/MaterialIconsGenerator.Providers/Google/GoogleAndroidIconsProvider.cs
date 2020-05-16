@@ -15,13 +15,21 @@ namespace MaterialIconsGenerator.Providers.Google
 
         private IEnumerable<string> _densities = new List<string>()
         {
-            "mdpi",
-            "hdpi",
-            "xhdpi",
-            "xxhdpi",
-            "xxxhdpi",
+            "drawable-mdpi",
+            "drawable-hdpi",
+            "drawable-xhdpi",
+            "drawable-xxhdpi",
+            "drawable-xxxhdpi",
             "drawable",
-            "drawable-v21"
+            "drawable-anydpi",
+            "drawable-v21",
+            "drawable-v24",
+            "mipmap-mdpi",
+            "mipmap-hdpi",
+            "mipmap-xhdpi",
+            "mipmap-xxhdpi",
+            "mipmap-xxxhdpi",
+            "mipmap-anydpi-v26"
         };
 
         public override IEnumerable<ISize> GetSizes() =>

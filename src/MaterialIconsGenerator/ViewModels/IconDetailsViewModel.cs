@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -256,9 +255,12 @@ namespace MaterialIconsGenerator.ViewModels
 
                 var project = Project.GetActiveProject();
                 var icons = this.Densities.Count == 0
-                    ? new List<IProjectIcon>() { this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, null) }
-                    : this.Densities.Where(x => x.IsSelected).Select(density =>
-                    { return this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, density.Item); });
+                    ? new List<IProjectIcon>() {
+                        this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, null)
+                    }
+                    : this.Densities.Where(x => x.IsSelected).Select(
+                        density => this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, density.Item)
+                    );
 
                 foreach (var icon in icons)
                 {
