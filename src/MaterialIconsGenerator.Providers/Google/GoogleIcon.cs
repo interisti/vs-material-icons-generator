@@ -14,7 +14,7 @@ namespace MaterialIconsGenerator.Providers.Google
         public IEnumerable<string> Keywords { get; set; } = new List<string>();
 
         public string PreviewUrl =>
-            $"https://raw.githubusercontent.com/google/material-design-icons/master/{this.Category.Id}/drawable-hdpi/{this.Id}_black_24dp.png";
+            $"https://vs-material-icons-generator.s3.amazonaws.com/icon-providers/google/assets/{this.Category.Id}/drawable-hdpi/material-icons/{this.Id}_24dp.png";
 
         public IIconProvider Provider { get; set; }
     }

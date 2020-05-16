@@ -12,6 +12,8 @@ namespace MaterialIconsGenerator.Core
 
         ISize Size { get; set; }
 
+        IIconTheme Theme{ get; set; }
+
         string Density { get; set; }
 
 

@@ -26,14 +26,17 @@ namespace MaterialIconsGenerator.ViewModels
             this.AddToProjectCommand = new RelayCommand(this.AddToProject, this.CanAddToProject);
         }
 
-        public IconDetailsViewModel(IIcon icon, ISize size = null, IIconColor color = null)
+        public IconDetailsViewModel(IIcon icon, IIconTheme theme = null, ISize size = null, IIconColor color = null)
             : this()
         {
             var sizes = icon.Provider.GetSizes();
             var densities = icon.Provider.GetDensities();
+            var themes = icon.Provider.GetThemes();
             // fill selection controls
             this._icon = icon;
             this._colors = new ObservableCollection<IIconColor>(MaterialIconColor.Get());
+            this._theme = theme ?? themes.First();
+            this._themes = new ObservableCollection<IIconTheme>(themes);
             this._size = size ?? sizes.First();
             this._sizes = new ObservableCollection<ISize>(sizes);
             this._densities = new ObservableCollection<Selectable<string>>(
@@ -43,10 +46,10 @@ namespace MaterialIconsGenerator.ViewModels
             // fill user selection
             this._color = color ?? MaterialIconColor.Black;
             this._colorCode = this.ColorToCode(this._color.Color);
-            this._materialColorSelected = this._color is MaterialIconColor 
-                ? this._color 
+            this._materialColorSelected = this._color is MaterialIconColor
+                ? this._color
                 : MaterialIconColor.Black;
-            this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon,
+            this._projectIcon = icon.Provider.CreateProjectIcon(this.Icon, this.Theme,
                 this.Color, this.Size, densities.FirstOrDefault());
 
             this.GenerateName();
@@ -124,7 +127,26 @@ namespace MaterialIconsGenerator.ViewModels
             }
         }
 
+        private ObservableCollection<IIconTheme> _themes;
+        public ObservableCollection<IIconTheme> Themes
+        {
+            get { return this._themes; }
+            set { this.Set(ref this._themes, value); }
+        }
 
+        private IIconTheme _theme;
+        public IIconTheme Theme
+        {
+            get { return this._theme; }
+            set
+            {
+                this.Set(ref this._theme, value);
+
+                this.GenerateName();
+                this.UpdatePreviewImage();
+                this.AddToProjectCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         private IIconColor _color;
         public IIconColor Color
@@ -215,7 +237,7 @@ namespace MaterialIconsGenerator.ViewModels
             if (data == null)
             {
                 this.PreviewImage = ImageUtils.EmptyBitmap;
-                this.Error = "Icon or size does not exists in Google's github repo";
+                this.Error = "Icon or size does not exists :(";
             }
             else
             {
@@ -237,9 +259,9 @@ namespace MaterialIconsGenerator.ViewModels
 
                 var project = Project.GetActiveProject();
                 var icons = this.Densities.Count == 0
-                    ? new List<IProjectIcon>() { this.Icon.Provider.CreateProjectIcon(this.Icon, this.Color, this.Size, null) }
+                    ? new List<IProjectIcon>() { this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, null) }
                     : this.Densities.Where(x => x.IsSelected).Select(density =>
-                    { return this.Icon.Provider.CreateProjectIcon(this.Icon, this.Color, this.Size, density.Item); });
+                    { return this.Icon.Provider.CreateProjectIcon(this.Icon, this.Theme, this.Color, this.Size, density.Item); });
 
                 foreach (var icon in icons)
                 {
@@ -264,6 +286,7 @@ namespace MaterialIconsGenerator.ViewModels
             return !this.IsBusy &&
                 this.Icon != null &&
                 this.Color != null &&
+                this.Theme != null &&
                 this.Size != null &&
                 !string.IsNullOrEmpty(this.Name) &&
                 (this.Densities.Count == 0 || this.Densities.Any(x => x.IsSelected)) &&
@@ -278,12 +301,10 @@ namespace MaterialIconsGenerator.ViewModels
 
             this.ProjectIcon.Color = this.Color;
             this.ProjectIcon.Size = this.Size;
+            this.ProjectIcon.Theme = this.Theme;
             this.Name = this.ProjectIcon.FullName;
         }
 
-        private string ColorToCode(System.Drawing.Color color)
-        {
-            return $"#{color.A.ToString("X2")}{color.R.ToString("X2")}{color.G.ToString("X2")}{color.B.ToString("X2")}";
-        }
+        private string ColorToCode(System.Drawing.Color color) => $"#{color.A:X2}{color.R:X2}{color.G:X2}{color.B:X2}";
     }
 }

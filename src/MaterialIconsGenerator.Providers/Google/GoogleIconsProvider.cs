@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MaterialIconsGenerator.Core;
 using Newtonsoft.Json.Linq;
-using RestSharp;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
@@ -13,16 +13,18 @@ namespace MaterialIconsGenerator.Providers.Google
             "Google Material Icons";
 
         public string Reference =>
-            "https://github.com/google/material-design-icons";
+            "https://material.io/resources/icons";
 
         public abstract IEnumerable<ISize> GetSizes();
 
         public abstract IEnumerable<string> GetDensities();
 
+        public IEnumerable<IIconTheme> GetThemes() => GoogleIconTheme.Get();
+
         public async Task<IEnumerable<IIcon>> Get()
         {
-            var client = new RestClient("https://material.io");
-            var request = new RestRequest("/tools/icons/static/data.json", Method.GET);
+            var client = new RestClient("https://vs-material-icons-generator.s3.amazonaws.com");
+            var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");
             var response = await client.ExecuteTaskAsync(request);
@@ -33,23 +35,24 @@ namespace MaterialIconsGenerator.Providers.Google
                 {
                     var iconCategory = new GoogleIconCategory()
                     {
-                        Id = category["name"].Value<string>(),
+                        Id = category["id"].Value<string>(),
                         Name = category["name"].Value<string>()
                     };
 
                     return category["icons"]
                         .Select(item => new GoogleIcon()
                         {
-                            Id = $"ic_{item["id"].Value<string>()}",
-                            Name = item["id"].Value<string>(),
+                            Id = item["id"].Value<string>(),
+                            Name = item["name"].Value<string>(),
                             Category = iconCategory,
-                            Keywords = new List<string>(),
+                            Keywords = item["keywords"].Values<string>(),
                             Provider = this
                         })
                         .ToList();
                 });
         }
 
-        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density);
+        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density);
+
     }
 }

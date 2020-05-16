@@ -8,12 +8,9 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public class GoogleAndroidProjectIcon : GoogleProjectIcon
     {
-        public GoogleAndroidProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
-            : base(icon, color, size, density)
+        public GoogleAndroidProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density)
+            : base(icon, theme, color, size, density)
         { }
-
-        public override string FullName =>
-            $"{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}";
 
         public override async Task<byte[]> Get()
         {
@@ -24,22 +21,20 @@ namespace MaterialIconsGenerator.Providers.Google
 
         protected override string GenerateUrl()
         {
+            var theme = this.Theme.Id;
             var category = this.Icon.Category.Id;
-            var density = (this.Density == "drawable" || this.Density == "drawable-v21")
-                ? "anydpi-v21"
-                : this.Density;
+            var density = this.Density == "drawable-v21" || this.Density == "drawable"
+                ? "drawable"
+                : $"drawable-{this.Density}";
             var id = this.Icon.Id;
-            var color = (this.Density == "drawable" || this.Density == "drawable-v21")
-                ? "black"
-                : this.Color.Color == System.Drawing.Color.White ? "white" : "black";
             var size = (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? "24dp"
-                : this.Size.Name;
+                : this.Size.Id;
             var extension = (this.Density == "drawable" || this.Density == "drawable-v21")
                 ? "xml"
                 : "png";
 
-            return $"google/material-design-icons/master/{category}/drawable-{density}/{id}_{color}_{size}.{extension}";
+            return $"icon-providers/google/assets/{category}/{density}/{theme}/{id}_{size}.{extension}";
         }
 
         private async Task<byte[]> GetVector()

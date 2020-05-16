@@ -162,6 +162,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -169,9 +170,18 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Grid.Row="0"
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" 
+                               Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Theme: " />
+                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                              Style="{StaticResource PreviewComboBoxStyle}"
+                              ItemsSource="{Binding Themes}"
+                              SelectedItem="{Binding Theme}"
+                              DisplayMemberPath="Name" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="1"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Color: " />
-                    <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
@@ -190,18 +200,18 @@
                         
                     </Grid>
 
-                    <TextBlock Grid.Column="0" Grid.Row="1" 
+                    <TextBlock Grid.Column="0" Grid.Row="2" 
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Size: " />
-                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                    <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
                               Style="{StaticResource PreviewComboBoxStyle}"
                               ItemsSource="{Binding Sizes}"
                               SelectedItem="{Binding Size}"
                               DisplayMemberPath="Title" />
 
-                    <TextBlock Grid.Column="0" Grid.Row="2" 
+                    <TextBlock Grid.Column="0" Grid.Row="3" 
                                Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" Text="Density: " />
-                    <ItemsControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
+                    <ItemsControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
                                   Visibility="{Binding Densities, Converter={StaticResource EmptyListVisibilityConverter}}"
                                   ItemsSource="{Binding Densities}">
                         <ItemsControl.ItemsPanel>
@@ -218,19 +228,19 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <TextBlock Grid.Column="0" Grid.Row="3" 
+                    <TextBlock Grid.Column="0" Grid.Row="4" 
                                Style="{StaticResource PreviewCaptionTextBlockStyle}" 
                                Text="Name: " />
-                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
+                    <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4"
                              Style="{StaticResource PreviewNameTextBoxStyle}"
                              Text="{Binding Name}"/>
 
 
-                    <TextBlock Grid.Column="1" Grid.Row="4"
+                    <TextBlock Grid.Column="1" Grid.Row="5"
                                Style="{StaticResource ErrorTextBlockStyle}" 
                                Text="{Binding Error}" />
 
-                    <Button Grid.Column="2" Grid.Row="4"
+                    <Button Grid.Column="2" Grid.Row="5"
                             Content="Add to Project"
                             Style="{StaticResource AddToProjectButtonStyle}"
                             Command="{Binding AddToProjectCommand}"/>

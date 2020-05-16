@@ -45,6 +45,7 @@
     <Compile Include="Contracts\IIconCategory.cs" />
     <Compile Include="Contracts\IIconColor.cs" />
     <Compile Include="Contracts\IIcon.cs" />
+    <Compile Include="Contracts\IIconTheme.cs" />
     <Compile Include="Contracts\IProject.cs" />
     <Compile Include="Contracts\IProjectIcon.cs" />
     <Compile Include="Contracts\IProjectManager.cs" />

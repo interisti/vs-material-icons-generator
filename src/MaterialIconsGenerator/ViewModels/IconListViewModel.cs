@@ -6,9 +6,6 @@ namespace MaterialIconsGenerator.ViewModels
     {
         public IconListViewModel(IIcon icon)
         {
-            var sizes = icon.Provider.GetSizes();
-            var densities = icon.Provider.GetDensities();
-
             this._icon = icon;
         }
 
