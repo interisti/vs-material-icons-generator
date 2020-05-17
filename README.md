@@ -5,7 +5,7 @@
 Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/3741d776-755b-4002-a6be-e86fa605a315)
 or get the [CI build](http://vsixgallery.com/extension/e1bf5443-bf81-49e6-bc33-004e1f1f7b02/).
 
----------------------------------------
+---
 
 This plugin help you to add material design icons to your Android, iOS or UWP project
 
@@ -13,12 +13,14 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 ## Features
 
-- Add icons from google public icons repo
+- Add icons from google's material icons set
+- Multiple sizes, densities and colors
 - Support for Xamarin.Android project
 - Support for Xamarin.iOS project
 - Support for UWP project
 
 ### Add Icons
+
 Right-click on your Project and click "Manage Material Icons..."
 
 ![Context Menu](art/context-menu.png)
@@ -26,6 +28,7 @@ Right-click on your Project and click "Manage Material Icons..."
 ![Main Window](art/main-window.png)
 
 ## Contribute
+
 Check out the [contribution guidelines](CONTRIBUTING.md)
 if you want to contribute to this project.
 
@@ -36,11 +39,14 @@ extension for Visual Studio which enables some features
 used by this project.
 
 ## Xamarin Studio
-* [xs-material-icons-generator](https://github.com/interisti/xs-material-icons-generator)
+
+- [xs-material-icons-generator](https://github.com/interisti/xs-material-icons-generator)
 
 ## Credits
-* Inspired by [android-material-design-icon-generator-plugin](https://github.com/konifar/android-material-design-icon-generator-plugin)
-* Icons From [Google's Material Design Icons Repository](https://github.com/google/material-design-icons)
+
+- Inspired by [android-material-design-icon-generator-plugin](https://github.com/konifar/android-material-design-icon-generator-plugin)
+- Icons From [Google's Material Design Icons Repository](https://github.com/google/material-design-icons)
 
 ## License
+
 [Apache 2.0](LICENSE)
