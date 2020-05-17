@@ -23,7 +23,7 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             try
             {
-                var client = new RestClient("https://vs-material-icons-generator.s3.amazonaws.com");
+                var client = new RestClient("https://www.vs-material-icons-generator.com");
                 var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET);
                 request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
                 request.AddHeader("cache-control", "max-age=0");

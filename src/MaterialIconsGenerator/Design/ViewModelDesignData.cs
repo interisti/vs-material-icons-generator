@@ -53,7 +53,7 @@ namespace MaterialIconsGenerator.Design
             this.Name = $"icon_{new Random().Next()}";
             this.Category = new IconCategoryDesign();
             this.Keywords = new List<string>() { $"keyword_{new Random().Next()}", $"keyword_{new Random().Next()}" };
-            this.PreviewUrl = "https://vs-material-icons-generator.s3.amazonaws.com/icon-providers/google/assets/action/drawable-xdpi/material-icons/ic_3d_ratition_24dp.png";
+            this.PreviewUrl = "https://www.vs-material-icons-generator.com/icon-providers/google/assets/action/drawable-xdpi/material-icons/ic_3d_ratition_24dp.png";
             this.Provider = new IconProviderDesign();
         }
 
