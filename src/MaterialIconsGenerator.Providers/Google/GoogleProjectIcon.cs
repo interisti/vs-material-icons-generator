@@ -45,7 +45,7 @@ namespace MaterialIconsGenerator.Providers.Google
             var request = new RestRequest(resource, Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
             request.AddHeader("cache-control", "max-age=0");
-            var response = await client.ExecuteTaskAsync(request);
+            var response = await client.ExecuteAsync(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
