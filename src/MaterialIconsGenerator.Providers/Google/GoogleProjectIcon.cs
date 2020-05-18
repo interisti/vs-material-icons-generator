@@ -42,9 +42,9 @@ namespace MaterialIconsGenerator.Providers.Google
         protected async Task<byte[]> Download(string resource)
         {
             var client = new RestClient("https://www.vs-material-icons-generator.com");
+            client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
             var request = new RestRequest(resource, Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
-            request.AddHeader("cache-control", "max-age=0");
             var response = await client.ExecuteAsync(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
