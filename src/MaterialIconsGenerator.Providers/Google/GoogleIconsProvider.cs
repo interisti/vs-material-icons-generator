@@ -23,8 +23,10 @@ namespace MaterialIconsGenerator.Providers.Google
         {
             try
             {
-                var client = new RestClient("https://www.vs-material-icons-generator.com");
-                client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
+                var client = new RestClient("https://www.vs-material-icons-generator.com")
+                {
+                    CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable)
+                };
                 var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET, DataFormat.Json);
                 request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
                 var response = await client.ExecuteAsync(request);
@@ -49,7 +51,8 @@ namespace MaterialIconsGenerator.Providers.Google
                                 Provider = this
                             })
                             .ToList();
-                    });
+                    })
+                    .OrderBy(x => x.Name);
             }
             catch
             {

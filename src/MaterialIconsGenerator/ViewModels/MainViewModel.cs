@@ -67,7 +67,7 @@ namespace MaterialIconsGenerator.ViewModels
             else
             {
                 this.FilteredItems = new ObservableCollection<IconListViewModel>(
-                    this.Items.Where(x => x.Icon.Name.Contains(this.FilterExpression))
+                    this.Items.Where(x => x.SatisfiesFilter(this.FilterExpression))
                 );
             }
         }
