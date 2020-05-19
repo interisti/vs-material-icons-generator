@@ -103,7 +103,7 @@
                                        Style="{StaticResource ListItemNameTextBlockStyle}" 
                                        Text="{Binding Icon.Name}" />
                             <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
-                                       Style="{StaticResource ListItemGroupTextBlockStyle}" 
+                                       Style="{StaticResource ListItemCategoryTextBlockStyle}" 
                                        Text="{Binding Icon.Category.Name}" />
                             <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
                                        Style="{StaticResource ListItemKeywordsTextBlockStyle}" 

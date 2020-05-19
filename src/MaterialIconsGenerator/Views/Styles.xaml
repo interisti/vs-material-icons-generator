@@ -110,7 +110,8 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 
-    <Style x:Key="ListItemGroupTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="ListItemCategoryTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
     <Style x:Key="ListItemKeywordsTextBlockStyle" TargetType="TextBlock">
@@ -148,6 +149,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static views:Brushes.UIText}}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="0 4 0 4" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="PreviewCaptionTextBlockStyle" TargetType="TextBlock">
