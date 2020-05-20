@@ -121,7 +121,7 @@
     <value>Material icons generator</value>
   </data>
   <data name="112" xml:space="preserve">
-    <value>This plugin help you to add material design icons to your Android, iOS or UWP project</value>
+    <value>This extension helps you to add material design icons to your Android, iOS or UWP project</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="400" type="System.Resources.ResXFileRef, System.Windows.Forms">
