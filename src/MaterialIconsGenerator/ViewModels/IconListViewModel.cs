@@ -6,11 +6,11 @@ namespace MaterialIconsGenerator.ViewModels
     {
         public IconListViewModel(IIcon icon)
         {
-            var sizes = icon.Provider.GetSizes();
-            var densities = icon.Provider.GetDensities();
-
             this._icon = icon;
+            this._filterableText = $"{icon.Name}#${icon.Category.Name}#{string.Join("#", icon.Keywords)}";
         }
+
+        private string _filterableText;
 
         private IIcon _icon;
         public IIcon Icon
@@ -22,6 +22,11 @@ namespace MaterialIconsGenerator.ViewModels
         public string PreviewUrl
         {
             get { return this.Icon.PreviewUrl; }
+        }
+
+        public bool SatisfiesFilter(string filterExpression)
+        {
+            return this._filterableText.Contains(filterExpression);
         }
     }
 }

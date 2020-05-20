@@ -7,7 +7,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using MaterialIconsGenerator.Views;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;

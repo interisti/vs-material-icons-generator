@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -17,9 +16,8 @@ namespace MaterialIconsGenerator.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // no op
-            Debug.Fail("Not Implemented");
-            return null;
+            var text = (string)value ?? "";
+            return text.Split(',');
         }
     }
 }

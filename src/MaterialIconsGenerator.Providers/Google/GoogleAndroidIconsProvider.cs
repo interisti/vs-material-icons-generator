@@ -7,21 +7,29 @@ namespace MaterialIconsGenerator.Providers.Google
     {
         private IEnumerable<ISize> _sizes = new List<ISize>()
         {
-            new GoogleSize{ Id = "18", Name ="18dp" },
-            new GoogleSize{ Id = "24", Name ="24dp" },
-            new GoogleSize{ Id = "36", Name ="36dp" },
-            new GoogleSize{ Id = "48", Name ="48dp" }
+            new GoogleSize{ Id = "18dp", Name ="18dp" },
+            new GoogleSize{ Id = "24dp", Name ="24dp" },
+            new GoogleSize{ Id = "36dp", Name ="36dp" },
+            new GoogleSize{ Id = "48dp", Name ="48dp" }
         };
 
         private IEnumerable<string> _densities = new List<string>()
         {
-            "mdpi",
-            "hdpi",
-            "xhdpi",
-            "xxhdpi",
-            "xxxhdpi",
+            "drawable-mdpi",
+            "drawable-hdpi",
+            "drawable-xhdpi",
+            "drawable-xxhdpi",
+            "drawable-xxxhdpi",
             "drawable",
-            "drawable-v21"
+            "drawable-anydpi",
+            "drawable-v21",
+            "drawable-v24",
+            "mipmap-mdpi",
+            "mipmap-hdpi",
+            "mipmap-xhdpi",
+            "mipmap-xxhdpi",
+            "mipmap-xxxhdpi",
+            "mipmap-anydpi-v26"
         };
 
         public override IEnumerable<ISize> GetSizes() =>
@@ -30,7 +38,7 @@ namespace MaterialIconsGenerator.Providers.Google
         public override IEnumerable<string> GetDensities() =>
             this._densities;
 
-        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density) =>
-            new GoogleAndroidProjectIcon(icon, color, size, density);
+        public override IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density) =>
+            new GoogleAndroidProjectIcon(icon, theme, color, size, density);
     }
 }

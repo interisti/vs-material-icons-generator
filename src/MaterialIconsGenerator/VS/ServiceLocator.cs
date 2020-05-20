@@ -19,14 +19,9 @@ namespace MaterialIconsGenerator.VS
     {
         public static void InitializePackageServiceProvider(IServiceProvider provider)
         {
-            if (provider == null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
-
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            PackageServiceProvider = provider;
+            PackageServiceProvider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
 
         public static IServiceProvider PackageServiceProvider { get; private set; }
@@ -47,8 +42,7 @@ namespace MaterialIconsGenerator.VS
             if (PackageServiceProvider != null)
             {
                 var result = PackageServiceProvider.GetService(typeof(TService));
-                TInterface service = result as TInterface;
-                if (service != null)
+                if (result is TInterface service)
                 {
                     return service;
                 }
@@ -81,8 +75,7 @@ namespace MaterialIconsGenerator.VS
             Guid riid = guidService;
             var serviceProvider = dte as VsServiceProvider;
 
-            IntPtr servicePtr;
-            int hr = serviceProvider.QueryService(ref guidService, ref riid, out servicePtr);
+            int hr = serviceProvider.QueryService(ref guidService, ref riid, out IntPtr servicePtr);
 
             if (hr != 0/*NuGetVSConstants.S_OK*/)
             {

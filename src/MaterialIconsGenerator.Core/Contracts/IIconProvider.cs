@@ -13,8 +13,10 @@ namespace MaterialIconsGenerator.Core
 
         IEnumerable<string> GetDensities();
 
+        IEnumerable<IIconTheme> GetThemes();
+
         Task<IEnumerable<IIcon>> Get();
 
-        IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density);
+        IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density);
     }
 }

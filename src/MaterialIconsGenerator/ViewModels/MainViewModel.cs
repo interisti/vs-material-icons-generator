@@ -67,7 +67,8 @@ namespace MaterialIconsGenerator.ViewModels
             else
             {
                 this.FilteredItems = new ObservableCollection<IconListViewModel>(
-                    this.Items.Where(x => x.Icon.Name.Contains(this.FilterExpression)));
+                    this.Items.Where(x => x.SatisfiesFilter(this.FilterExpression))
+                );
             }
         }
 
@@ -98,12 +99,7 @@ namespace MaterialIconsGenerator.ViewModels
             }
             else
             {
-                var icon = selectedIcon.Icon;
-                // get last selected size and color
-                var size = this._selectedIconDetails?.Size;
-                var color = this._selectedIconDetails?.Color;
-
-                this._selectedIconDetails = new IconDetailsViewModel(icon, size, color);
+                this._selectedIconDetails = new IconDetailsViewModel(selectedIcon.Icon, this._selectedIconDetails);
             }
 
             this.RaisePropertyChanged(nameof(this.SelectedIconDetails));

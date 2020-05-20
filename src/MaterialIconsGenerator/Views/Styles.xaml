@@ -110,7 +110,8 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 
-    <Style x:Key="ListItemGroupTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="ListItemCategoryTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
     <Style x:Key="ListItemKeywordsTextBlockStyle" TargetType="TextBlock">
@@ -148,6 +149,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static views:Brushes.UIText}}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="0 4 0 4" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="PreviewCaptionTextBlockStyle" TargetType="TextBlock">
@@ -197,10 +199,18 @@
         <Setter Property="Width" Value="360" />
     </Style>
 
+    <Style x:Key="BusyMessageTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="Margin" Value="0 4 6 4" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+
     <Style x:Key="ErrorTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="Red" />
         <Setter Property="Margin" Value="0 4 6 4" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
     <Style x:Key="CloseButtonStyle" TargetType="Button"
@@ -233,5 +243,15 @@
                 <Setter Property="IsEnabled" Value="False" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="BusyProgressBarStyle" TargetType="vs:SmoothProgressBar"
+           BasedOn="{StaticResource {x:Static views:Styles.ProgressBarStyleKey}}">
+        <Setter Property="IsIndeterminate" Value="True" />
+        <Setter Property="Margin" Value="24 0" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 </ResourceDictionary>

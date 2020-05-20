@@ -7,10 +7,11 @@ namespace MaterialIconsGenerator.Providers.Google
 {
     public abstract class GoogleProjectIcon : IProjectIcon
     {
-        public GoogleProjectIcon(IIcon icon, IIconColor color, ISize size, string density)
+        public GoogleProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density)
         {
             this.Icon = icon;
             this.Color = color;
+            this.Theme = theme;
             this.Size = size;
             this.Density = density;
         }
@@ -19,11 +20,17 @@ namespace MaterialIconsGenerator.Providers.Google
 
         public IIconColor Color { get; set; }
 
+        public IIconTheme Theme { get; set; }
+
         public ISize Size { get; set; }
 
         public string Density { get; set; }
 
-        public abstract string FullName { get; }
+        public virtual bool IsVector => false;
+
+        public virtual string FullName =>
+            $"ic_{this.Icon.Id}_{this.Color.Name}_{this.Size.Name}";
+
 
         public virtual async Task<byte[]> Get()
         {
@@ -34,11 +41,13 @@ namespace MaterialIconsGenerator.Providers.Google
 
         protected async Task<byte[]> Download(string resource)
         {
-            var client = new RestClient("https://raw.githubusercontent.com");
+            var client = new RestClient("https://www.vs-material-icons-generator.com")
+            {
+                CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable)
+            };
             var request = new RestRequest(resource, Method.GET);
             request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
-            request.AddHeader("cache-control", "max-age=0");
-            var response = await client.ExecuteTaskAsync(request);
+            var response = await client.ExecuteAsync(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -55,8 +64,7 @@ namespace MaterialIconsGenerator.Providers.Google
                 return data;
             }
 
-            if (this.Color.Color == System.Drawing.Color.White ||
-                this.Color.Color == System.Drawing.Color.Black)
+            if (this.Color.Color == System.Drawing.Color.Black)
             {
                 return data;
             }

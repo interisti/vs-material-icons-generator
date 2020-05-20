@@ -41,11 +41,9 @@ namespace MaterialIconsGenerator.VS
             solution.GetProjectOfUniqueName(this._vsProject.UniqueName, out hierarchy);
             if (hierarchy == null) return ProjectType.Other;
 
-            var ap = hierarchy as IVsAggregatableProjectCorrected;
-            if (ap == null) return ProjectType.Other;
+            if (!(hierarchy is IVsAggregatableProjectCorrected ap)) return ProjectType.Other;
 
-            string projectTypeGuids;
-            ap.GetAggregateProjectTypeGuids(out projectTypeGuids);
+            ap.GetAggregateProjectTypeGuids(out string projectTypeGuids);
             if (string.IsNullOrEmpty(projectTypeGuids)) return ProjectType.Other;
 
             // check if UWP project

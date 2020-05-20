@@ -1,55 +1,65 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MaterialIconsGenerator.Core;
 using Newtonsoft.Json.Linq;
-using RestSharp;
+using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.Providers.Google
 {
     public abstract class GoogleIconsProvider : IIconProvider
     {
-        public string Name =>
-            "Google Material Icons";
+        public string Name => "Google Material Icons";
 
-        public string Reference =>
-            "https://github.com/google/material-design-icons";
+        public string Reference => "https://material.io/resources/icons";
 
         public abstract IEnumerable<ISize> GetSizes();
 
         public abstract IEnumerable<string> GetDensities();
 
+        public IEnumerable<IIconTheme> GetThemes() => GoogleIconTheme.Get();
+
         public async Task<IEnumerable<IIcon>> Get()
         {
-            var client = new RestClient("https://material.io");
-            var request = new RestRequest("/tools/icons/static/data.json", Method.GET);
-            request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
-            request.AddHeader("cache-control", "max-age=0");
-            var response = await client.ExecuteTaskAsync(request);
-            var json = JObject.Parse(response.Content);
-
-            return json["categories"]
-                .SelectMany(category =>
+            try
+            {
+                var client = new RestClient("https://www.vs-material-icons-generator.com")
                 {
-                    var iconCategory = new GoogleIconCategory()
-                    {
-                        Id = category["name"].Value<string>(),
-                        Name = category["name"].Value<string>()
-                    };
+                    CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable)
+                };
+                var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET, DataFormat.Json);
+                request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
+                var response = await client.ExecuteAsync(request);
+                var json = JObject.Parse(response.Content);
 
-                    return category["icons"]
-                        .Select(item => new GoogleIcon()
+                return json["categories"]
+                    .SelectMany(category =>
+                    {
+                        var iconCategory = new GoogleIconCategory()
                         {
-                            Id = $"ic_{item["id"].Value<string>()}",
-                            Name = item["id"].Value<string>(),
-                            Category = iconCategory,
-                            Keywords = new List<string>(),
-                            Provider = this
-                        })
-                        .ToList();
-                });
+                            Id = category["id"].Value<string>(),
+                            Name = category["name"].Value<string>()
+                        };
+
+                        return category["icons"]
+                            .Select(item => new GoogleIcon()
+                            {
+                                Id = item["id"].Value<string>(),
+                                Name = item["name"].Value<string>(),
+                                Category = iconCategory,
+                                Keywords = item["keywords"].Values<string>(),
+                                Provider = this
+                            })
+                            .ToList();
+                    })
+                    .OrderBy(x => x.Name);
+            }
+            catch
+            {
+                return new List<IIcon>();
+            }
         }
 
-        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconColor color, ISize size, string density);
+        public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density);
     }
 }
