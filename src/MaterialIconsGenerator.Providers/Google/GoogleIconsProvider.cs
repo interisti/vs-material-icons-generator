@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using MaterialIconsGenerator.Core;
 
 namespace MaterialIconsGenerator.Providers.Google
@@ -27,24 +26,24 @@ namespace MaterialIconsGenerator.Providers.Google
                 var request = new RestRequest("/icon-providers/google/material-icons.json", Method.GET, DataFormat.Json);
                 request.AddHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
                 var response = await client.ExecuteAsync(request);
-                var json = JObject.Parse(response.Content);
+                var json = SimpleJson.DeserializeObject<IconsJsonResponse>(response.Content);
 
-                return json["categories"]
+                return json.categories
                     .SelectMany(category =>
                     {
                         var iconCategory = new GoogleIconCategory()
                         {
-                            Id = category["id"].Value<string>(),
-                            Name = category["name"].Value<string>()
+                            Id = category.id,
+                            Name = category.name
                         };
 
-                        return category["icons"]
+                        return category.icons
                             .Select(item => new GoogleIcon()
                             {
-                                Id = item["id"].Value<string>(),
-                                Name = item["name"].Value<string>(),
+                                Id = item.id,
+                                Name = item.name,
                                 Category = iconCategory,
-                                Keywords = item["keywords"].Values<string>(),
+                                Keywords = item.keywords,
                                 Provider = this
                             })
                             .ToList();
@@ -58,5 +57,26 @@ namespace MaterialIconsGenerator.Providers.Google
         }
 
         public abstract IProjectIcon CreateProjectIcon(IIcon icon, IIconTheme theme, IIconColor color, ISize size, string density);
+    }
+
+    class IconsJsonResponse
+    {
+        public IEnumerable<IconsJsonCategory> categories { get; set; }
+    }
+
+    class IconsJsonCategory
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+
+        public IEnumerable<IconsJsonIcon> icons { get; set; }
+    }
+
+    class IconsJsonIcon
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+
+        public IEnumerable<string> keywords { get; set; }
     }
 }
