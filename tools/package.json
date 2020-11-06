@@ -4,7 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "collect-google-icons": "node collect-google-icons"
+    "collect-google-icons": "node collect-google-icons",
+    "is-up-to-date": "node is-up-to-date"
   },
   "author": "",
   "license": "ISC",
