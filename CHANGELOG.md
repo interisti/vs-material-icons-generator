@@ -80,3 +80,9 @@ on the official Visual Studio extension gallery.
 
 - [x] new icon themes
 - [x] additional android densities
+
+## 2.1.0
+
+**2020-11-06**
+
+- [x] Remove Newtonsoft.JSON dependency
