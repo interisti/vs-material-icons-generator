@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jszip": "3.4.0"
+    "jszip": "3.7.0"
   },
   "devDependencies": {
     "@types/jszip": "3.1.7",
